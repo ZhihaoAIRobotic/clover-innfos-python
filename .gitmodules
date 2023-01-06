@@ -1,0 +1,3 @@
+[submodule "innfos-cpp-sdk"]
+	path = innfos-cpp-sdk
+	url = https://github.com/mintasca/innfos-cpp-sdk.git
