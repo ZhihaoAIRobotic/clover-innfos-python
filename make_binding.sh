@@ -11,6 +11,7 @@ INCLUDES=${INCLUDES:=all_includes.hpp}
 
 mkdir -p "${PREFIX}/${BIND_DIR}"
 binder --root-module ${ROOT_MODULE} --prefix ${PREFIX}/${BIND_DIR} --config ${PREFIX}/binder.config ${INCLUDES} \
+       --include-pybind11-stl \
        -- -I${PREFIX}/innfos-cpp-sdk/sdk/include
 
 #binder --root-module ActuatorController --prefix ~/wip/clover/Education_robot_py/ActuatorController_SDK/sdk/include --bind Actuator pybinding.hpp -- -I$HOME/wip/clover/Education_robot_py/ActuatorController_SDK/sdk/include -I$HOME/wip/clover/Education_robot_py/ActuatorController_SDK/sdk/lib/linux_x86_64/libActuatorController.so  -I/usr/include/c++/10 -I/usr/include/x86_64-linux-gnu/c++/10 -std=c++11
