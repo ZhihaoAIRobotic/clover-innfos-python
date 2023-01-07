@@ -4,7 +4,7 @@
 
 # Set the following env variables before invoking this script if you want something different
 # than the defaults listed below
-ROOT_MODULE=${ROOT_MODULE:="ActuatorController"}
+ROOT_MODULE=${ROOT_MODULE:="clover_ActuatorController"}
 PREFIX=${PREFIX:=$(pwd)}
 BIND_DIR=${BIND_DIR:=binding}
 INCLUDES=${INCLUDES:=all_includes.hpp}
