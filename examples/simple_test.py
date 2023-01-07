@@ -8,8 +8,6 @@ start = time.time()
 
 arm.enableAllActuators()
 err = Actuator.ErrorsDefine(0)
-#jointlist = arm.lookupActuators(err)
-#jointids = [j.actuatorID for j in jointlist]
 arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Cur)
 if err != Actuator.ErrorsDefine(0):
     print("Error: ",err)
@@ -27,6 +25,7 @@ getAllPositions = lambda self: [self.getPosition(i,bRefresh=True) for i in arm.j
 for x in range(1000):
     pos = getAllPositions(arm)
     print(pos )
+    time.sleep(0.1)
 
 start = time.time()
 arm.disableAllActuators()
