@@ -14,9 +14,16 @@ class ActuatorControllerBase(object):
 class Clover_GLUON(ActuatorControllerBase):
 
     def __init__(self):
-        err = Actuator.ErrorsDefine(0) # Create object to store errors
+        err = Actuator.ErrorsDefine(0) # Create object to store errors during actuator lookup
         jointlist = self.lookupActuators(err)
         if err != Actuator.ErrorsDefine(0):
             raise Exception("Failed to lookup actuators! Error: ",err)
         self.jointlist = jointlist
         self.jointids = [j.actuatorID for j in self.jointlist]
+
+    def set_safety_values(self, max_acc, max_dec, max_vel, min_pos, max_pos):
+        self.setProfilePositionAcceleration(max_acc)
+        self.setProfilePositionDeceleration(-abs(max_dec))
+        self.setProfilePositionMaxVelocity(max_vel)
+        self.setMinimumPosition(min_pos)
+        self.setMaximumPosition(max_pos)

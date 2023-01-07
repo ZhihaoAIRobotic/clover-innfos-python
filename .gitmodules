@@ -1,3 +1,6 @@
 [submodule "innfos-cpp-sdk"]
 	path = innfos-cpp-sdk
 	url = https://github.com/mintasca/innfos-cpp-sdk.git
+[submodule "pyPS4Controller"]
+	path = pyPS4Controller
+	url = https://github.com/hauptmech/pyPS4Controller.git
