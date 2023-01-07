@@ -5,4 +5,4 @@ To recreate the binding with different configuration: edit `binder.config` and r
 
 ## Installation
 
-`sudo python setup.py install'
+`sudo python setup.py install`
