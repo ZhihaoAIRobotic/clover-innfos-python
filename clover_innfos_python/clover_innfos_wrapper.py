@@ -1,4 +1,7 @@
 from clover_ActuatorController import Actuator, ActuatorController
+import numpy as np
+
+A = np.array
 
 class ActuatorControllerBase(object):
 
@@ -26,8 +29,11 @@ class ActuatorControllerBase(object):
             func_to_call = getattr(self,key[:-1])
             if callable(func_to_call):
                 # Create a function that calls the function repeatedly
-                def repeated(ids, *args, **kwargs):
-                    return [ func_to_call(i, *args, **kwargs)  for i in ids ]
+                def repeated(*args, **kwargs):
+                    if len(args) > 0 and isinstance(args[0], list):
+                        return A([ func_to_call(i, j, *args[1:], **kwargs)  for i,j in zip(self.actuator_ids, args[0]) ])
+                    else:
+                        return A([ func_to_call(i, *args, **kwargs)  for i in self.actuator_ids ])
                 
                 return repeated
             else:
@@ -37,38 +43,55 @@ class ActuatorControllerBase(object):
 
 class Clover_GLUON(ActuatorControllerBase):
 
-    def __init__(self):
+    def __init__(self, actuator_id_list=None):
         err = Actuator.ErrorsDefine(0) # Create object to store errors during actuator lookup
         jointlist = self.lookupActuators(err)
         if err != Actuator.ErrorsDefine(0):
             raise Exception("Failed to lookup actuators! Error: ",err)
         self.jointlist = jointlist
-        self.jointids = [j.actuatorID for j in self.jointlist]
+        
+        if actuator_id_list:
+            self.actuator_ids = actuator_id_list
+        else:
+            self.actuator_ids = [j.actuatorID for j in self.jointlist] # [2, 3, 5] => Aid[J0] = 2
 
-        for i in self.jointids:
-            self.setPositionOffset(i,0.0)
+        self.dof = len(self.actuator_ids)
 
-        self.home_position = [0,0,0,0,0,0]
+        self.joint_idxs = [None for i in range(max(self.actuator_ids)+1)] # joint_idxs[actuatorid] = actuator_ids.index(joint_index)
+        for i, myid in enumerate(self.actuator_ids):
+            self.joint_idxs[myid] = self.actuator_ids.index(myid)
+
+        # for i in self.actuator_ids:
+        #     self.setPositionOffset(i,0.0)
+
+        self.home_position = A([0,0,0,0,0,0])[:self.dof]  # Keep track of what our home position is
+        self.set_safety_values(max_acc=400, max_dec=-200, max_vel=500, min_pos=9, max_pos=9)
 
     def set_safety_values(self, max_acc, max_dec, max_vel, min_pos, max_pos):
-        self.setProfilePositionAcceleration(max_acc)
-        self.setProfilePositionDeceleration(-abs(max_dec))
-        self.setProfilePositionMaxVelocity(max_vel)
-        self.setMinimumPosition(min_pos)
-        self.setMaximumPosition(max_pos)
+        for i in self.actuator_ids:
+            self.setProfilePositionAcceleration(i, max_acc)
+            self.setProfilePositionDeceleration(i, -abs(max_dec))
+            self.setProfilePositionMaxVelocity(i, max_vel)
+            self.setMinimumPosition(i, min_pos)
+            self.setMaximumPosition(i, max_pos)
 
     def home(self):
-        self.home_position = self.getPositions()
+        self.home_position = A([self.getPosition(i,bRefresh=True) for i in self.actuator_ids])
 
-    def getPositions(self):
-        return [self.getPosition(i,bRefresh=True) for i in self.jointids]
+    def getPositions(self,bRefresh=True):
+        pos = A([self.getPosition(i,bRefresh=bRefresh) for i in self.actuator_ids])
+        # print('getPosition', -self.home_position+pos)
+        return pos-self.home_position
 
     def setPositions(self, pos):
-        return [self.setPosition(i,self.home_position[self.jointids.index(i)]+q) for i,q in zip(self.jointids, pos)]
+        pos = A(pos)[:self.dof]
+        # print('setPosition', self.home_position+pos,[(i,q) for i,q in zip(self.actuator_ids,self.home_position + pos)])
+        return [self.setPosition(i,q) for i,q in zip(self.actuator_ids,self.home_position + pos)]
 
     def report(self):
         def quickstring(func):
-            return f"{func.__name__}: {[round(func(i,True),4) for i in self.jointids]}"
+            return f"{func.__name__}: {[round(func(i,True),4) for i in self.actuator_ids]}"
+
         nl = "\n"
         s = ""
         s += quickstring(self.getPosition) + nl

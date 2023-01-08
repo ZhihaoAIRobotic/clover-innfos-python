@@ -18,9 +18,9 @@ class MyController(Controller):
     def on_timer(self):
         print("timer func2")
 
-controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
-controller.wait_for_interface()
-controller.open()
+# controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
+# controller.wait_for_interface()
+# controller.open()
 
 # while(1):
 #     # Process events that are 0.001 seconds apart all together
@@ -45,32 +45,38 @@ endtime = time.time()
 
 print("It took ",endtime-start," seconds to enable the arm")
 print([arm.getActuatorMode(i) for i in [1,2,3,4,6,7]])
-[arm.setPositionKi(i,0.0) for i in arm.jointids]
-#[arm.setHomingPosition(arm.jointids[-2], 0) for i in arm.jointids]
-arm.clearHomingInfo(arm.jointids[0])
-#arm.setHomingPosition(arm.jointids[0], 100)
-arm.setPositionOffset(arm.jointids[0], 3)
-arm.setMaximumPosition(arm.jointids[0], 6)
-arm.setMinimumPosition(arm.jointids[0], -9)
+# [arm.setPositionKi(i,0.01) for i in arm.actuator_ids]
+
+# arm.clearHomingInfo(arm.actuator_ids[0])
+# arm.setPositionOffset(arm.actuator_ids[0], 0)
+# arm.setMaximumPosition(arm.actuator_ids[0], 6)
+# arm.setMinimumPosition(arm.actuator_ids[0], -6)
+input("Move arm to zero")
 arm.home()
 print("\n",arm.report())
+print('Home position is: ',arm.home_position)
+print("\n\nPosition is ",arm.getPositions(bRefresh=True),'\n')
+
+print(arm.actuator_ids)
+
 
 input("Move arm to start")
 arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Profile_Pos)
-startpos = arm.getPositions()
+startpos = arm.getPositions(bRefresh=True)
 print("\n\nInitialPosition is ",startpos,'\n')
 
 print("Going to zero")
-arm.setPositions([0,0,0,0,0,0])
+res = arm.setPositions([0,0,0,0,0,0])
+
 time.sleep(5)
 
-print("\n\nPosition is ",arm.getPositions(),'\n')
+print("\n\nPosition at zero is ",arm.getPositions(bRefresh=True),'\n')
 print("Going home")
 arm.setPositions(startpos)
 
 
 time.sleep(5)
-print("\n\nPosition is ",arm.getPositions(),'\n')
+print("\n\nPosition at start is",arm.getPositions(bRefresh=True),'\n')
 start = time.time()
 arm.disableAllActuators()
 endtime = time.time()
