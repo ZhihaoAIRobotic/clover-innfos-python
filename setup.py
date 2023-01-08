@@ -23,13 +23,12 @@ ext_modules = [
 
 setup(
     name='clover_innfos_python',
-	#version = "1.0",
-	#packages=find_packages(),
 	packages=['clover_innfos_python'],
-	setup_requires = ['pybind11'],
+	setup_requires = ['pybind11','setuptools-git-versioning<2'],
     install_requires = ["matplotlib", "scipy", "pandas", "numpy"],
     provides = ["clover_innfos_python"],
     ext_modules=ext_modules,
 	data_files=[('',['innfos-cpp-sdk/sdk/lib/linux_x86_64/libActuatorController.so'])],
+	setuptools_git_versioning={"enabled": True,},
 )
 
