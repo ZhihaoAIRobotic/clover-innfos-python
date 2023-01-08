@@ -1,6 +1,8 @@
 from clover_ActuatorController import Actuator, ActuatorController
 
 __all__ = ["Actuator", "Clover_GLUON"]
+class UID():
+    actuatorID = 0
 
 class ActuatorControllerBase(object):
 
@@ -9,7 +11,34 @@ class ActuatorControllerBase(object):
         obj._singleton_ = ActuatorController.initController()
         return obj
         
+    # Make sure we have __dict__ keys for functions that end in `s`, see __getattr__ below
+    def lookupActuators(self,*args): return [UID()]#self._singleton_.lookupActuators(*args)
+    def processEvents(self): self._singleton_.processEvents()
+    def enableAllActuators(self): return self._singleton_.enableAllActuators()
+    def disableAllActuators(self): return self._singleton_.disableAllActuators()
+
+
+
     def __getattr__(self, key):
+        """!
+        @brief Autoexpand member function calls that end in 's' into multiple calls
+        to base functions
+
+        @param key (str): attribute name
+
+        @return _type_: attribute (or proxy function if key ends in 's')
+        """
+        if key[-1] == 's':
+            func_to_call = getattr(self,key[:-1])
+            if callable(func_to_call):
+                # Create a function that calls the function repeatedly
+                def repeated(ids, *args, **kwargs):
+                    return [ func_to_call(i, *args, **kwargs)  for i in ids ]
+                
+                return repeated
+            else:
+                pass # Drop to returning the full key
+
         return getattr(self._singleton_, key )
 
 class Clover_GLUON(ActuatorControllerBase):
@@ -33,6 +62,10 @@ class Clover_GLUON(ActuatorControllerBase):
         self.setProfilePositionMaxVelocity(max_vel)
         self.setMinimumPosition(min_pos)
         self.setMaximumPosition(max_pos)
+
+    def hi(self, i, *args):
+        print(i,args)
+        return i
 
     def home(self):
         self.home_position = self.getPositions()
