@@ -1,8 +1,6 @@
 from clover_ActuatorController import Actuator, ActuatorController
 
 __all__ = ["Actuator", "Clover_GLUON"]
-class UID():
-    actuatorID = 0
 
 class ActuatorControllerBase(object):
 
@@ -17,12 +15,10 @@ class ActuatorControllerBase(object):
     def enableAllActuators(self): return self._singleton_.enableAllActuators()
     def disableAllActuators(self): return self._singleton_.disableAllActuators()
 
-
-
     def __getattr__(self, key):
         """!
-        @brief Autoexpand member function calls that end in 's' into multiple calls
-        to base functions
+        @brief Redirect attribute access to the _sigleton_. Autoexpand member function calls that end in 's' into multiple calls
+        to base functions.
 
         @param key (str): attribute name
 
@@ -39,7 +35,7 @@ class ActuatorControllerBase(object):
             else:
                 pass # Drop to returning the full key
 
-        return getattr(self._singleton_, key )
+        return getattr(self._singleton_, key)
 
 class Clover_GLUON(ActuatorControllerBase):
 
@@ -62,10 +58,6 @@ class Clover_GLUON(ActuatorControllerBase):
         self.setProfilePositionMaxVelocity(max_vel)
         self.setMinimumPosition(min_pos)
         self.setMaximumPosition(max_pos)
-
-    def hi(self, i, *args):
-        print(i,args)
-        return i
 
     def home(self):
         self.home_position = self.getPositions()

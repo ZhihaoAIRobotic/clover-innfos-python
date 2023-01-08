@@ -55,7 +55,7 @@ arm.setMinimumPosition(arm.jointids[0], -9)
 arm.home()
 print("\n",arm.report())
 
-input("Move to start")
+input("Move arm to start")
 arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Profile_Pos)
 startpos = arm.getPositions()
 print("\n\nInitialPosition is ",startpos,'\n')
