@@ -9,7 +9,6 @@ binding_source_files_string = open(os.path.join(os.path.dirname(__file__),f"bind
 binding_source_files = binding_source_files_string.strip().split('\n')
 binding_source_files = ["binding/"+pth for pth in binding_source_files]
 
-print("Binding: ",binding_source_files)
 ext_modules = [
     Pybind11Extension(
         MODULE_NAME,
