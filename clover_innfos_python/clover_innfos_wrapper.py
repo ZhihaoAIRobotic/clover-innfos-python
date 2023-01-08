@@ -1,3 +1,4 @@
+from clover_ActuatorController import Actuator, ActuatorController
 
 class ActuatorControllerBase(object):
 
@@ -7,7 +8,7 @@ class ActuatorControllerBase(object):
         return obj
         
     # Make sure we have __dict__ keys for functions that end in `s`, see __getattr__ below
-    def lookupActuators(self,*args): return [UID()]#self._singleton_.lookupActuators(*args)
+    def lookupActuators(self,*args): return self._singleton_.lookupActuators(*args)
     def processEvents(self): self._singleton_.processEvents()
     def enableAllActuators(self): return self._singleton_.enableAllActuators()
     def disableAllActuators(self): return self._singleton_.disableAllActuators()

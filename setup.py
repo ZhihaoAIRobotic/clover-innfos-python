@@ -1,9 +1,7 @@
 from glob import glob
-from setuptools import setup
-import sysconfig
+from setuptools import setup, find_packages
 from pybind11.setup_helpers import Pybind11Extension
 import os
-
 
 MODULE_NAME = "clover_ActuatorController"
 BASE_DIR = os.path.dirname(__file__)
@@ -11,9 +9,13 @@ binding_source_files_string = open(os.path.join(BASE_DIR,f"binding/{MODULE_NAME}
 binding_source_files = binding_source_files_string.strip().split('\n')
 binding_source_files = ["binding/"+pth for pth in binding_source_files]
 
+import compileall
+compileall.compile_dir(os.path.join(BASE_DIR,'clover_innfos_python'))
+
 # Copy libActuatorController.so into the package directory
 import shutil
 shutil.copyfile(os.path.join(BASE_DIR,"innfos-cpp-sdk/sdk/lib/linux_x86_64/libActuatorController.so"), os.path.join(BASE_DIR,'clover_innfos_python','libActuatorController.so'))
+
 
 ext_modules = [
     Pybind11Extension(
@@ -25,6 +27,7 @@ ext_modules = [
         extra_link_args=["-Wl,-rpath,$ORIGIN:$ORIGIN/clover_innfos_python/"], # Needed so libActuatorController.so can be found by clover_ActuatorController
     ),
 ]
+
 
 setup(
     name='clover_innfos_python',
