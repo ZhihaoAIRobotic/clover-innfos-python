@@ -5,7 +5,7 @@ A = np.array
 
 class ActuatorControllerBase(object):
     
-    def __new__(cls):
+    def __new__(cls,*args):
         obj = super().__new__(cls)
         obj._singleton_ = ActuatorController.initController()
         return obj
