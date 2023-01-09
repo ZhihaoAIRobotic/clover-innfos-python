@@ -2,7 +2,8 @@ from pyPS4Controller.controller import Controller
 import time
 from clover_innfos_python import *
 
-arm = Clover_GLUON()
+#arm = Clover_GLUON()
+arm = ArmInterface()
 
 class MyController(Controller):
 
@@ -71,9 +72,11 @@ res = arm.setPositions([0,0,0,0,0,0])
 time.sleep(5)
 
 print("\n\nPosition at zero is ",arm.getPositions(bRefresh=True),'\n')
+
 print("Going home")
 arm.setPositions(startpos)
-
+time.sleep(0.2)
+print("\n\Velocity at going home is ",arm.getVelocitys(bRefresh=True),'\n')
 
 time.sleep(5)
 print("\n\nPosition at start is",arm.getPositions(bRefresh=True),'\n')
