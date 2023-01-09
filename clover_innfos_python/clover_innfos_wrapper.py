@@ -76,18 +76,7 @@ class Clover_GLUON(ActuatorControllerBase):
         for i, myid in enumerate(self.actuator_id_list):
             self.joint_idxs[myid] = self.actuator_id_list.index(myid)
 
-        # for i in self.actuator_id_list:
-        #     self.setPositionOffset(i,0.0)
-
-        """ 
-            About units: attributes always use (store) values in the original innfos units. Values
-            are converted to the users units when they are retrieved or sent to the user
-        """
-        
-        self.home_position = A([0,0,0,0,0,0])[:self.dof]  # Keep track of what our home position is
-
-
-        self.set_safety_values(max_acc=400, max_dec=-200, max_vel=500, min_pos=9, max_pos=9)
+        self.set_safety_values(max_acc=400, max_dec=-200, max_vel=500, min_pos=-9, max_pos=9)
 
     def set_safety_values(self, max_acc, max_dec, max_vel, min_pos, max_pos):
         for i in self.actuator_id_list:
@@ -97,27 +86,21 @@ class Clover_GLUON(ActuatorControllerBase):
             self.setMinimumPosition(i, min_pos)
             self.setMaximumPosition(i, max_pos)
 
-    def home(self, position = None, include_current_offset=False, units = innfos_position_units):
+    def home(self, position = [0,0,0,0,0,0]):
         """ Set the home (zero) position.
-
-            If no position is given, the current position is taken.
-            If a position is given and include_current_offset is True, the given position has the same 'home' as getPositions
-            If include_current_offset is False, the given position is relative to the actuator position value
         """
-        if position is None:
-            self.home_position = A([self.getPosition(i,bRefresh=True) for i in self.actuator_id_list])
-        elif include_current_offset:
-            self.home_position = A(position)[:self.dof]*units-self.home_position # Coerce pos to be np.array with self.dof elements
-        else:
-            self.home_position = A(position)[:self.dof]*units # Coerce pos to be np.array with self.dof elements
+        self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Homing)
+        self.setHomingPositions(position)
+        time.sleep(0.1) # Without sleep, there is a race condition and homing may or may not fail
+        self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Profile_Pos)
 
     def getPositions(self,bRefresh=True, units = innfos_position_units):
         pos = A([self.getPosition(i,bRefresh=bRefresh) for i in self.actuator_id_list])
-        return (pos-self.home_position)/units
+        return (pos)/units
 
     def setPositions(self, pos, units = innfos_position_units):
         pos = A(pos)[:self.dof]*units# Coerce pos to be np.array with self.dof elements
-        return [self.setPosition(i,q) for i,q in zip(self.actuator_id_list,self.home_position + pos)]
+        return [self.setPosition(i,q) for i,q in zip(self.actuator_id_list,pos)]
 
     def report(self, pos_unit = innfos_position_units, vel_unit = innfos_velocity_units):
         def quickstring(func, unit=1.0):
@@ -208,17 +191,29 @@ class ArmInterface(Clover_GLUON):
     def safePositionMode(self,max_acc=None, max_dec=None, max_vel=None, min_pos=None, max_pos=None):
         """
         set robot arm into safe position control mode
-        :param: None
+        :max_acc: Max acceleration in Degrees/minute**2 (scalar or array)
+        :max_dec: Max deceleration in Degrees/minute**2 (scalar or array)
+        :max_vel: Max velocity in Degrees/minute (scalar or array)
+        :min_pos: Minimum position in Degrees (scalar or array)
+        :max_pos: Maximum position in Degrees (scalar or array)
         :return: None
         """
-        
-        for i in self.actuator_id_list:
-            #self.setProfilePositionAcceleration(i, max_acc)
-            #self.setProfilePositionDeceleration(i, -abs(max_dec))
-            #self.setProfilePositionMaxVelocity(i, max_vel)
-            #self.setMinimumPosition(i, min_pos)
-            if max_pos is not None:
-                self.setMaximumPosition(i, max_pos)
+        def coerce_to_array(x):
+            if not isinstance(x, (tuple, list, np.ndarray)):
+                x = [x for i in range(self.dof)]
+            return np.array(x)
+
+        if max_pos is not None:
+            self.setMaximumPositions(coerce_to_array(max_pos)*Degrees)
+        if min_pos is not None:
+            self.setMinimumPositions(coerce_to_array(min_pos)*Degrees)
+        if max_acc is not None:
+            self.setProfilePositionAccelerations(coerce_to_array(max_acc*Degrees/minute**2))
+        if max_dec is not None:
+            self.setProfilePositionDecelerations(coerce_to_array( -abs(max_dec)*Degrees/minute**2))
+        if max_vel is not None:
+            self.setProfilePositionMaxVelocitys(coerce_to_array(max_vel*Degrees/minute))
+
 
     def setVelocityMode(self):
         """
@@ -279,6 +274,7 @@ class ArmInterface(Clover_GLUON):
             # pos = trajectory_generator.getPosition(t_now)
             tra = trajectory_generator.getTrajectory(t_now)
             self.setArmPosition(tra[:,0])
+
             time_list.append(t_now)
             ArmPosition = self.getArmPosition()
             arm_velocity = self.getArmVelocity()
@@ -331,8 +327,10 @@ class ArmInterface(Clover_GLUON):
         :return: None
         """
         tolerance = 0.1
+        
+        self.setArmPosition([0, 0, 0, 0, 0, 0])
+
         while True:
-            self.setArmPosition([0, 0, 0, 0, 0, 0])
             time.sleep(0.01)
             if (np.absolute(np.array(self.getArmPosition()))< tolerance).all():
                 break

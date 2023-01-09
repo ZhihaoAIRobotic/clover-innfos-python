@@ -7,7 +7,7 @@ from clover_innfos_python import *
 
 
 import sys
-from PyQt5.QtWidgets import QWidget,QTextEdit,QApplication,QListWidget,QGridLayout,QLabel,QVBoxLayout
+from PyQt5.QtWidgets import QWidget,QTextEdit,QApplication,QListWidget,QGridLayout,QLabel,QVBoxLayout,QStatusBar
 from PyQt5.QtCore import QTimer,QDateTime
 
 class WinForm(QWidget):
@@ -20,6 +20,7 @@ class WinForm(QWidget):
         self.label=QLabel('Jpos')
         self.modelabel=QLabel('mode')
         self.labels = [QLabel('Label_i') for i in range(self.Nlabels )]
+        self.status = QStatusBar()
 
         # Make timer to update joint position
         self.timer=QTimer()
@@ -38,7 +39,7 @@ class WinForm(QWidget):
 
     def showInfo(self):
         self.label.setText( f"Joint positions: {self.arm.getPositions()}")
-        self.modelabel.setText( f"Joint positions: {arm.getActuatorModes()}")
+        self.modelabel.setText( f"Joint positions: {[mode.name for mode in arm.getActuatorModes()]}")
         self.labels[0].setText(f"Joint offsets: {self.arm.getPositionOffsets(True)}")
 
 
@@ -77,12 +78,9 @@ if __name__ == '__main__':
         print("It took ",endtime-start," seconds to enable the arm")
 
         input("Move to zero")
-        arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Homing)
-        arm.setHomingPositions([0,0,0,0,0,0])
-        #arm.setPositionOffsets([0,0,0,0,0,0])
+        arm.home() # Will set position to profile mode
 
 
-        time.sleep(0.01)
         arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Cur)
 
     GUI(arm_sequence, arm)
