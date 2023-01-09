@@ -33,7 +33,7 @@ setup(
     name='clover_innfos_python',
     packages=['clover_innfos_python'],
     setup_requires = ['pybind11','setuptools-git-versioning<2','setuptools_scm'],
-    install_requires = ["matplotlib", "scipy", "pandas", "numpy"],
+    install_requires = ["matplotlib", "scipy", "numpy"],
     provides = ["clover_innfos_python"],
     ext_modules=ext_modules,
     package_data={'clover_innfos_python': ['libActuatorController.so']},
