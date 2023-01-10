@@ -1,6 +1,7 @@
 from clover_ActuatorController import Actuator, ActuatorController
 import numpy as np
 import sys
+import signal
 
 ###################### Helpers ####################################
 # numpy array building function
@@ -93,7 +94,7 @@ class Clover_MINTASCA(ActuatorControllerPython):
         Base class for a Mintasca actuators. This class works for 
     """
 
-    def __init__(self, actuator_id_list=None, on_Exception=Actuator.ActuatorMode.Mode_Vel):
+    def __init__(self, actuator_id_list=None, on_Exception=Actuator.ActuatorMode.Mode_Vel, qt=None):
         super().__init__()
         err = Actuator.ErrorsDefine(0) # Create object to store errors during actuator lookup
         jointlist = self.lookupActuators(err)
@@ -115,14 +116,21 @@ class Clover_MINTASCA(ActuatorControllerPython):
 
         self.dof = len(self.actuator_id_list)
 
+
         ### Register a hook for exceptions ###
         def my_except_hook(exctype, value, traceback):
             # Try to leave arm in relatively safe condition in an exception
             self.setVelocityKis([0,0,0,0,0,0])
             self.setVelocityKps([1,1,1,1,1,1])
             self.activateActuatorModeInBantch(self.jointlist, on_Exception)
-            
+
+            ## Handle CTRL+C with Qt ##
+            # If a qt application object has been registered, tell it to quit
+            if not self.qt is None:
+                self.qt.quit()
+
             sys.__excepthook__(exctype, value, traceback)
+
         sys.excepthook = my_except_hook
 
 

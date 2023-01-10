@@ -7,6 +7,7 @@ from clover_innfos_python import *
 
 from PyQt5.QtWidgets import QWidget,QTextEdit,QApplication,QListWidget,QGridLayout,QLabel,QVBoxLayout,QStatusBar
 from PyQt5.QtCore import QTimer,QDateTime
+from PyQt5.QtGui import QKeySequence
 import threading
 
 
@@ -14,8 +15,11 @@ import threading
 class WinForm(QWidget):
     def __init__(self,parent=None,arm=None):
         super(WinForm, self).__init__(parent)
+        self.setObjectName("mainDialog")
         self.setWindowTitle('Joint Display example')
         self.arm = arm
+        self.arm.qt = self
+        
 
         columns = list(range(1+self.arm.dof))
 
@@ -63,6 +67,15 @@ class WinForm(QWidget):
         self.timer.start(10)
         self.velarray = None
 
+    ## Handle CTRL+C with Qt ##
+    def quit(self):
+        QApplication.instance().quit()
+
+    def keyPressEvent(self, event):
+        ## Handle CTRL+C with Qt ##
+        if QKeySequence(event.key()+int(event.modifiers())) == QKeySequence("Ctrl+C"):
+            self.quit()
+
     def showInfo(self):
         
         current = self.arm.getCurrents(bRefresh=True)
@@ -93,15 +106,25 @@ def StartDashboard(arm_sequence_thread, arm_instance):
     form=WinForm(arm=arm_instance)
     form.show()
 
+    def thread_wrapper(*args):
+        try:
+            arm_sequence_thread(*args)
+        finally:
+            print("Arm sequence thread is done")
+            
+
     thread_args = [arm_instance]
-    ui_th = threading.Thread(target=arm_sequence_thread, args=thread_args)
+    ui_th = threading.Thread(target=thread_wrapper, args=thread_args)
+    ## Handle CTRL+C with Qt ##
+    ui_th.daemon = True # Thread will be killed on exit() of Qt
     ui_th.start()
     app.exec_()
-
+    
     sys.exit(app.quit() )
 
 
 if __name__ == '__main__':
+
     np.set_printoptions(precision=4,floatmode='fixed',suppress=True)
     actuator_ids =  [1,2,4,7,6] # J1=id(1) ... J5=id(6)
     arm = ArmInterface(actuator_ids)
@@ -109,7 +132,6 @@ if __name__ == '__main__':
     def arm_sequence(*args):
         """ Sequence of operations on the arm to run """
         arm = args[0]
-
         print("Enabling arm...")
         start = time.time()
         arm.enableAllActuators()
@@ -124,34 +146,48 @@ if __name__ == '__main__':
 
         arm.setPositionMode()
         jidx = 0
-        arm.setArmPosition([360,0,0,0,0,0])
-        while(current:=abs(arm.getCurrents(True)[0]) < 1.0):
-            lastpos = arm.getArmPosition()
-        # Reset position mode (remove profile ramp and integrator windup) and go the other direction
-        arm.setPositionMode()
-        
-        print('pos',lastpos)
-        arm.setArmPosition([-360,0,0,0,0,0])
-        time.sleep(2)
-        pos_stop = lastpos[jidx]
-        while(current:=abs(arm.getCurrents(True)[0]) < 1.0):
-            lastpos = arm.getArmPosition()
+        trigger_current = 0.5
+        search_limit = 360
+        target = np.zeros(arm.dof)
 
-        arm.setPositionMode()
+        def find_limits(arm, jidx, search_limit, trigger_current):
+            target[jidx] = search_limit
+            print("Moving to ",target)
+            arm.setArmPosition(target)
+            while(current:=abs(arm.getCurrents(True)[jidx]) < trigger_current):
+                lastpos = arm.getArmPosition()
+            # Reset position mode (remove profile ramp and integrator windup) and go the other direction
+            arm.setPositionMode()
+            
+            print('positive stop position:',lastpos)
+            target[jidx] = -search_limit
+            arm.setArmPosition(target)
 
-        current=abs(arm.getCurrents(True)[0])
-        while( current < 1.0):
-            current=abs(arm.getCurrents(True)[0])
-            lastpos = arm.getArmPosition()
+            time.sleep(2) # Sleep a little to wait for direction change
 
-        print('neg',lastpos)
-        neg_stop = lastpos[jidx]
-        print(pos_stop,neg_stop)
-        print("going to",[(neg_stop+pos_stop)/2,0,0,0,0,0])
+            pos_stop = lastpos[jidx]
+            while(current:=abs(arm.getCurrents(True)[jidx]) < trigger_current):
+                lastpos = arm.getArmPosition()
+            arm.setPositionMode()
+            print(arm.getArmPosition())
 
-        arm.setArmPosition([(neg_stop+pos_stop)/2,0,0,0,0,0])
+            print('negative stop position:',lastpos)
+            neg_stop = lastpos[jidx]
+            
+            
+            target[jidx] = (neg_stop+pos_stop)/2
+            arm.setArmPosition(target)
 
+            # Wait until we get to our target
+            while((pos:=np.abs(arm.getArmPosition()-A(target)) > 0.1).any()):
+                pass
+                
 
+            arm.home() # Will set position to profile mode
+            return (neg_stop, pos_stop)
+
+        j0_limit = find_limits(arm, 0, 360, 0.5)
+        print("j0 limit was",j0_limit)
 
 
     StartDashboard(arm_sequence, arm)
