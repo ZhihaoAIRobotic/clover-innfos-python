@@ -1,15 +1,58 @@
 from clover_ActuatorController import Actuator, ActuatorController
 import numpy as np
+import sys
 
-A = np.array
+###################### Helpers ####################################
+# numpy array building function
+def A(*args):
+    """
+        A(np.ndarray) => np.ndarray
+        A(1, 0) => np.array([1,0])
+        A([1,2],[3,4]) => np.array([[1,2],[3,4]])
+    """
+    # A(np.ndarray) => np.ndarray
+    if len(args)==1 and isinstance(args[0],(list,np.ndarray)): return np.array(args[0])
+    # A(1, 0) => np.array([1,0]), A([1,2],[3,4]) => np.array([[1,2],[3,4]])
+    return np.array([arg for arg in args])
 
-class ActuatorControllerBase(object):
+pi = np.pi
+pi_2 = np.pi/2
+Degrees = 0.1 # Degrees_value*Degrees => Control_value, Control_value/Degrees => Degrees_value
+Radians = 18.0/pi
+innfos_position_units = 1.0
+second = 1.0/60.0
+minute = 1.0
+innfos_velocity_units = 1.0
+######################     Helpers      ####################################
+
+
+###################### ActuatorController wrapper ##########################
+
+class ActuatorControllerPython(object):
+    """ WARNING: You should probably not use this class directly. See: Clover_GLUON()
+        
+        ActuatorController as provided by pybind11 must be instantiated with .initController() and
+        is a c++ object that cannot have python attributes added to it.  To be able to use this class
+        easily in python, we create a wrapper class of the pybind11 wrapper, which allows us to add
+        our own attributes.
+
+        We override __getattr__ to pass function calls meant for ActuatorController to it.
+
+        We add magic to set/get all the actuators at once. If a function name ends in 's',
+        we call the function without 's' repeatedly for each actuator.
+
+        self.getVelocitys(True) #=> [self.getVelocity(i,True) for i in self.actuator_id_list]
+        self.setVelocitys([1,2,3,4]) #=> [self.setVelocity(i,v) for i,v in zip(self.actuator_id_list,args[0]]
+    """
     
     def __new__(cls,*args):
+        """
+            Attach ActuatorController singleton to an internal attribute
+        """
         obj = super().__new__(cls)
         obj._singleton_ = ActuatorController.initController()
         return obj
-        
+    
     # Make sure we have __dict__ keys for functions that end in `s`, see __getattr__ below
     def lookupActuators(self,*args): return self._singleton_.lookupActuators(*args)
     def processEvents(self): self._singleton_.processEvents()
@@ -25,6 +68,7 @@ class ActuatorControllerBase(object):
 
         @return _type_: attribute (or proxy function if key ends in 's')
         """
+        # Magic for functions ending in 's'
         if not key in self.__dict__ and key[-1] == 's':
             func_to_call = getattr(self,key[:-1])
             if callable(func_to_call):
@@ -33,44 +77,54 @@ class ActuatorControllerBase(object):
                     if len(args) > 0 and isinstance(args[0], (list,np.ndarray)):
                         return A([ func_to_call(i, j, *args[1:], **kwargs)  for i,j in zip(getattr(self,'actuator_id_list'), args[0]) ])
                     else:
-                        return A([ func_to_call(i, *args, **kwargs)  for i in getattr(self,'actuator_id_list') ])
+                        return A([ func_to_call(i, *args, **kwargs) for i in getattr(self,'actuator_id_list') ])
                 
                 return repeated
-            else:
-                pass # Drop to returning the full key
-
-        return getattr(self._singleton_, key)
-
-
-pi = np.pi
-Degrees = 0.1 # Degrees_value*Degrees => Control_value, Control_value/Degrees => Degrees_value
-Radians = 18.0/pi
-innfos_position_units = 1.0
-second = 1.0/60.0
-minute = 1.0
-innfos_velocity_units = 1.0
-
-class Clover_GLUON(ActuatorControllerBase):
+        # Get attribute from ActuatorController singleton
+        else:
+            return getattr(self._singleton_, key)
 
 
-    scale_pos= {"Degrees": Degrees, "Radians": Radians, "Control": innfos_position_units}
-    scale_vel= {"Minute": minute, "Second": second, "Control": innfos_position_units}
 
-    def __init__(self, actuator_id_list=None):
+
+
+class Clover_MINTASCA(ActuatorControllerPython):
+    """
+        Base class for a Mintasca actuators. This class works for 
+    """
+
+    def __init__(self, actuator_id_list=None, on_Exception=Actuator.ActuatorMode.Mode_Vel):
         super().__init__()
         err = Actuator.ErrorsDefine(0) # Create object to store errors during actuator lookup
         jointlist = self.lookupActuators(err)
+        if len(jointlist) == 0:
+            raise Exception("No MINTASCA actuators found! Did you connect the network?")
         if err != Actuator.ErrorsDefine(0):
             self.clearErrors()
+            time.sleep(0.1)
+            jointlist = self.lookupActuators(err)
+            if err != Actuator.ErrorsDefine(0):
+                raise Exception("Arm has error ",err," which we are unable to clear!")
 
         self.jointlist = jointlist
-        
+
         if actuator_id_list:
             self.actuator_id_list = actuator_id_list
         else:
             self.actuator_id_list = [j.actuatorID for j in self.jointlist] # [2, 3, 5] => Aid[J0] = 2
 
         self.dof = len(self.actuator_id_list)
+
+        ### Register a hook for exceptions ###
+        def my_except_hook(exctype, value, traceback):
+            # Try to leave arm in relatively safe condition in an exception
+            self.setVelocityKis([0,0,0,0,0,0])
+            self.setVelocityKps([1,1,1,1,1,1])
+            self.activateActuatorModeInBantch(self.jointlist, on_Exception)
+            
+            sys.__excepthook__(exctype, value, traceback)
+        sys.excepthook = my_except_hook
+
 
         self.joint_idxs = [None for i in range(max(self.actuator_id_list)+1)] # joint_idxs[actuatorid] = actuator_id_list.index(joint_index)
         for i, myid in enumerate(self.actuator_id_list):
@@ -86,13 +140,13 @@ class Clover_GLUON(ActuatorControllerBase):
             self.setMinimumPosition(i, min_pos)
             self.setMaximumPosition(i, max_pos)
 
-    def home(self, position = [0,0,0,0,0,0]):
+    def home(self, position = [0,0,0,0,0,0], then_switch_to_mode=Actuator.ActuatorMode.Mode_Profile_Pos):
         """ Set the home (zero) position.
         """
         self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Homing)
         self.setHomingPositions(position)
         time.sleep(0.1) # Without sleep, there is a race condition and homing may or may not fail
-        self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Profile_Pos)
+        self.activateActuatorModeInBantch(self.jointlist, then_switch_to_mode)
 
     def getPositions(self,bRefresh=True, units = innfos_position_units):
         pos = A([self.getPosition(i,bRefresh=bRefresh) for i in self.actuator_id_list])
@@ -132,7 +186,7 @@ class Clover_GLUON(ActuatorControllerBase):
         return s
 
 import time
-class ArmInterface(Clover_GLUON):
+class ArmInterface(Clover_MINTASCA):
 
     def enableActuators(self):
         """

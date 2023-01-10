@@ -3,6 +3,6 @@ from .clover_innfos_wrapper import *
 
 
 __all__ = [
-    "Actuator", "Clover_GLUON","ArmInterface",
-    "Degrees", "Radians", "minute", "second"
+    "Actuator", "Clover_MINTASCA","ArmInterface",
+    "Degrees", "Radians", "minute", "second", "A"
 ]

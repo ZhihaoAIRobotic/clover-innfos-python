@@ -14,12 +14,10 @@ arm = clover_innfos_python.ArmInterface(actuator_ids)
 
 arm.enableAllActuators()
 
-# Infinite loop should be inside try/finally so we can
-# correctly disable the actuators at the end
-try:
-    while(1):
-        print("( CTRL+C to stop) Position:", arm.getArmPosition(), " (Degrees) ")
 
-# After Keyboardinterrupt exception, disable the arm
-finally:
-    arm.disableAllActuators()
+while(1):
+    print("( CTRL+C to stop) Position:", arm.getArmPosition(), " (Degrees) ")
+    time.sleep(0.1)
+
+
+
