@@ -33,10 +33,13 @@ setup(
     name='clover_innfos_python',
     packages=['clover_innfos_python'],
     setup_requires = ['pybind11','setuptools-git-versioning<2','setuptools_scm'],
-    install_requires = ["matplotlib", "scipy", "numpy"],
+    install_requires = ["matplotlib", "scipy", "numpy", "pyqt5"],
     provides = ["clover_innfos_python"],
     ext_modules=ext_modules,
     package_data={'clover_innfos_python': ['libActuatorController.so']},
     use_scm_version=True,
+    description='Python interface for Mintasca (Innfos) actuators and GLUON arm.',
+    author='Traveler Hauptman',
+    author_email='hauptmech@gmail.com',
 )
 

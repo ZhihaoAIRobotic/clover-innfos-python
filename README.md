@@ -6,11 +6,18 @@ See the `examples` folder for examples of use.
 
 ## Get the submodules
 
+If you used git to retrieve this source code, you will also need to get the submodules.
+
 `git submodule update --init --recursive` 
 
 ## Installation
 
-`sudo python setup.py install`
+This package can be installed via pip. Open a terminal at the directory of this README.md.
+
+```
+SOURCE_PATH=$(pwd)
+pip3 install $SOURCE_PATH
+```
 
 
 ## Python binding for innfos-cpp-sdk
