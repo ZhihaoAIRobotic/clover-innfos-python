@@ -127,7 +127,7 @@ if __name__ == '__main__':
 
     np.set_printoptions(precision=4,floatmode='fixed',suppress=True)
     actuator_ids =  [1,2,4,7,6] # J1=id(1) ... J5=id(6)
-    arm = ArmInterface(actuator_ids)
+    arm = ArmInterface()
 
     def arm_sequence(*args):
         """ Sequence of operations on the arm to run """

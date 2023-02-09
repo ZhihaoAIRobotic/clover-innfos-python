@@ -18,8 +18,8 @@
 import time
 import clover_innfos_python
 
-actuator_ids =  [1,2,4,7,6] 
-arm = clover_innfos_python.ArmInterface( actuator_ids )
+# actuator_ids =  [1,2,4,7,6]
+arm = clover_innfos_python.ArmInterface(  )
 
 
 print("Enabling arm...")
