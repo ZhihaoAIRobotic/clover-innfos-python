@@ -94,7 +94,8 @@ class Clover_MINTASCA(ActuatorControllerPython):
         Base class for a Mintasca actuators. This class works for 
     """
 
-    def __init__(self, actuator_id_list=None, on_Exception=Actuator.ActuatorMode.Mode_Vel, qt=None):
+    def __init__(self, actuator_id_list=None, on_Exception=Actuator.ActuatorMode.Mode_Vel, mode_on_Exit=Actuator.ActuatorMode.Mode_Vel, qt=None):
+        self.mode_on_Exit = mode_on_Exit
         super().__init__()
         err = Actuator.ErrorsDefine(0) # Create object to store errors during actuator lookup
         jointlist = self.lookupActuators(err)
@@ -138,7 +139,32 @@ class Clover_MINTASCA(ActuatorControllerPython):
         for i, myid in enumerate(self.actuator_id_list):
             self.joint_idxs[myid] = self.actuator_id_list.index(myid)
 
+        # ToDo: Replace set_safety_values with detailed default values for all parameters including gains
         self.set_safety_values(max_acc=400, max_dec=-200, max_vel=500, min_pos=-9, max_pos=9)
+
+        """
+        # Hardcoded safe default limits for GLUON arm
+        safe_acceleration_defaults = A([400, 400, 400, 400, 400, 400, 400])
+        safe_deceleration_defaults = -np.abs(A([-200, -200, -200, -200, -200, -200, -200]))
+        safe_maxvelocity_defaults = A([500, 500, 500, 500, 500, 500, 500])
+        safe_minposition_defaults = A([-90,-90,-90,-90,-90,-90]) * Degrees
+        safe_maxposition_defaults = A([90,90,90,90,90,90]) * 
+        safe_PositionKp = A([0.35, 0.35, 0.35, 0.35, 0.35, 0.35])
+
+        
+        self.setProfilePositionAccelerations( safe_acceleration_defaults )
+        self.setProfilePositionDecelerations( safe_deceleration_defaults )
+        self.setProfilePositionMaxVelocitys( safe_maxvelocity_defaults )
+        self.setMinimumPosition( safe_minposition_defaults )
+        self.setMaximumPosition( safe_maxposition_defaults )
+        self.setPositionKps( safe_PositionKp )
+        
+        raise Exception(" TODO! Set defaults for all actuator parameters!!!!!)
+        """
+    def end_operation(self):
+        self.setVelocityKis([0,0,0,0,0,0])
+        self.setVelocityKps([1,1,1,1,1,1])
+        self.activateActuatorModeInBantch(self.jointlist, self.mode_on_Exit)
 
     def set_safety_values(self, max_acc, max_dec, max_vel, min_pos, max_pos):
         for i in self.actuator_id_list:
