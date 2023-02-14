@@ -178,8 +178,8 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
 
 
     # Calculate the error
-    # pos_error = np.zeros(3)
-    pos_error = Transform[0:3, 3] - initial_transform[0:3, 3]
+    pos_error = np.zeros(3)
+    pos_error[2] = Transform[2, 3] - initial_transform[2, 3]
     # print(pos_error)
     omg_error = eomg(initial_transform)
     # print(omg_error)
@@ -227,17 +227,18 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         q_transform = fk(chain, q)
 
         # Calculate the error for the next iteration
-        pos_error = Transform[0:3, 3] - q_transform[0:3, 3]
+        pos_error = np.zeros(3)
+        pos_error[2] = Transform[2, 3] - q_transform[2, 3]
         omg_error = eomg(q_transform)
         error = [*pos_error, *omg_error]
-        print(error)
+        # print(error)
 
         # Build the error condition
         condition = np.linalg.norm(pos_error) > 0.01 \
                     or np.linalg.norm(omg_error) > 0.00005
 
         # Build the graphing variable library
-        graphlist.append(error)
+        graphlist.append(q[2])
 
         # Define the limits in terms of Radians
 
@@ -344,9 +345,9 @@ if __name__ == "__main__":
     #
     # print("Forward kinematics", forward_kinematics)
 
-    forward_kinematics = np.array([[0.04, 0.92, 0.04, 0.08011],
-                                   [0.92, 0.04, 0.04, -0.3252],
-                                   [0.04, 0.04, -0.92, 0.2077],
+    forward_kinematics = np.array([[0, 1, 0, 0],
+                                   [1, 0, 0, 0],
+                                   [0, 0, -1, 0.3],
                                    [0, 0, 0, 1]])
 
     j = jacobian(robot_chain, [0, 0, 0, 0, 0, 0])
@@ -355,20 +356,20 @@ if __name__ == "__main__":
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Quaternion")
+    Inverse_kinematics, condition, thetalist = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Angle_and_Axis")
     print("Inverse kinematics", Inverse_kinematics, condition)
+    print("")
     print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
 
     print("")
     rad_to_degree = Inverse_kinematics[:]*(180/pi)
-
-    print(rad_to_degree)
+    print("In Degrees",rad_to_degree)
 
     # Check if the Transform of the Inverse kinematics is the same as the Forward kinematics
     Solution_Check = fk(robot_chain, Inverse_kinematics)
     print("Solution Check", Solution_Check)
 
-    graphlist = np.array(thetalist).reshape(6, np.array(thetalist).shape[0])
+    graphlist = np.array(thetalist).reshape(1, np.array(thetalist).shape[0])
 
     for row in graphlist:
         plt.plot(row)
