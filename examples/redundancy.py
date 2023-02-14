@@ -160,6 +160,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
             # for desired Transform
             n_d = Quat(Transform)[0]
             e_d = Quat(Transform)[1]
+            # print(n_d)
 
             # for current Transform
             n_e = Quat(T)[0]
@@ -175,12 +176,16 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
 
             return e_omg
 
+
     # Calculate the error
+    # pos_error = np.zeros(3)
     pos_error = Transform[0:3, 3] - initial_transform[0:3, 3]
+    # print(pos_error)
     omg_error = eomg(initial_transform)
     # print(omg_error)
 
     error = np.array([*pos_error, *omg_error]).reshape(6, 1)
+    print(error)
 
     # Build the error condition
     condition = np.linalg.norm(pos_error) > 0.01 \
@@ -225,6 +230,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         pos_error = Transform[0:3, 3] - q_transform[0:3, 3]
         omg_error = eomg(q_transform)
         error = [*pos_error, *omg_error]
+        print(error)
 
         # Build the error condition
         condition = np.linalg.norm(pos_error) > 0.01 \
@@ -334,8 +340,14 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    forward_kinematics = fk(robot_chain, [0, 1.5, -0.5, 1.5, 0.3, 0.1])
-    print("Forward kinematics", forward_kinematics)
+    # forward_kinematics = fk(robot_chain, [0, 1.7, -0.4, 1.5, 0.3, 0.1])
+    #
+    # print("Forward kinematics", forward_kinematics)
+
+    forward_kinematics = np.array([[0.04, 0.92, 0.04, 0.08011],
+                                   [0.92, 0.04, 0.04, -0.3252],
+                                   [0.04, 0.04, -0.92, 0.2077],
+                                   [0, 0, 0, 1]])
 
     j = jacobian(robot_chain, [0, 0, 0, 0, 0, 0])
     # print("Jacobian: J(q) | q=0,0,0,0,0,0", j)

@@ -205,6 +205,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         #     q = q + tolerance
 
         # Calculate the pseudo inverse of the geometric jacobian
+
         pseudoinv = np.linalg.pinv(jacobian(chain, q))
 
         # Calculate the error with gain
@@ -231,7 +232,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
                     or np.linalg.norm(omg_error) > 0.00005
 
         # Build the graphing variable library
-        graphlist.append(error)
+        graphlist.append(q)
 
         # Define the limits in terms of Radians
 
@@ -300,7 +301,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
                 if -(2 * np.pi) < q[j] < -np.pi:
                     q[j] = (2 * np.pi) + q[j]
 
-    return (q, not condition, graphlist)
+    return (q, not condition, graphlist, dq)
 
 
 ################# np.array pretty print #################################
@@ -334,7 +335,7 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    forward_kinematics = fk(robot_chain, [0, 1.5, -0.5, 1.5, 0.3, 0.1])
+    forward_kinematics = fk(robot_chain, [0, 1.7, -0.4, 1.5, 0.3, 0.1])
     print("Forward kinematics", forward_kinematics)
 
     j = jacobian(robot_chain, [0, 0, 0, 0, 0, 0])
@@ -343,14 +344,15 @@ if __name__ == "__main__":
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Quaternion")
+    Inverse_kinematics, condition, thetalist, q_vel = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Quaternion")
     print("Inverse kinematics", Inverse_kinematics, condition)
-    print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
+    print("Joint Velocity", q_vel)
+    # print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
 
-    print("")
-    rad_to_degree = Inverse_kinematics[:]*(180/pi)
+    # print("")
+    # rad_to_degree = Inverse_kinematics[:]*(180/pi)
 
-    print(rad_to_degree)
+    # print(rad_to_degree)
 
     # Check if the Transform of the Inverse kinematics is the same as the Forward kinematics
     Solution_Check = fk(robot_chain, Inverse_kinematics)
@@ -360,7 +362,8 @@ if __name__ == "__main__":
 
     for row in graphlist:
         plt.plot(row)
-        plt.ylabel("θ (°)")
+        # plt.ylabel("θ (°)")
+        plt.ylabel("θ (radians)")
         plt.xlabel("Iterations")
-        plt.title("Error iterations")
+        plt.title("Joint iterations")
     plt.show()
