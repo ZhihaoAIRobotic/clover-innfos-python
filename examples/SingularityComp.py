@@ -335,7 +335,7 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    forward_kinematics = fk(robot_chain, [0, 1.7, -0.4, 1.5, 0.3, 0.1])
+    forward_kinematics = fk(robot_chain, [0, 1, -1, 0, 0, 0])
     print("Forward kinematics", forward_kinematics)
 
     j = jacobian(robot_chain, [0, 0, 0, 0, 0, 0])

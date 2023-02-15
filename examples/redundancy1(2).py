@@ -345,9 +345,9 @@ if __name__ == "__main__":
     #
     # print("Forward kinematics", forward_kinematics)
 
-    forward_kinematics = np.array([[1.889e-05, 1, -3.814e-06, 0],
-                                   [1, -1.889e-05, 1.928e-05, 0],
-                                   [1.928e-05, 3.813e-06, -1, 0.3],
+    forward_kinematics = np.array([[-1.889e-05, 1, 3.814e-06, 0],
+                                   [1, 1.889e-05, -1.928e-05, 0],
+                                   [-1.928e-05, -3.813e-06, -1, 0.3],
                                    [0, 0, 0, 1]])
 
     j = jacobian(robot_chain, [0, 0, 0, 0, 0, 0])

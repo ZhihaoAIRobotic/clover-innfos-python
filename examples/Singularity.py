@@ -346,6 +346,7 @@ if __name__ == "__main__":
 
     Inverse_kinematics, condition, thetalist, q_vel = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 500, 0.5, method="Quaternion")
     print("Inverse kinematics", Inverse_kinematics, condition)
+    print("")
     print("Joint Velocity", q_vel)
     # print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
 
