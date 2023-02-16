@@ -13,7 +13,8 @@ actuator_ids = [1, 2, 3, 4, 5, 6]
 arm = clover_innfos_python.ArmInterface()
 arm.enableAllActuators()
 
-arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Cur)
+arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Cur) 
+
 
 input("Move to zero")
 arm.home()  # Will set position to profile mode
@@ -42,7 +43,7 @@ while 1:
 
     Transform = kinematics.fk(robot_chain, lastpos)
 
-    print(Transform)
+    # print(Transform)
 
     jv = input()
 
@@ -55,10 +56,19 @@ while 1:
 
     op[:] = op[:]*180/pi
     print(op)
+    op[0] = -op[0]
     op[1] = -op[1]
+    op[4] = -op[4]
+    op[5] = -op[5]
     print(op)
 
     arm.setArmPosition(op)
+
+    curpos = arm.getArmPosition()
+
+    T = kinematics.fk(robot_chain, curpos)
+
+    print(T)
 
 
 

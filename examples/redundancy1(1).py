@@ -307,7 +307,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
                 if -(2 * np.pi) < q[j] < -np.pi:
                     q[j] = (2 * np.pi) + q[j]
 
-    return (q, not condition, graphlist)
+    return (q, not condition, graphlist, jacobian(chain, q))
 
 
 ################# np.array pretty print #################################
@@ -356,7 +356,7 @@ if __name__ == "__main__":
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Angle_and_Axis")
+    Inverse_kinematics, condition, thetalist, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Angle_and_Axis")
     print("Inverse kinematics", Inverse_kinematics, condition)
     print("")
     print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
@@ -365,6 +365,12 @@ if __name__ == "__main__":
     rad_to_degree = Inverse_kinematics[:]*(180/pi)
     print("In Degrees",rad_to_degree)
 
+    print("")
+    print("Determinant of Jacobian")
+    det = np.linalg.det(jab)
+    print(det)
+
+    print("")
     # Check if the Transform of the Inverse kinematics is the same as the Forward kinematics
     Solution_Check = fk(robot_chain, Inverse_kinematics)
     print("Solution Check", Solution_Check)

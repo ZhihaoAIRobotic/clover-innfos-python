@@ -301,7 +301,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
                 if -(2 * np.pi) < q[j] < -np.pi:
                     q[j] = (2 * np.pi) + q[j]
 
-    return (q, not condition, graphlist, dq)
+    return (q, not condition, graphlist, dq, jacobian(chain, q))
 
 
 ################# np.array pretty print #################################
@@ -344,11 +344,17 @@ if __name__ == "__main__":
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist, q_vel = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Quaternion")
+    Inverse_kinematics, condition, thetalist, q_vel, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Quaternion")
     print("Inverse kinematics", Inverse_kinematics, condition)
     print("Joint Velocity", q_vel)
     # print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
 
+    print("")
+    print("Determinant of Jacobian")
+    det = np.linalg.det(jab)
+    print(det)
+
+    print("")
     # print("")
     # rad_to_degree = Inverse_kinematics[:]*(180/pi)
 

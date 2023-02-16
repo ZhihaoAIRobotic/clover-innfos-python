@@ -184,7 +184,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
 
     # Build the error condition
     condition = np.linalg.norm(pos_error) > 0.01 \
-                or np.linalg.norm(omg_error) > 0.00005
+                or np.linalg.norm(omg_error) > 0.0005
 
     # initialize the graphing variable library
     graphlist = []
@@ -228,7 +228,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
 
         # Build the error condition
         condition = np.linalg.norm(pos_error) > 0.01 \
-                    or np.linalg.norm(omg_error) > 0.00005
+                    or np.linalg.norm(omg_error) > 0.0005
 
         # Build the graphing variable library
         graphlist.append(error)
@@ -300,7 +300,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
                 if -(2 * np.pi) < q[j] < -np.pi:
                     q[j] = (2 * np.pi) + q[j]
 
-    return (q, not condition, graphlist)
+    return (q, not condition, graphlist, jacobian(chain, q))
 
 
 ################# np.array pretty print #################################
@@ -334,8 +334,13 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    forward_kinematics = fk(robot_chain, [0, 1.2, -0.2, -1.1, 0.3, 0.4])
+    forward_kinematics = fk(robot_chain, [2.5, 0.5, -1, -0.5,0,0])
     print("Forward kinematics", forward_kinematics)
+
+    # forward_kinematics = np.array([[0.004272, 0, 1, 0.08011],
+    #                                [0.4346, -0.9006, -0.001857, -0.1117],
+    #                                [  0.9006, 0.4346, -0.003848, 0.0873],
+    #                                [0,0,0,1]])
 
     j = jacobian(robot_chain, [0, 0, 0, 0, 0, 0])
     # print("Jacobian: J(q) | q=0,0,0,0,0,0", j)
@@ -343,12 +348,18 @@ if __name__ == "__main__":
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Quaternion")
+    Inverse_kinematics, condition, thetalist, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 3000, 0.5, method="Quaternion")
     print("Inverse kinematics", Inverse_kinematics, condition)
     print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
 
     print("")
     rad_to_degree = Inverse_kinematics[:]*(180/pi)
+
+    print("")
+    print("Determinant of Jacobian")
+    det = np.linalg.det(jab)
+    print(det)
+    print("")
 
     print(rad_to_degree)
 
