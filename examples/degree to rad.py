@@ -1,6 +1,6 @@
 import numpy as np
 
-q = [0, 1.2, -0.2, -1.1, 0.3, 90]
+q = [ ]
 
 rad = np.zeros(6)
 rad[0] = q[0]*np.pi/180
