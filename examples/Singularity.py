@@ -335,23 +335,26 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    forward_kinematics = fk(robot_chain, [0, 1, 0, 0, 0, 0])
+    forward_kinematics = fk(robot_chain, [0, 0, 0, -1, 0, 1])
     print("Forward kinematics", forward_kinematics)
 
-    j = jacobian(robot_chain, [0, 0, 0, 0, 0, 0])
-    # print("Jacobian: J(q) | q=0,0,0,0,0,0", j)
-    # print("Jacobian: J(q)*dq | dq=1,0,0,0,0,0", j @ [1, 0, 0, 0, 0, 0])
+    j = jacobian(robot_chain, [0, 1, 0, 0,0,0])
+    print("Jacobian: J(q) | q=0,0,0,0,0,0", j)
+
+    print("The rank of the Jacobian is " + str(np.linalg.matrix_rank(j)))
+    print("")
+    # print("Jacobian: J(q)*dq | dq=1,0,0,0,0,0", j @ [0, 1, 0, 0, 0, 0])
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist, q_vel, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 500, 0.5, method="Quaternion")
+    Inverse_kinematics, condition, thetalist, q_vel, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 500, 0.5, method="Angle_and_Axis")
     print("Inverse kinematics", Inverse_kinematics, condition)
     print("")
     print("Joint Velocity", q_vel)
 
     print("")
     print("Determinant of Jacobian")
-    det = np.linalg.det(jab)
+    det = np.linalg.det(jab)*np.linalg.det(jab).T
     print(det)
 
     print("")

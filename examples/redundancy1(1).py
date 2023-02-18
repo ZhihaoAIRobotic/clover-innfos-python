@@ -249,40 +249,40 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         # Set the joint limits
 
         if q[0] < -l1:
-            q[0] = 0
+            q[0] = -l1
 
         if q[0] > l1:
-            q[0] = 0
+            q[0] = l1
 
         if q[1] < -l2:
-            q[1] = 0
+            q[1] = -l2
 
         if q[1] > l2:
-            q[1] = 0
+            q[1] = l2
 
         if q[2] < -l1:
-            q[2] = 0
+            q[2] = -l1
 
         if q[2] > l1:
-            q[2] = 0
+            q[2] = l1
 
         if q[3] < -l1:
-            q[3] = 0
+            q[3] = -l1
 
         if q[3] > l1:
-            q[3] = 0
+            q[3] = l1
 
         if q[4] < -l1:
-            q[4] = 0
+            q[4] = -l1
 
         if q[4] > l1:
-            q[4] = 0
+            q[4] = l1
 
         if q[5] < -l3:
-            q[5] = 0
+            q[5] = -l3
 
         if q[5] > l3:
-            q[5] = 0
+            q[5] = l3
 
         # Restart the loop if IK algorithm does not converge
         # if condition == True:
@@ -356,7 +356,7 @@ if __name__ == "__main__":
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Angle_and_Axis")
+    Inverse_kinematics, condition, thetalist, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 3000, 0.5, method="Angle_and_Axis")
     print("Inverse kinematics", Inverse_kinematics, condition)
     print("")
     print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])

@@ -334,7 +334,9 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    forward_kinematics = fk(robot_chain, [2.5, 0.5, -1, -0.5,0,0])
+    joint_value = [0,0,0,-1,0,1]
+
+    forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)
 
     # forward_kinematics = np.array([[0.004272, 0, 1, 0.08011],
@@ -342,13 +344,13 @@ if __name__ == "__main__":
     #                                [  0.9006, 0.4346, -0.003848, 0.0873],
     #                                [0,0,0,1]])
 
-    j = jacobian(robot_chain, [0, 0, 0, 0, 0, 0])
-    # print("Jacobian: J(q) | q=0,0,0,0,0,0", j)
+    j = jacobian(robot_chain, joint_value)
+    print("Jacobian: J(q) | q=" + str(joint_value), j)
     # print("Jacobian: J(q)*dq | dq=1,0,0,0,0,0", j @ [1, 0, 0, 0, 0, 0])
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 3000, 0.5, method="Quaternion")
+    Inverse_kinematics, condition, thetalist, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 2000, 0.5, method="Angle_and_Axis")
     print("Inverse kinematics", Inverse_kinematics, condition)
     print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
 
@@ -371,7 +373,7 @@ if __name__ == "__main__":
 
     for row in graphlist:
         plt.plot(row)
-        plt.ylabel("θ (°)")
+        plt.ylabel("θ (rads)")
         plt.xlabel("Iterations")
         plt.title("Error iterations")
     plt.show()
