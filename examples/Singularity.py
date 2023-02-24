@@ -19,6 +19,8 @@ from copy import copy, deepcopy
 from math import atan2, sqrt, pow, sin, cos
 import matplotlib.pyplot as plt
 import sys
+from rank_nullspace import rank, nullspace
+from jacobianrange import jrange
 
 pi = np.pi
 pi_2 = pi / 2
@@ -143,16 +145,54 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
             # Calculate the quaternion from the rotation matrix
             n = 1 / 2 * sqrt(1 + T[0, 0] + T[1, 1] + T[2, 2])
 
-            if Transform[0, 3] > 0:
-                sign = 1
-            else:
-                sign = -1
+            # if Transform[0, 3] >= 0:
+            #     sign = 1
+            # else:
+            #     sign = -1
 
             e = np.zeros(3)
-            e[0] = sign * (T[2, 1] - T[1, 2]) * 1 / 2 * sqrt(T[0, 0] - T[1, 1] - T[2, 2] + 1)
-            e[1] = sign * (T[0, 2] - T[2, 0]) * 1 / 2 * sqrt(T[1, 1] - T[2, 2] - T[1, 1] + 1)
-            e[2] = sign * (T[1, 0] - T[0, 1]) * 1 / 2 * sqrt(T[2, 2] - T[0, 0] - T[1, 1] + 1)
+            # e[0] = sign * (T[2, 1] - T[1, 2]) * 1 / 2 * sqrt(T[0, 0] - T[1, 1] - T[2, 2] + 1)
+            # e[1] = sign * (T[0, 2] - T[2, 0]) * 1 / 2 * sqrt(T[1, 1] - T[2, 2] - T[1, 1] + 1)
+            # e[2] = sign * (T[1, 0] - T[0, 1]) * 1 / 2 * sqrt(T[2, 2] - T[0, 0] - T[1, 1] + 1)
 
+            e[0] = (T[2, 1] - T[1, 2]) / (4 * n)
+            e[1] = (T[0, 2] - T[2, 0]) / (4 * n)
+            e[2] = (T[1, 0] - T[0, 1]) / (4 * n)
+
+            # t = np.matrix.trace(T)
+            # q = np.asarray([0.0, 0.0, 0.0, 0.0], dtype=np.float64)
+            #
+            # if (t > 0):
+            #     t = np.sqrt(t + 1)
+            #     q[0] = 0.5 * t
+            #     t = 0.5 / t
+            #     q[1] = (T[2, 1] - T[1, 2]) * t
+            #     q[2] = (T[0, 2] - T[2, 0]) * t
+            #     q[3] = (T[1, 0] - T[0, 1]) * t
+            #
+            # else:
+            #     i = 0
+            #     if (T[1, 1] > T[0, 0]):
+            #         i = 1
+            #     if (T[2, 2] > T[i, i]):
+            #         i = 2
+            #     j = (i + 1) % 3
+            #     k = (j + 1) % 3
+            #
+            #     t = np.sqrt(T[i, i] - T[j, j] - T[k, k] + 1)
+            #     q[i] = 0.5 * t
+            #     t = 0.5 / t
+            #     q[0] = (T[k, j] - T[j, k]) * t
+            #     q[j] = (T[j, i] + T[i, j]) * t
+            #     q[k] = (T[k, i] + T[i, k]) * t
+            #
+            # n = q[0]
+            # e = np.zeros(3)
+            # e[0] = q[1]
+            # e[1] = q[2]
+            # e[2] = q[3]
+
+            n
             return n, e
 
         def eomg(T):
@@ -205,11 +245,11 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         #     q = q + tolerance
 
         # Calculate the pseudo inverse of the geometric jacobian
-
         pseudoinv = np.linalg.pinv(jacobian(chain, q))
 
         # Calculate the error with gain
         gain_error = np.dot(error, k)
+
 
         # Calculate the derivative of the joint values
         dq = np.dot(pseudoinv, gain_error).reshape(1, 6)
@@ -232,7 +272,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
                     or np.linalg.norm(omg_error) > 0.00005
 
         # Build the graphing variable library
-        graphlist.append(q)
+        graphlist.append(error)
 
         # Define the limits in terms of Radians
 
@@ -301,7 +341,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
                 if -(2 * np.pi) < q[j] < -np.pi:
                     q[j] = (2 * np.pi) + q[j]
 
-    return (q, not condition, graphlist, dq, jacobian(chain, q))
+    return (q, not condition, graphlist, jacobian(chain, q), dq)
 
 
 ################# np.array pretty print #################################
@@ -335,35 +375,52 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    forward_kinematics = fk(robot_chain, [0, 0, 0, -1, 0, 1])
+    joint_value = [0, 1, 0, 0,0,0]
+
+    forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)
 
-    j = jacobian(robot_chain, [0, 1, 0, 0,0,0])
-    print("Jacobian: J(q) | q=0,0,0,0,0,0", j)
+    # forward_kinematics = np.array([[0.004272, 0, 1, 0.08011],
+    #                                [0.4346, -0.9006, -0.001857, -0.1117],
+    #                                [  0.9006, 0.4346, -0.003848, 0.0873],
+    #                                [0,0,0,1]])
 
-    print("The rank of the Jacobian is " + str(np.linalg.matrix_rank(j)))
-    print("")
-    # print("Jacobian: J(q)*dq | dq=1,0,0,0,0,0", j @ [0, 1, 0, 0, 0, 0])
+    j = jacobian(robot_chain, joint_value)
+    print("Jacobian: J(q) | q=" + str(joint_value), j)
+    # print("Jacobian: J(q)*dq | dq=1,0,0,0,0,0", j @ [1, 0, 0, 0, 0, 0])
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist, q_vel, jab = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 500, 0.5, method="Angle_and_Axis")
+    Inverse_kinematics, condition, thetalist, jab, dq = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 5000, 0.1, method="Quaternion")
     print("Inverse kinematics", Inverse_kinematics, condition)
+    print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
+
     print("")
-    print("Joint Velocity", q_vel)
+    rad_to_degree = Inverse_kinematics[:]*(180/pi)
 
     print("")
     print("Determinant of Jacobian")
-    det = np.linalg.det(jab)*np.linalg.det(jab).T
+    det = np.linalg.det(jab)
     print(det)
-
     print("")
-    # print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3], Inverse_kinematics[4], Inverse_kinematics[5]])
 
-    # print("")
-    # rad_to_degree = Inverse_kinematics[:]*(180/pi)
+    print("Rank:")
+    print(rank(jab))
+    print("")
 
-    # print(rad_to_degree)
+    print("nullspace:")
+    print("(Note: The nullspace will have dimension of n(6) - m(rank))")
+    print(nullspace(jab))
+    print("")
+
+    j_vel = np.array(dq).reshape(6, 1)
+    ve = np.matmul(jab, j_vel)
+
+    ra, i = jrange(ve)
+    print("Range: ")
+    print("The range has the matrix dimension of 6 x " + str(i))
+    print(ra)
+    print("")
 
     # Check if the Transform of the Inverse kinematics is the same as the Forward kinematics
     Solution_Check = fk(robot_chain, Inverse_kinematics)
@@ -373,8 +430,7 @@ if __name__ == "__main__":
 
     for row in graphlist:
         plt.plot(row)
-        # plt.ylabel("θ (°)")
-        plt.ylabel("θ (radians)")
+        plt.ylabel("θ (rads)")
         plt.xlabel("Iterations")
-        plt.title("Joint iterations")
+        plt.title("Error iterations")
     plt.show()
