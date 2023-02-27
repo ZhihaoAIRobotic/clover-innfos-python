@@ -375,7 +375,7 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    joint_value = [0, 1, 0, 0,0,0]
+    joint_value = [0, 1.5, 0, 0, 0, 0]
 
     forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)
@@ -412,6 +412,8 @@ if __name__ == "__main__":
     print("(Note: The nullspace will have dimension of n(6) - m(rank))")
     print(nullspace(jab))
     print("")
+    # a = nullspace(jab)
+    # print(a[0,0])
 
     j_vel = np.array(dq).reshape(6, 1)
     ve = np.matmul(jab, j_vel)

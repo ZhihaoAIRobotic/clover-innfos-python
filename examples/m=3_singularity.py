@@ -20,8 +20,8 @@ from math import atan2, sqrt, pow, sin, cos
 import matplotlib.pyplot as plt
 import sys
 from rank_nullspace import rank, nullspace
-from jacobianrange import jrange
-import pandas as pd
+from jacobianrange_m3 import jrange
+from sympy import Matrix
 
 pi = np.pi
 pi_2 = pi / 2
@@ -79,6 +79,7 @@ def fk(chain, q):
     Te = np.identity(4)
     for tf, qi in zip(chain, q):
         Te = Te @ tf.calc(qi)
+        # print(Te)
     return Te  # Transform of end effector
 
 
@@ -93,14 +94,16 @@ def jacobian(chain, q):
     for O in Os[:-1]:
         z = O[0:3, 2]  # 3rd column (z cosine vector)
         p = Te[0:3, 3] - O[0:3, 3]  # 4th column (position)
-        p = [p[0], p[1], 0]
-        # z = [0, 0, z[2]]
+        # p = [p[0], p[1], p[2]]
+        # z = [z[0], 0, 0]
+
         # Build j as list of columns, to be transposed at the end
         Jcolumns.append(np.hstack([np.cross(z, p), z]))
-
         jcol = np.array(Jcolumns).T
-        jcol = np.concatenate((jcol[:2,:], jcol[3:, :]))
-        # print(jcol)
+        jcol = np.concatenate((jcol[1:3, :], jcol[3:4, :]))
+        # jcol[2, 5] = jcol
+
+    # print(jcol)
     return jcol
 
 
@@ -218,14 +221,15 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
             return e_omg
 
     # Calculate the error
-    pos_error = Transform[2, 3] - initial_transform[2, 3]
-    omg_error = eomg(initial_transform)
+    pos_error = Transform[0:3, 3] - initial_transform[0:3, 3]
+    # omg_error = eomg(initial_transform)
     # print(omg_error)
+    omg_error = Transform[0:3, 2] - initial_transform[0:3, 2]
 
-    error = np.array([0, 0, pos_error, *omg_error]).reshape(6, 1)
+    error = np.array([0, pos_error[1], pos_error[2], *omg_error]).reshape(6, 1)
 
     # Build the error condition
-    condition = (pos_error) > 0.01 \
+    condition = np.linalg.norm(pos_error) > 0.001 \
                 or np.linalg.norm(omg_error) > 0.00005
 
     # initialize the graphing variable library
@@ -248,23 +252,26 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
 
         # Calculate the pseudo inverse of the geometric jacobian
         pseudoinv = np.linalg.pinv(jacobian(chain, q)).T
-
+        # pseudotran = np.array(pseudoinv).T
+        # pseudoj = np.matmul(pseudotran, pseudoinv)
         # Calculate the error with gain
         gain_error = np.dot(error, k)
         # print(pseudoinv)
         # Calculate the derivative of the joint values
-        dq = np.dot(pseudoinv, gain_error).reshape(1, 5)
+        dq = np.dot(pseudoinv, gain_error).reshape(1, 3)
 
-        # print(q)
-
-        q = [q[0], q[1], q[2], q[3], q[5]]
+        dq = dq[0]
+        dq = np.array([dq[0], dq[1], 0, dq[2], 0, 0])
         # Iterate
+        q = np.array(q)
         q = q \
             + dq
 
+        # print(q)
+
         q = np.array(q).reshape(-1)
 
-        q = [q[0], q[1], q[2], q[3], 0, q[4]]
+        q = [q[0], q[1], 0, q[2], 0, 0]
 
         q_transform = fk(chain, q)
 
@@ -272,15 +279,16 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         # q[2] = 0
 
         # Calculate the error for the next iteration
-        pos_error = Transform[2, 3] - q_transform[2, 3]
-        omg_error = eomg(q_transform)
-        error = [0,0, pos_error, *omg_error]
+        pos_error = Transform[0:3, 3] - q_transform[0:3, 3]
+        # omg_error = eomg(q_transform)
+        omg_error = Transform[0:3, 2] - q_transform[0:3, 2]
+        error = [0, pos_error[1], pos_error[2], *omg_error]
         # Build the error condition
-        condition = (pos_error) > 0.01 \
+        condition = np.linalg.norm(pos_error) > 0.001 \
                     or np.linalg.norm(omg_error) > 0.00005
 
         # Build the graphing variable library
-        graphlist.append(q[4])
+        graphlist.append(q[3])
 
         # Define the limits in terms of Radians
 
@@ -308,11 +316,11 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         if q[2] > l1:
             q[2] = 0
 
-        if q[3] < -l1:
-            q[3] = 0
-
-        if q[3] > l1:
-            q[3] = 0
+        # if q[3] < -l1:
+        #     q[3] = 0
+        #
+        # if q[3] > l1:
+        #     q[3] = 0
 
         if q[4] < -l1:
             q[4] = 0
@@ -383,14 +391,14 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    joint_value = [2.5, 0, 0, 0, 1, 0]
+    joint_value = [1.5708, 1, 0, 0, 0, 0]
 
     forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)
-
-    # forward_kinematics = np.array([[0.004272, 0, 1, 0.08011],
-    #                                [0.4346, -0.9006, -0.001857, -0.1117],
-    #                                [  0.9006, 0.4346, -0.003848, 0.0873],
+    #
+    # forward_kinematics = np.array([[-0.8632, 0.263, 0.431, 0.2078],
+    #                                [0.4123, -0.1256, 0.9023, -0.01048],
+    #                                [0.2915, 0.9566, 0, 0.4004],
     #                                [0,0,0,1]])
 
     j = jacobian(robot_chain, joint_value)
@@ -399,8 +407,9 @@ if __name__ == "__main__":
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist, jab, dq = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 5000, 0.5, method="Angle_and_Axis")
+    Inverse_kinematics, condition, thetalist, jab, dq = ik(robot_chain, [0, 0, 0, 0, 0, 1.5709], forward_kinematics, 5000, 0.5, method="Angle_and_Axis")
     print("Inverse kinematics", Inverse_kinematics, condition)
+
     print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3],
            Inverse_kinematics[4], Inverse_kinematics[5]])
 
@@ -409,17 +418,19 @@ if __name__ == "__main__":
 
     print("")
     print("Determinant of Jacobian")
-    det = np.linalg.det(np.matmul(jab, np.array(jab).T))
+    det = np.linalg.det(np.matmul(jab,np.array(jab).T))
     print(det)
     print("")
 
-    j_vel = np.array(dq).reshape(5, 1)
-    jab = np.array(jab).T
+    j_vel = np.array(dq).reshape(6, 1)
+    jab = np.array(jab)
+    # print(jab)
     ve = np.matmul(jab, j_vel)
     # print(ve)
 
-    j_vel = np.array(dq).reshape(5, 1)
+    j_vel = np.array(dq).reshape(6, 1)
     ve = np.matmul(jab, j_vel)
+    # print(ve)
 
     ra, i = jrange(ve)
     print("Range: ")
@@ -429,7 +440,7 @@ if __name__ == "__main__":
 
     print("Rank:")
     # print("Rank is full if rank = m")
-    if rank(jab) == i:
+    if rank(jab) == 3:
         print(str(rank(jab)) + " is Full rank")
     else:
         print(rank(jab))
