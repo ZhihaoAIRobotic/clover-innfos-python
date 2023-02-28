@@ -21,7 +21,6 @@ import matplotlib.pyplot as plt
 import sys
 from rank_nullspace import rank, nullspace
 from jacobianrange import jrange
-import pandas as pd
 
 pi = np.pi
 pi_2 = pi / 2
@@ -94,8 +93,8 @@ def jacobian(chain, q):
     for O in Os[:-1]:
         z = O[0:3, 2]  # 3rd column (z cosine vector)
         p = Te[0:3, 3] - O[0:3, 3]  # 4th column (position)
-        p = [0, p[1], p[2]]
-        z = [z[0], 0, 0]
+        # p = [0, p[1], p[2]]
+        # z = [z[0], 0, 0]
         # Build j as list of columns, to be transposed at the end
         Jcolumns.append(np.hstack([np.cross(z, p), z]))
 
@@ -386,7 +385,7 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    joint_value = [0, 0.4, 1.2, -1.1, 0, 0]
+    joint_value = [0, 1, 0, 0, 0, 0]
 
     forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)

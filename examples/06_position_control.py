@@ -44,31 +44,75 @@ while 1:
     Transform = kinematics.fk(robot_chain, lastpos)
 
     # print(Transform)
+    print("Joint Mode?")
+    jm = input()
 
-    jv = input()
+    if jm == 'Joint Position':
 
-    # print(np.array([jv]))
+        jp = input()
 
-    op = list(map(float, jv.split(',')))
-    op = np.asarray(op)
+        # print(np.array([jv]))
 
-    # op = np.asarray(op)
+        op = list(map(float, jp.split(',')))
+        op = np.asarray(op)
 
-    op[:] = op[:]*180/pi
-    print(op)
-    op[0] = -op[0]
-    op[1] = -op[1]
-    op[4] = -op[4]
-    op[5] = -op[5]
-    print(op)
+        # op = np.asarray(op)
 
-    arm.setArmPosition(op)
+        op[:] = op[:]*180/pi
+        print(op)
+        op[0] = -op[0]
+        op[1] = -op[1]
+        op[4] = -op[4]
+        op[5] = -op[5]
+        print(op)
 
-    curpos = arm.getArmPosition()
+        arm.setArmPosition(op)
 
-    T = kinematics.fk(robot_chain, curpos)
+        curpos = arm.getArmPosition()
 
-    print(T)
+        T = kinematics.fk(robot_chain, curpos)
+
+        print(T)
+
+    if jm == 'Joint Velocity':
+
+        eepos = arm.getArmPosition()
+
+        jv = input()
+
+        i = 0
+
+        while i < 100:
+
+        # print(np.array([jv]))
+
+            op = list(map(float, jv.split(',')))
+            op = np.asarray(op)
+
+        # op = np.asarray(op)
+
+            op[:] = op[:] * 18 / pi
+            # print(op)
+            op[0] = -op[0]
+            op[1] = -op[1]
+            op[4] = -op[4]
+            op[5] = -op[5]
+            # print(op)            now = arm.getArmPosition() + op
+
+            now = arm.getArmPosition() + op
+
+            if (arm.getArmPosition() != eepos).all():
+
+                op = 0
+
+            arm.setArmPosition(now)
+
+            print(now)
+
+            i = i + 1
+
+
+
 
 
 
