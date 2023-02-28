@@ -271,7 +271,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
 
         q = np.array(q).reshape(-1)
 
-        q = [q[0], q[1], 0, q[2], 0, 0]
+        q = [q[0], q[1], 0, q[3], 0, 0]
 
         q_transform = fk(chain, q)
 
@@ -391,7 +391,7 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    joint_value = [1.5708, 1, 0, 0, 0, 0]
+    joint_value = [0, 0.1, 0, 0, 0, 0]
 
     forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)
@@ -407,7 +407,7 @@ if __name__ == "__main__":
 
     # The inverse kinematics orientation error method parameters consists of: Euler_Angles, Angle_and_Axis, Quaternion
 
-    Inverse_kinematics, condition, thetalist, jab, dq = ik(robot_chain, [0, 0, 0, 0, 0, 1.5709], forward_kinematics, 5000, 0.5, method="Angle_and_Axis")
+    Inverse_kinematics, condition, thetalist, jab, dq = ik(robot_chain, [0, 0, 0, 0, 0, 0], forward_kinematics, 5000, 0.5, method="Angle_and_Axis")
     print("Inverse kinematics", Inverse_kinematics, condition)
 
     print([Inverse_kinematics[0], Inverse_kinematics[1], Inverse_kinematics[2], Inverse_kinematics[3],
