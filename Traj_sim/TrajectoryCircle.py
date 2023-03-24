@@ -1,6 +1,5 @@
 import numpy as np
-import ikpyKinematics
-
+from scps.ikpykinematics import Kinematics
 class TrajectoryCircle(object):
     def __init__(self, timespan, x_axis, y_axis, z_axis, orientation):
 
@@ -21,7 +20,7 @@ class TrajectoryCircle(object):
     def get_instant_circle(self, radius):
 
         # initialize the kinematics library
-        kin = ikpyKinematics.Kinematics()
+        kin = Kinematics()
 
         # Calculate time step, -2 is to consider the time it takes to reach from initial to the start point of the circle
         self.angle = (2*np.pi)/((3*self.timespan)/5)
@@ -83,7 +82,7 @@ class TrajectoryCircle(object):
 
                 self.coordinate[i] = np.array([self.xt, self.yt, self.zt])
 
-                print(self.coordinate)
+                # print(self.coordinate)
 
             return self.coordinate
 
@@ -557,6 +556,7 @@ class TrajectoryCircle(object):
 
 if __name__ == '__main__':
 
-    traj = TrajectoryCircle(150, x_axis=False, y_axis=False, z_axis=True, orientation="all")
-    traj.get_instant_circle(0.1)
+    traj = TrajectoryCircle(150, x_axis=True, y_axis=False, z_axis=False, orientation="all")
+    a = traj.get_instant_circle(0.1)
+    b = traj.get_instant_rotation()
 

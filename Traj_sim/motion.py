@@ -1,9 +1,13 @@
+import sys
+
 import numpy as np
-from motion_and_traj import trajectoryimport
+from scps.trajectoryconvert import traj_convert
 from scps.ikpykinematics import Kinematics
+from traj_circle import change
+from TrajectoryCircle import TrajectoryCircle
+from TrajectoryCurve import TrajectoryCurve
 
 kin = Kinematics()
-traj = trajectoryimport.traj_import()
 
 import time
 
@@ -32,87 +36,64 @@ input("Ready")
 
 arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
 
+# motion = np.load('/home/clover/Github/Rofunc/rofunc/data/taichi_1l.npy')
+# motion = motion*0.0001
+# q = traj_convert(motion)
+
+# q = np.array([[0,0,0,0,0,0],
+#               [0,0.1,-0.1,0,0,0],
+#               [0,0.2,-0.2,0,0,0],
+#               [0, 0.3, -0.3, 0, 0, 0],
+#               [0,0.4, -0.4, 0,0,0],
+#               [0, 0.5, -0.5, 0, 0, 0],
+#               [0,0.6, -0.6, 0,0,0],
+#               [0,0.7, -0.7, 0,0,0],
+#               [0,0.8, -0.8, 0,0,0],
+#               [0,0.9, -0.9, 0,0,0],
+#               [0,1.5, -1.5, 0,0,0],
+#               [0,0.4, -0.4, 0,0,0],
+#               [0,0, 0, 0,0,0]])
+
+# traj = TrajectoryCircle(150, x_axis=True, y_axis=False, z_axis=False, orientation='None')
+# a = traj.get_instant_circle(0.1)
+# b = traj.get_instant_rotation()
+
+Target = np.array(
+    [-0.19190641732275654, -2.661618746277845, -1.7225457138037745, 0.9390738728429078, 0.19190412669933546,
+     -8.201720369527266e-07])
+
+Rotation = ([1, 0, 0],
+            [0, 1, 0],
+            [0, 0, 1])
+
+c = TrajectoryCurve(Target, 100, Rotation, orientation=None)
+a = c.get_instant_curve()
+b = c.get_instant_rotation()
+
+
+q = change(a, b)
+
 while 1:
-    # print(Transform)
-    print("Joint Mode?")
 
-    for i in len(traj):
-
-        op = traj[i]
-        op[:] = op[:] * 180 / pi
+    for i in range(len(q)):
+        # op = q[i]
+        op = q[i][1:7]
         print(op)
         op[0] = -op[0]
         op[1] = -op[1]
         op[4] = -op[4]
         op[5] = -op[5]
-        print(op)
 
+        op[:] = op[:] * 180 / pi
         arm.setArmPosition(op)
 
 
         time.sleep(0.1)
 
+        i = i+1
 
-    # jm = input()
-    #
-    # if jm == 'Joint Position':
-    #
-    #     jp = input()
-    #
-    #     # print(np.array([jv]))
-    #
-    #     op = list(map(float, jp.split(',')))
-    #     op = np.asarray(op)
-    #
-    #     # op = np.asarray(op)
-    #
-    #     op[:] = op[:]*180/pi
-    #     print(op)
-    #     op[0] = -op[0]
-    #     op[1] = -op[1]
-    #     op[4] = -op[4]
-    #     op[5] = -op[5]
-    #     print(op)
-    #
-    #     arm.setArmPosition(op)
-    #
-    #     curpos = arm.getArmPosition()
-    #
-    #     T = kin.fk(robot_chain, curpos)
-    #
-    # if jm == 'Joint Velocity':
-    #
-    #     eepos = arm.getArmPosition()
-    #
-    #     jv = input()
-    #
-    #     i = 0
-    #
-    #     while i < 100:
-    #
-    #     # print(np.array([jv]))
-    #
-    #         op = list(map(float, jv.split(',')))
-    #         op = np.asarray(op)
-    #
-    #     # op = np.asarray(op)
-    #
-    #         op[:] = op[:] * 18 / pi
-    #         # print(op)
-    #         op[0] = -op[0]
-    #         op[1] = -op[1]
-    #         op[4] = -op[4]
-    #         op[5] = -op[5]
-    #         # print(op)            now = arm.getArmPosition() + op
-    #
-    #         now = arm.getArmPosition() + op
-    #
-    #         if (arm.getArmPosition() != eepos).all():
-    #
-    #             op = 0
-    #
-    #         arm.setArmPosition(now)
-    #
-    #         print(now)
-    #
-    #         i = i + 1
+        if i == len(q):
+
+            arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
+
+            sys.exit()

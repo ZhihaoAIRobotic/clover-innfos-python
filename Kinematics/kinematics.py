@@ -19,8 +19,8 @@ from copy import copy, deepcopy
 from math import atan2, sqrt, pow, sin, cos
 import matplotlib.pyplot as plt
 import sys
-from rank_nullspace import rank, nullspace
-from jacobianrange import jrange
+from Kinematics.rank_nullspace import rank, nullspace
+from Kinematics.jacobianrange import jrange
 
 pi = np.pi
 pi_2 = pi / 2

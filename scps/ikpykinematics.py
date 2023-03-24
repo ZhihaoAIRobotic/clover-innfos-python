@@ -8,7 +8,7 @@ class Kinematics:
 
         # initialize the chain class [for the ikpy use - explained in github documentation] for Edubot arm
         self.urdf = chain.Chain.from_urdf_file(
-            "/home/ubuntu/Github/Robase/environment models/gluon.urdf",
+            "/home/clover/Github/clover-innfos-python/Urdf/gluon.urdf",
             base_elements=["base_link", "axis_joint_1", "1_Link", "axis_joint_2", "2_Link",
                            "axis_joint_3", "3_Link", "axis_joint_4", "4_Link", "axis_joint_5", "5_Link", "axis_joint_6", "6_Link"],
             last_link_vector=None,

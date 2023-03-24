@@ -1,11 +1,7 @@
-Metadata-Version: 1.1
+Metadata-Version: 2.1
 Name: clover-innfos-python
-Version: 0.1.dev24+gbe6d39b
-Summary: UNKNOWN
-Home-page: UNKNOWN
-Author: UNKNOWN
-Author-email: UNKNOWN
-License: UNKNOWN
-Description: UNKNOWN
-Platform: UNKNOWN
+Version: 0.1.dev43+g9cac8d6.d20230324
+Summary: Python interface for Mintasca (Innfos) actuators and GLUON arm.
+Author: Traveler Hauptman
+Author-email: hauptmech@gmail.com
 Provides: clover_innfos_python
