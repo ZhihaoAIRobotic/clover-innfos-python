@@ -7,11 +7,10 @@ traj = trajectoryimport.traj_import()
 
 import time
 
-import numpy
 import numpy as np
 import clover_innfos_python
 from clover_innfos_python import Actuator
-import kinematics
+
 
 pi = np.pi
 pi_2 = np.pi/2

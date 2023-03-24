@@ -1,4 +1,7 @@
 import numpy as np
+import scps
+import rofunc as rf
+import os
 kin = scps.ikpykinematics.Kinematics()
 
 def traj_import(traj_trans):
@@ -22,3 +25,11 @@ def traj_import(traj_trans):
         i = i + 1
 
     return joint_list
+
+if __name__ == "__main__":
+
+    m = np.load(os.path.join(rf.file.get_rofunc_path(), 'data/taichi_1l.npy'))
+    m = m*0.05
+    t = traj_import(m)
+
+    print(t)
