@@ -100,7 +100,7 @@ def jacobian(chain, q):
         # Build j as list of columns, to be transposed at the end
         Jcolumns.append(np.hstack([np.cross(z, p), z]))
         jcol = np.array(Jcolumns).T
-        jcol = np.concatenate((jcol[1:3, :], jcol[3:4, :]))
+        jcol = np.concatenate((jcol[0:2, :], jcol[3:4 , :]))
         # jcol[2, 5] = jcol
 
     # print(jcol)
@@ -224,9 +224,9 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
     pos_error = Transform[0:3, 3] - initial_transform[0:3, 3]
     # omg_error = eomg(initial_transform)
     # print(omg_error)
-    omg_error = Transform[0:3, 2] - initial_transform[0:3, 2]
+    omg_error = Transform[0:3, 0] - initial_transform[0:3, 0]
 
-    error = np.array([0, pos_error[1], pos_error[2], *omg_error]).reshape(6, 1)
+    error = np.array([*pos_error, *omg_error]).reshape(6, 1)
 
     # Build the error condition
     condition = np.linalg.norm(pos_error) > 0.001 \
@@ -258,10 +258,10 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         gain_error = np.dot(error, k)
         # print(pseudoinv)
         # Calculate the derivative of the joint values
-        dq = np.dot(pseudoinv, gain_error).reshape(1, 3)
+        dq = np.dot(pseudoinv, gain_error).reshape(1, 4)
 
         dq = dq[0]
-        dq = np.array([dq[0], dq[1], 0, dq[2], 0, 0])
+        dq = np.array([dq[0], dq[1], 0, dq[2], dq[3], 0])
         # Iterate
         q = np.array(q)
         q = q \
@@ -271,7 +271,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
 
         q = np.array(q).reshape(-1)
 
-        q = [q[0], q[1], 0, q[3], 0, 0]
+        # q = [q[0], q[1], 0, q[3], 0, 0]
 
         q_transform = fk(chain, q)
 
@@ -281,8 +281,9 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         # Calculate the error for the next iteration
         pos_error = Transform[0:3, 3] - q_transform[0:3, 3]
         # omg_error = eomg(q_transform)
-        omg_error = Transform[0:3, 2] - q_transform[0:3, 2]
-        error = [0, pos_error[1], pos_error[2], *omg_error]
+        omg_error = Transform[0:3, 0] - q_transform[0:3, 0]
+        error = [*pos_error, *omg_error]
+        # print(error)
         # Build the error condition
         condition = np.linalg.norm(pos_error) > 0.001 \
                     or np.linalg.norm(omg_error) > 0.00005
@@ -391,7 +392,7 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    joint_value = [0, 0.1, 0, 0, 0, 0]
+    joint_value = [0, 1, 0, 0, 0, 0]
 
     forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)

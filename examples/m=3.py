@@ -99,11 +99,8 @@ def jacobian(chain, q):
 
         # Build j as list of columns, to be transposed at the end
         Jcolumns.append(np.hstack([np.cross(z, p), z]))
-        jcol = np.array(Jcolumns).T
-        # jcol[2, 5] = jcol
 
-    # print(jcol)
-    return jcol
+    return np.array(Jcolumns).T
 
 
 '''
@@ -148,6 +145,7 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
 
     if method == "Quaternion":
         def Quat(T):
+
             # Calculate the quaternion from the rotation matrix
             n = 1 / 2 * sqrt(1 + T[0, 0] + T[1, 1] + T[2, 2])
 
@@ -198,9 +196,11 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
             # e[1] = q[2]
             # e[2] = q[3]
 
+            n
             return n, e
 
         def eomg(T):
+
             # for desired Transform
             n_d = Quat(Transform)[0]
             e_d = Quat(Transform)[1]
@@ -223,12 +223,11 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
     pos_error = Transform[0:3, 3] - initial_transform[0:3, 3]
     omg_error = eomg(initial_transform)
     # print(omg_error)
-    # omg_error = Transform[0:3, 2] - initial_transform[0:3, 2]
 
-    error = np.array([0, pos_error[1], pos_error[2], *omg_error]).reshape(6, 1)
+    error = np.array([*pos_error, *omg_error]).reshape(6, 1)
 
     # Build the error condition
-    condition = np.linalg.norm(pos_error) > 0.001 \
+    condition = np.linalg.norm(pos_error) > 0.01 \
                 or np.linalg.norm(omg_error) > 0.00005
 
     # initialize the graphing variable library
@@ -250,44 +249,34 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         #     q = q + tolerance
 
         # Calculate the pseudo inverse of the geometric jacobian
-        pseudoinv = np.linalg.pinv(jacobian(chain, q)).T
-        # pseudotran = np.array(pseudoinv).T
-        # pseudoj = np.matmul(pseudotran, pseudoinv)
+        pseudoinv = np.linalg.pinv(jacobian(chain, q))
+
         # Calculate the error with gain
         gain_error = np.dot(error, k)
-        # print(pseudoinv)
+
+
         # Calculate the derivative of the joint values
         dq = np.dot(pseudoinv, gain_error).reshape(1, 6)
 
-        dq = dq[0]
-        dq = np.array([dq[0], dq[1], dq[2], dq[3], dq[4], dq[5]])
         # Iterate
-        q = np.array(q)
         q = q \
             + dq
 
-        # print(q)
-
         q = np.array(q).reshape(-1)
 
-        # q = [q[0], q[1], 0, q[3], 0, 0]
-
         q_transform = fk(chain, q)
-
-        # q[1] = 0
-        # q[2] = 0
 
         # Calculate the error for the next iteration
         pos_error = Transform[0:3, 3] - q_transform[0:3, 3]
         omg_error = eomg(q_transform)
-        # omg_error = Transform[0:3, 2] - q_transform[0:3, 2]
         error = [*pos_error, *omg_error]
+
         # Build the error condition
-        condition = np.linalg.norm(pos_error) > 0.001 \
+        condition = np.linalg.norm(pos_error) > 0.01 \
                     or np.linalg.norm(omg_error) > 0.00005
 
         # Build the graphing variable library
-        graphlist.append(q[3])
+        graphlist.append(error)
 
         # Define the limits in terms of Radians
 
@@ -315,11 +304,11 @@ def ik(chain, initial_guess, Transform, iterations, k=0.02, method="Euler_Angles
         if q[2] > l1:
             q[2] = 0
 
-        # if q[3] < -l1:
-        #     q[3] = 0
-        #
-        # if q[3] > l1:
-        #     q[3] = 0
+        if q[3] < -l1:
+            q[3] = 0
+
+        if q[3] > l1:
+            q[3] = 0
 
         if q[4] < -l1:
             q[4] = 0
@@ -390,7 +379,7 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    joint_value = [0, 1, 0, 0, 0, 0]
+    joint_value = [0.5, 1.1, -0.1, 1.4, 0.7, 0.2]
 
     forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)
@@ -454,13 +443,45 @@ if __name__ == "__main__":
     print("nullspace:")
     print("(Note: The nullspace will have dimension of n(6) - m(rank))")
     print(nullspace(jab))
+
     print("..." * 180)
+    print("Jacobian Transpose")
+    print("")
+
+    jabT = np.array(jab).T
+    jab3T = np.array(jab3).T
+
+    print("Transpose of the task jacobian")
+    print(jab3T)
+    print("")
+
+    print("Rank:")
+    # print("Rank is full if rank = m")
+    if rank(jabT) == 6:
+        print(str(rank(jabT)) + " is Full rank")
+    else:
+        print(rank(jabT))
+    print("")
+
+    ve = np.matmul(jabT, j_vel)
+    # print(ve)
+
+    ra, i = jrange(ve)
+    print("Range of Tranpose: ")
+    print(ra)
+    print("")
+
+    print("nullspace:")
+    print("(Note: The nullspace will have dimension of n(6) - m(rank))")
+    print(nullspace(jabT))
+
+    print("---" * 180)
 
     # Check if the Transform of the Inverse kinematics is the same as the Forward kinematics
     Solution_Check = fk(robot_chain, Inverse_kinematics)
     print("Solution Check", Solution_Check)
 
-    graphlist = np.array(thetalist).reshape(1, np.array(thetalist).shape[0])
+    graphlist = np.array(thetalist).reshape(6, np.array(thetalist).shape[0])
 
     for row in graphlist:
         # print(row)

@@ -375,7 +375,7 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    joint_value = [0, 1.5, 0, 0, 0, 0]
+    joint_value = [0.2, 1.2, -1, 0.3, 1, 0]
 
     forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)
@@ -403,6 +403,8 @@ if __name__ == "__main__":
     det = np.linalg.det(jab)
     print(det)
     print("")
+
+    jab = np.array(jab).T
 
     print("Rank:")
     print(rank(jab))

@@ -19,13 +19,13 @@ def jrange(ve):
         y = np.array([0, sgn, 0, 0, 0, 0]).reshape(6, 1)
         r.append(np.hstack(y))
 
-    if abs(ve[2]) > 0:
-        if ve[2] < 0:
-            sgn = -1
-        if ve[2] > 0:
-            sgn = 1
-        z = np.array([0, 0, sgn, 0, 0, 0]).reshape(6, 1)
-        r.append(np.hstack(z))
+    # if abs(ve[2]) > 0:
+    #     if ve[2] < 0:
+    #         sgn = -1
+    #     if ve[2] > 0:
+    #         sgn = 1
+    #     z = np.array([0, 0, sgn, 0, 0, 0]).reshape(6, 1)
+    #     r.append(np.hstack(z))
 
     i = 0
     for row in r:
