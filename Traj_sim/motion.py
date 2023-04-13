@@ -58,6 +58,11 @@ arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
 # a = traj.get_instant_circle(0.1)
 # b = traj.get_instant_rotation()
 
+"""Coffee Project Trajectory"""
+
+q = np.array([[0,0,0,0,0,0],
+              [0, 9.1]])
+
 Target = np.array(
     [-0.19190641732275654, -2.661618746277845, -1.7225457138037745, 0.9390738728429078, 0.19190412669933546,
      -8.201720369527266e-07])
