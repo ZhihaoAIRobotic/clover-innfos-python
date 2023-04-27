@@ -7,6 +7,7 @@ import os
 from scps.dynamics import gravity, inertia, centrifugalterms
 from scps.controller import PD_controller
 import pandas as pd
+import time
 
 
 ASSETS = {}
@@ -24,7 +25,7 @@ con = PD_controller()
 con.kd = 1
 con.kp = 1
 
-xcel_data = pd.read_excel('/home/ubuntu/Github/clover-innfos-python/trajectories/test_traj/test_ilqr3d_03.xlsx')
+xcel_data = pd.read_excel('/home/ubuntu/Github/clover-innfos-python/trajectories/test_traj/test_ilqr3d_100it_dt002.xlsx')
 q_dot = pd.DataFrame(xcel_data, columns=['u1', 'u2', 'u3', 'u4', 'u5', 'u6'])
 q_dot = q_dot.to_numpy()
 
@@ -40,29 +41,30 @@ i = 0
 
 for i in range(len(traj)):
 
-    # data.ctrl[:] = traj[i]
+    data.qvel[:] = traj[i]*10
 
     # theta_dot = data.qvel[:]
-
-    theta_dot = traj[i]
-    theta = data.qpos[:]
-    theta_d = np.array([-3.97674561, 50.89657676, 120.01220703, 87.05993652, -7.04406738, 86.52160645])
-    theta_d = theta_d * (np.pi / 180)
     #
-    u = con.pos_control(theta, theta_d, theta_dot)
-    #
-    data.qvel[:] = u
+    # theta_dot = traj[i]
+    # theta = data.qpos[:]
+    # theta_d = np.array([-3.97674561, 50.89657676, 120.01220703, 87.05993652, -7.04406738, 86.52160645])
+    # theta_d = theta_d * (np.pi / 180)
+    # #
+    # u = con.pos_control(theta, theta_d, theta_dot)
+    # #
+    # data.qvel[:] = u
 
     mujoco.mj_step(model, data)
     viewer.render()
+
+    time.sleep(0.02)
 
     i = i + 1
 print('pls')
 
 theta = data.qpos[:]
 print(theta)
-theta_d = np.array([-3.97674561, 50.89657676, 120.01220703, 87.05993652, -7.04406738, 86.52160645])
-theta_d = theta_d*(np.pi/180)
+theta_d = np.array([1.57266381, 1.55914166, 1.57024239, 1.47110888, 0.81238131, -1.51003364])
 print(theta_d)
 
 
