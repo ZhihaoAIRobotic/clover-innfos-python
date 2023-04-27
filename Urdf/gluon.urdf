@@ -29,7 +29,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/base_link.STL" />
+          filename="./dae_meshes/base_link.dae" />
       </geometry>
       <material
         name="">
@@ -37,15 +37,6 @@
           rgba="1 1 1 1" />
       </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="./meshes/base_link.STL" />
-      </geometry>
-    </collision>
   </link>
   <link
     name="1_Link">
@@ -69,7 +60,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/1_Link.STL" />
+          filename="./dae_meshes/1_Link.dae" />
       </geometry>
       <material
         name="">
@@ -77,15 +68,6 @@
           rgba="1 1 1 1" />
       </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="./meshes/1_Link.STL" />
-      </geometry>
-    </collision>
   </link>
   <link
     name="2_Link">
@@ -109,7 +91,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/2_Link.STL" />
+          filename="./dae_meshes/2_Link.dae" />
       </geometry>
       <material
         name="">
@@ -117,15 +99,6 @@
           rgba="1 1 1 1" />
       </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="./meshes/2_Link.STL" />
-      </geometry>
-    </collision>
   </link>
   <link
     name="3_Link">
@@ -149,7 +122,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/3_Link.STL" />
+          filename="./dae_meshes/3_Link.dae" />
       </geometry>
       <material
         name="">
@@ -157,15 +130,6 @@
           rgba="1 1 1 1" />
       </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="./meshes/3_Link.STL" />
-      </geometry>
-    </collision>
   </link>
   <link
     name="4_Link">
@@ -189,7 +153,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/4_Link.STL" />
+          filename="./dae_meshes/4_Link.dae" />
       </geometry>
       <material
         name="">
@@ -197,15 +161,6 @@
           rgba="1 1 1 1" />
       </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="./meshes/4_Link.STL" />
-      </geometry>
-    </collision>
   </link>
   <link
     name="5_Link">
@@ -229,7 +184,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/5_Link.STL" />
+          filename="./dae_meshes/5_Link.dae" />
       </geometry>
       <material
         name="">
@@ -237,15 +192,6 @@
           rgba="1 1 1 1" />
       </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="./meshes/5_Link.STL" />
-      </geometry>
-    </collision>
   </link>
   <link
     name="6_Link">
@@ -269,7 +215,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="./meshes/6_Link.STL" />
+          filename="./dae_meshes/6_Link.dae" />
       </geometry>
       <material
         name="">
@@ -277,15 +223,6 @@
           rgba="1 1 1 1" />
       </material>
     </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="./meshes/6_Link.STL" />
-      </geometry>
-    </collision>
   </link>
   <joint
     name="dummy_joint"

@@ -3,6 +3,7 @@ import clover_innfos_python
 from clover_innfos_python import Actuator
 from Kinematics import kinematics
 
+
 pi = np.pi
 pi_2 = np.pi/2
 

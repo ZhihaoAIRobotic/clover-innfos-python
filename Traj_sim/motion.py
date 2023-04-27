@@ -93,6 +93,8 @@ while 1:
         arm.setArmPosition(op)
 
 
+
+
         time.sleep(0.1)
 
         i = i+1

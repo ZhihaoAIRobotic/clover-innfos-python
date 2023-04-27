@@ -1,0 +1,195 @@
+Fri Apr 21 07:23:41 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/Robase/environment models/gluon_robot.xml
+
+Fri Apr 21 07:23:41 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/Robase/environment models/./empty_arena.xml
+
+Fri Apr 21 07:23:41 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/Robase/environment models/./gluon_kinematics.xml
+
+Fri Apr 21 07:23:41 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/Robase/environment models/./gluon_position_actuators.xml
+
+Fri Apr 21 07:26:55 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/gluon_robot.xml
+
+Fri Apr 21 07:26:55 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./empty_arena.xml
+
+Fri Apr 21 07:26:55 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_kinematics.xml
+
+Fri Apr 21 07:26:55 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_position_actuators.xml
+
+Fri Apr 21 07:29:07 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/gluon_robot.xml
+
+Fri Apr 21 07:29:07 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./empty_arena.xml
+
+Fri Apr 21 07:29:07 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_kinematics.xml
+
+Fri Apr 21 07:29:07 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_position_actuators.xml
+
+Fri Apr 21 07:30:47 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/gluon_robot.xml
+
+Fri Apr 21 07:30:47 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./empty_arena.xml
+
+Fri Apr 21 07:30:47 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_kinematics.xml
+
+Fri Apr 21 07:30:47 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_position_actuators.xml
+
+Fri Apr 21 07:42:23 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/gluon_robot.xml
+
+Fri Apr 21 07:42:23 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./empty_arena.xml
+
+Fri Apr 21 07:42:23 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_kinematics.xml
+
+Fri Apr 21 07:42:23 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_position_actuators.xml
+
+Fri Apr 21 07:45:25 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/gluon_robot.xml
+
+Fri Apr 21 07:45:25 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./empty_arena.xml
+
+Fri Apr 21 07:45:25 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_kinematics.xml
+
+Fri Apr 21 07:45:25 2023
+WARNING: mju_openResource: could not open resource '/home/ubuntu/Github/clover-innfos-python/environment models/./gluon_position_actuators.xml
+
+Fri Apr 21 08:01:21 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.4680.
+
+Fri Apr 21 08:10:45 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0620.
+
+Fri Apr 21 08:11:48 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2280.
+
+Fri Apr 21 08:34:23 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2280.
+
+Fri Apr 21 08:34:56 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2280.
+
+Fri Apr 21 08:40:36 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0440.
+
+Fri Apr 21 08:41:15 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0440.
+
+Fri Apr 21 08:55:53 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 5. The simulation is unstable. Time = 0.0100.
+
+Fri Apr 21 08:56:10 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 5. The simulation is unstable. Time = 0.0100.
+
+Fri Apr 21 08:56:18 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0220.
+
+Fri Apr 21 08:59:06 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0220.
+
+Fri Apr 21 08:59:48 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0260.
+
+Fri Apr 21 09:00:44 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0260.
+
+Fri Apr 21 09:00:58 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0260.
+
+Fri Apr 21 09:04:05 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0920.
+
+Sat Apr 22 09:39:27 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.3440.
+
+Sat Apr 22 09:46:26 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1340.
+
+Sat Apr 22 09:48:45 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0120.
+
+Sat Apr 22 09:49:21 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 5. The simulation is unstable. Time = 0.0100.
+
+Sun Apr 23 04:29:40 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.0100.
+
+Sun Apr 23 04:30:28 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0100.
+
+Sun Apr 23 04:31:37 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1220.
+
+Sun Apr 23 07:08:26 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0200.
+
+Sun Apr 23 07:09:06 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0140.
+
+Sun Apr 23 07:09:57 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0140.
+
+Sun Apr 23 07:26:07 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0280.
+
+Sun Apr 23 07:28:28 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0060.
+
+Sun Apr 23 07:31:02 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0100.
+
+Sun Apr 23 07:32:11 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0280.
+
+Sun Apr 23 07:33:29 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0280.
+
+Sun Apr 23 07:35:02 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2880.
+
+Sun Apr 23 08:00:01 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2880.
+
+Sun Apr 23 08:37:03 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1420.
+
+Sun Apr 23 11:39:35 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 4. The simulation is unstable. Time = 0.3780.
+
+Sun Apr 23 11:41:20 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0200.
+
+Sun Apr 23 11:41:43 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0300.
+
+Sun Apr 23 11:42:18 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0100.
+
+Sun Apr 23 11:49:51 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 2.1100.
+
+Sun Apr 23 11:54:17 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.0040.
+
+Sun Apr 23 11:54:35 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0060.
+
+Wed Apr 26 10:56:16 2023
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0000.
+
