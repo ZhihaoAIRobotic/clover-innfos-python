@@ -33,7 +33,7 @@ x = pd.DataFrame(xcel_data, columns=['J_dot_1', 'J_dot_2', 'J_dot_3', 'J_dot_4',
 x = x.to_numpy()
 
 # print(x_dot.shape)
-traj = q_dot
+traj = x
 
 viewer = mujoco_viewer.MujocoViewer(model, data)
 
