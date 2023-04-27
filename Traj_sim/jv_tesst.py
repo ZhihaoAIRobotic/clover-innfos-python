@@ -46,10 +46,11 @@ while 1:
     op = np.asarray(op)
 
 
-    op[0] = -op[0]
-    op[1] = -op[1]
-    op[4] = -op[4]
-    op[5] = op[5]
+    # op[0] = -op[0]
+    # op[1] = -op[1]
+    # op[4] = -op[4]
+    # op[5] = op[5]
     print(op)
+    print(kin.fk(op))
 
     arm.setArmPosition(op)

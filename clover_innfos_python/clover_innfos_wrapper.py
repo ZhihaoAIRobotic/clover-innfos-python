@@ -317,7 +317,7 @@ class ArmInterface(Clover_MINTASCA):
         :param: None
         :return: joint position
         """
-        ret = self.getPositions(units=Degrees)
+        ret = self.getPositions(units=Radians)
         return ret
 
     def getArmVelocity(self):
@@ -326,7 +326,7 @@ class ArmInterface(Clover_MINTASCA):
         :param: None
         :return: joint velocity
         """
-        return self.getVelocitys(bRefresh=True) / (Degrees/minute)
+        return self.getVelocitys(bRefresh=True) / (Radians/minute)
 
     def setArmPosition(self, positions):
         """
@@ -334,7 +334,7 @@ class ArmInterface(Clover_MINTASCA):
         :param positions: list/numpy array of 6 floats
         :return: None
         """
-        self.setPositions(np.array(positions),units=Degrees)
+        self.setPositions(np.array(positions),units=Radians)
 
     def setArmVelocity(self, velocity):
         """
@@ -342,7 +342,7 @@ class ArmInterface(Clover_MINTASCA):
         :param positions: list/numpy array of 6 floats
         :return: None
         """
-        velocity = np.array(velocity) * Degrees / minute
+        velocity = np.array(velocity) / second
         self.setVelocitys(velocity)
 
     def joint_trajectory_tracking(self, trajectory_generator):
