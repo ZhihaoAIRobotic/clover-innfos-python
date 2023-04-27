@@ -25,7 +25,7 @@ con = PD_controller()
 con.kd = 1
 con.kp = 1
 
-xcel_data = pd.read_excel('/home/ubuntu/Github/clover-innfos-python/trajectories/test_traj/test_ilqr3d_100it_dt002.xlsx')
+xcel_data = pd.read_excel('/home/ubuntu/Github/clover-innfos-python/trajectories/test_traj/test_ilqr3d_02.xlsx')
 q_dot = pd.DataFrame(xcel_data, columns=['u1', 'u2', 'u3', 'u4', 'u5', 'u6'])
 q_dot = q_dot.to_numpy()
 
@@ -33,7 +33,7 @@ x = pd.DataFrame(xcel_data, columns=['J_dot_1', 'J_dot_2', 'J_dot_3', 'J_dot_4',
 x = x.to_numpy()
 
 # print(x_dot.shape)
-traj = x
+traj = q_dot
 
 viewer = mujoco_viewer.MujocoViewer(model, data)
 
@@ -57,7 +57,7 @@ for i in range(len(traj)):
     mujoco.mj_step(model, data)
     viewer.render()
 
-    time.sleep(0.02)
+    time.sleep(0.2)
 
     i = i + 1
 print('pls')
