@@ -8,7 +8,7 @@ class Kinematics:
 
         # initialize the chain class [for the ikpy use - explained in github documentation] for Edubot arm
         self.urdf = chain.Chain.from_urdf_file(
-            "/home/clover/Github/clover-innfos-python/Urdf/gluon.urdf",
+            "/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf",
             base_elements=["base_link", "axis_joint_1", "1_Link", "axis_joint_2", "2_Link",
                            "axis_joint_3", "3_Link", "axis_joint_4", "4_Link", "axis_joint_5", "5_Link", "axis_joint_6", "6_Link"],
             last_link_vector=None,
@@ -45,12 +45,12 @@ if __name__ == '__main__':
 
     kin = Kinematics()
 
-    theta = ([1.57266381, 1.55914166, 1.57024239, 1.47110888, 0.81238131, -1.51003364])
+    theta = ([0.02425504, -1.21359149, 0.75960586, -0.12028765, 0.01961326, 1.08267801])
     forward = kin.fk(theta)
     print(forward)
 
-    # theta_new = kin.ik(forward, initial_position=None, orientation="all")
-    # print(theta_new)
+    theta_new = kin.ik(forward, initial_position=None, orientation="all")
+    print(theta_new)
 
     # forward_new = kin.fk(theta_new[1:7])
     # print(forward_new)

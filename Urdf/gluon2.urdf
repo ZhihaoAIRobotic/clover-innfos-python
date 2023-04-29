@@ -246,7 +246,7 @@
     <child
       link="1_Link" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-2.79"
       upper="2.79"
@@ -264,7 +264,7 @@
     <child
       link="2_Link" />
     <axis
-      xyz="-1 0 0" />
+      xyz="1 0 0" />
     <limit
       lower="-1.54"
       upper="1.54"
@@ -336,7 +336,7 @@
     <child
       link="6_Link" />
     <axis
-      xyz="-1 0 0" />
+      xyz="1 0 0" />
     <limit
       lower="-2.79"
       upper="2.79"

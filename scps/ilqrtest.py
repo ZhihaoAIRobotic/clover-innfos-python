@@ -162,6 +162,7 @@ for i in range(param.nbIter):
         if cost < cost0 or alpha < 1e-3:
             u = utmp
             print("Iteration {}, cost: {}".format(i, cost))
+            print(np.linalg.norm(du * alpha))
             break
         alpha /= 2
     if np.linalg.norm(du * alpha) < 1E-2:

@@ -25,15 +25,16 @@ con = PD_controller()
 con.kd = 1
 con.kp = 1
 
-xcel_data = pd.read_excel('/home/ubuntu/Github/clover-innfos-python/trajectories/test_traj/test_ilqr3d_02.xlsx')
-q_dot = pd.DataFrame(xcel_data, columns=['u1', 'u2', 'u3', 'u4', 'u5', 'u6'])
-q_dot = q_dot.to_numpy()
+xcel_data = pd.read_excel('/home/ubuntu/Github/clover-innfos-python/trajectories/test_traj/test_ilqr3d_002s.xlsx')
+u = pd.DataFrame(xcel_data, columns=['u1', 'u2', 'u3', 'u4', 'u5', 'u6'])
+u = u.to_numpy()
 
 x = pd.DataFrame(xcel_data, columns=['J_dot_1', 'J_dot_2', 'J_dot_3', 'J_dot_4', 'J_dot_5', 'J_dot_6'])
 x = x.to_numpy()
 
 # print(x_dot.shape)
-traj = x
+traj = u
+Kt = 100
 
 viewer = mujoco_viewer.MujocoViewer(model, data)
 
@@ -41,30 +42,32 @@ i = 0
 
 for i in range(len(traj)):
 
-    data.qvel[:] = traj[i]*10
+    q_vel = data.qvel[:]
+    q_pos = data.qpos[:]
 
-    # theta_dot = data.qvel[:]
-    #
-    # theta_dot = traj[i]
-    # theta = data.qpos[:]
-    # theta_d = np.array([-3.97674561, 50.89657676, 120.01220703, 87.05993652, -7.04406738, 86.52160645])
-    # theta_d = theta_d * (np.pi / 180)
-    # #
-    # u = con.pos_control(theta, theta_d, theta_dot)
-    # #
-    # data.qvel[:] = u
+    traj = np.linspace(q_vel, u[i], 10)
+    path = np.linspace(q_pos, x[i], 10)
 
-    mujoco.mj_step(model, data)
-    viewer.render()
+    for j in range(10):
 
-    time.sleep(0.2)
+        data.qvel[:] = traj[j]
+
+        q = data.qpos[:]
+        q_dot = data.qvel[:]
+
+        q_vel = q_dot + Kt * (path[j] - q)
+
+        data.qvel[:] = q_vel
+
+        mujoco.mj_step(model, data)
+        viewer.render()
 
     i = i + 1
 print('pls')
 
 theta = data.qpos[:]
 print(theta)
-theta_d = np.array([1.57266381, 1.55914166, 1.57024239, 1.47110888, 0.81238131, -1.51003364])
+theta_d = x[-2]
 print(theta_d)
 
 
