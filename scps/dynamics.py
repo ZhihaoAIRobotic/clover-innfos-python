@@ -58,8 +58,23 @@ def centrifugalterms(q, qd):
 
     return C
 
+def array_clean_print(sep=' ', vert='|', pad=10, precision=4):
+    def prettyprint(a):
+        s = "\n"
+        if len(a.shape) == 1:
+            a = [a]  # Make array appear 2D if it's 1D
+        for row in a:
+            s += vert + sep + sep.join([f"{x: ^ {pad}.{precision}g}" for x in row]) + vert + "\n"
+        return s
+
+    return prettyprint
+
+
+np.set_string_function(array_clean_print(), repr=False)
+np.set_string_function(array_clean_print(), repr=True)
+
 if __name__ == '__main__':
-    q = np.array([0, 0, 0, 0, 0, 0])
+    q = np.array([0, np.pi/2, -np.pi/2, 0, 0, 0])
     g = gravity(q)
     print(g)
 
