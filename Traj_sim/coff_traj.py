@@ -36,7 +36,7 @@ input("Ready")
 
 arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
 
-"""Coffee Project Trajectory"""
+"""coffee_project Trajectory"""
 
 q = np.array([[0,0,0,0,0,0],
               [0, 9.164, 113.68, 0, -0.216, 112.94],

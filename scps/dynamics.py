@@ -13,7 +13,7 @@ def gravity(q):
     """
 
     # Create a model
-    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon.urdf")
+    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
 
     # Create a data object
     data = model.createData()
@@ -35,26 +35,27 @@ def inertia(q):
     """
 
     # Create a model
-    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon.urdf")
+    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
 
     # Create a data object
     data = model.createData()
 
     # Compute the inertia matrix
-    H = pin.computeMinverse(model, data, q)
+    H = pin.crba(model, data, q)
 
     return H
 
 def centrifugalterms(q, qd):
 
     # Create a model
-    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon.urdf")
+    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
 
     # Create a data object
     data = model.createData()
 
     # Compute the centrifugal terms
-    C = pin.computeCoriolisMatrix(model, data, q, qd)
+    Cor = pin.computeCoriolisMatrix(model, data, q, qd)
+    C = Cor @ qd
 
     return C
 
@@ -85,7 +86,7 @@ if __name__ == '__main__':
 
     print("..." * 60)
 
-    dq = np.array([0, 0, 1, 0, 0, 0])
+    dq = np.array([0, 0, 0, 0.2, 0.3, 0.1])
 
     I = centrifugalterms(q, dq)
     print(I)

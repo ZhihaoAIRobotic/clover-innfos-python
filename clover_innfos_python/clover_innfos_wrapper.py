@@ -18,10 +18,10 @@ def A(*args):
 
 pi = np.pi
 pi_2 = np.pi/2
-Degrees = 0.1 # Degrees_value*Degrees => Control_value, Control_value/Degrees => Degrees_value
-Radians = 18.0/pi
+Degrees = 180/pi # Degrees_value*Degrees => Control_value, Control_value/Degrees => Degrees_value
+Radians = 1
 innfos_position_units = 1.0
-second = 1.0/60.0
+second = 1.0/60.03
 minute = 1.0
 innfos_velocity_units = 1.0
 ######################     Helpers      ####################################
@@ -190,6 +190,21 @@ class Clover_MINTASCA(ActuatorControllerPython):
         pos = A(pos)[:self.dof]*units# Coerce pos to be np.array with self.dof elements
         return [self.setPosition(i,q) for i,q in zip(self.actuator_id_list,pos)]
 
+    def getVelocitys(self, bRefresh=True, units = innfos_position_units):
+        vel = A([self.getVelocity(i,bRefresh=bRefresh) for i in self.actuator_id_list])
+        return (vel)/units
+
+    def setVelocitys(self, vel, units = innfos_velocity_units):
+        vel = A(vel)[:self.dof]*units
+        return [self.setVelocity(i,v) for i,v in zip(self.actuator_id_list, vel)]
+
+    def getCurrent(self, bRefresh=True):
+        return A([self.getCurrent(i,bRefresh=bRefresh) for i in self.actuator_id_list])
+
+    def setCurrent(self, current):
+        current = A(current)[:self.dof]
+        return [self.setCurrent(i,c) for i,c in zip(self.actuator_id_list, current)]
+
     def report(self, pos_unit = innfos_position_units, vel_unit = innfos_velocity_units):
         def quickstring(func, unit=1.0):
             return f"{func.__name__}: {A([round(func(i,True),4) for i in self.actuator_id_list])/unit}"
@@ -292,15 +307,15 @@ class ArmInterface(Clover_MINTASCA):
             return np.array(x)
 
         if max_pos is not None:
-            self.setMaximumPositions(coerce_to_array(max_pos)*Degrees)
+            self.setMaximumPositions(coerce_to_array(max_pos)*Radians)
         if min_pos is not None:
-            self.setMinimumPositions(coerce_to_array(min_pos)*Degrees)
+            self.setMinimumPositions(coerce_to_array(min_pos)*Radians)
         if max_acc is not None:
-            self.setProfilePositionAccelerations(coerce_to_array(max_acc*Degrees/minute**2))
+            self.setProfilePositionAccelerations(coerce_to_array(max_acc*Radians/minute**2))
         if max_dec is not None:
-            self.setProfilePositionDecelerations(coerce_to_array( -abs(max_dec)*Degrees/minute**2))
+            self.setProfilePositionDecelerations(coerce_to_array( -abs(max_dec)*Radians/minute**2))
         if max_vel is not None:
-            self.setProfilePositionMaxVelocitys(coerce_to_array(max_vel*Degrees/minute))
+            self.setProfilePositionMaxVelocitys(coerce_to_array(max_vel*Radians/minute))
 
 
     def setVelocityMode(self):
@@ -328,13 +343,21 @@ class ArmInterface(Clover_MINTASCA):
         """
         return self.getVelocitys(bRefresh=True) / (Radians/minute)
 
+    def getArmTorque(self):
+        """
+        get robot arm joint position
+        :param: None
+        :return: joint position
+        """
+        return self.getCurrent(bRefresh=True) * 4.6
+
     def setArmPosition(self, positions):
         """
         set robot arm joint position
         :param positions: list/numpy array of 6 floats
         :return: None
         """
-        self.setPositions(np.array(positions),units=Radians)
+        self.setPositions(np.array(positions), units=Radians)
 
     def setArmVelocity(self, velocity):
         """
@@ -342,8 +365,18 @@ class ArmInterface(Clover_MINTASCA):
         :param positions: list/numpy array of 6 floats
         :return: None
         """
-        velocity = np.array(velocity) / second
-        self.setVelocitys(velocity)
+        # velocity = np.array(velocity) / minute
+        self.setVelocitys(np.array(velocity), units=Radians)
+
+    def setArmTorque(self, Torque):
+        """
+        set robot arm joint position
+        :param positions: list/numpy array of 6 floats
+        :return: None
+        """
+        # velocity = np.array(velocity) / minute
+        current = np.array(Torque)/4.6
+        self.setCurrent(current)
 
     def joint_trajectory_tracking(self, trajectory_generator):
         """

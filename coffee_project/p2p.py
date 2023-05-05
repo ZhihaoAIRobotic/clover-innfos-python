@@ -5,6 +5,7 @@ import time
 import numpy as np
 import clover_innfos_python
 from clover_innfos_python import Actuator
+import matplotlib.pyplot as plt
 
 
 pi = np.pi
@@ -22,11 +23,12 @@ input("Move to zero")
 arm.home()  # Will set position to profile mode
 
 arm.safePositionMode(max_vel=30 * 60, min_pos=-360, max_pos=+360)
-arm.setPositionMode()
+# arm.setPositionMode()
 
 input("Ready")
 
 arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
+errorlist = []
 
 while 1:
 
@@ -39,6 +41,16 @@ while 1:
 
     arm.setArmPosition(op)
 
+    error = op - arm.getArmPosition()
+    errorlist.append(error)
+
     q = arm.getArmPosition()
-    theta = q[:] + Kp(op-q)
+    theta = q[:] + Kp*(error)
     arm.setArmPosition(theta)
+
+    for row in errorlist:
+        plt.plot(row)
+        plt.ylabel("θ (rads)")
+        plt.xlabel("Iterations")
+        plt.title("Error iterations")
+    plt.show()

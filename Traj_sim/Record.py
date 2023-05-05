@@ -1,11 +1,8 @@
 import sys
 
-import numpy as np
-from scps.trajectoryconvert import traj_convert
+
 from scps.ikpykinematics import Kinematics
-from traj_circle import change
-from TrajectoryCircle import TrajectoryCircle
-from TrajectoryCurve import TrajectoryCurve
+
 
 kin = Kinematics()
 
@@ -14,7 +11,7 @@ import time
 import numpy as np
 import clover_innfos_python
 from clover_innfos_python import Actuator
-
+from scps.dynamics import gravity
 
 pi = np.pi
 pi_2 = np.pi/2
@@ -42,5 +39,11 @@ while 1:
 
     i = 0
 
+    u = gravity(arm.getArmPosition())
+
+    arm.setArmTorque(u*0.1)
+
     print(arm.getArmPosition())
+
+
 
