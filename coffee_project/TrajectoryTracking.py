@@ -8,7 +8,7 @@ from clover_innfos_python import Actuator
 import matplotlib.pyplot as plt
 from coffee_project.polynomial_trajectory import PolynomialGenerator
 from scps import dynamics
-from kinematics import jacobian
+
 
 pg = PolynomialGenerator()
 dy = dynamics
@@ -29,7 +29,7 @@ input("Move to zero")
 arm.home()  # Will set position to profile mode
 
 arm.safePositionMode(max_vel=30 * 60, min_pos=-360, max_pos=+360)
-# arm.setPositionMode()
+arm.setVelocityMode()
 
 input("Ready")
 
@@ -52,9 +52,14 @@ q, dq, ddq = pg.generate_trajectory(q_start, via_points, 0, t_list, n_list)
 
 while 1:
     for i in range(len(q)):
-
+        int = time.time()
         theta = arm.getArmPosition()
         theta_dot = arm.getArmVelocity()
-        u = dy.inertia(q) @ (ddq + Kp*(q - theta) + Kd*(dq - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
+        u = dy.inertia(q[i]) @ (ddq[i] + Kp*(q[i] - theta) + Kd*(dq[i] - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
+        u = u*0.01
+        # arm.setArmTorque(u)
+        arm.setArmPosition(q[i]*0.5)
+        # print(arm.getArmTorque())
+        now = time.time() - int
 
-        arm.setArmTorque(u)
+        time.sleep(0.1 - now)

@@ -1,8 +1,8 @@
 import scps.dynamics as dyn
-import scps.ikpykinematics as kin
+# import scps.ikpykinematics as kin
 import numpy as np
 
-kin = kin.Kinematics()
+# kin = kin.Kinematics()
 
 class PD_controller():
 
