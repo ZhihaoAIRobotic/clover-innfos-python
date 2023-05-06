@@ -2,7 +2,7 @@ import numpy as np
 from math import comb, factorial
 from kinematics import fk, jacobian
 
-class PolynomialGenerator():
+class PolynomialGeneratorCart():
     """
     PolynomialGenerator generates a polynomial trajectory given a set of initial and final conditions.
     """
@@ -68,7 +68,7 @@ class PolynomialGenerator():
             n: Number of points to generate
 
         Returns:
-            Array of n points of the polynomial (Joint Values)
+            Array of n points of the polynomial (pose Values)
         """
 
         ts = np.linspace(from_t, to_t, n)
@@ -91,7 +91,7 @@ class PolynomialGenerator():
             n: Number of points to generate
 
         Returns:
-            Array of n points of the polynomial's dth derivative (Joint Velocities or Accelerations)
+            Array of n points of the polynomial's dth derivative (pose Velocities or Accelerations)
         """
 
         ts = np.linspace(from_t, to_t, n)
@@ -106,67 +106,67 @@ class PolynomialGenerator():
 
         return poly
 
-    def generate_p2p_trajectory(self, q_init, q_final, t_f, t_0=0.0, n=100):
+    def generate_p2p_trajectory(self, x_init, x_final, t_f, t_0=0.0, n=100):
 
         """
         Generates a len(q_init)th DOF trajectory given initial and final conditions
 
         Args:
-            q_init (list): Initial conditions (Type: Array)
-            q_final (list): Final conditions (Type: Array)
+            x_init (list): Initial conditions (Type: Array)
+            x_final (list): Final conditions (Type: Array)
             t_f (float): Final time
             t_0 (float): Initial time
             n (int): Number of points to generate
         """
 
-        q = q_init[0]
-        dq = q_init[1]
-        ddq = q_init[2]
+        x = x_init[0]
+        dx = x_init[1]
+        ddx = x_init[2]
 
-        if len(q_final) == 1:
-            qf = q_final[0]
-            q_desired = [qf]
+        if len(x_final) == 1:
+            xf = x_final[0]
+            x_desired = [xf]
 
-        elif len(q_final) == 2:
-            qf = q_final[0]
-            dqf = q_final[1]
-            q_desired = [qf, dqf]
-        elif len(q_final) == 3:
-            qf = q_final[0]
-            dqf = q_final[1]
-            ddqf = q_final[2]
-            q_desired = [qf, dqf, ddqf]
+        elif len(x_final) == 2:
+            xf = x_final[0]
+            dxf = x_final[1]
+            x_desired = [xf, dxf]
+        elif len(x_final) == 3:
+            xf = x_final[0]
+            dxf = x_final[1]
+            ddxf = x_final[2]
+            x_desired = [xf, dxf, ddxf]
 
-        qlist = np.zeros((len(q), n))
-        dqlist = np.zeros((len(dq), n))
-        ddqlist = np.zeros((len(ddq), n))
+        xlist = np.zeros((len(x), n))
+        dxlist = np.zeros((len(dx), n))
+        ddxlist = np.zeros((len(ddx), n))
 
-        for i in range(len(q)-1):
-            q_in = [q[i], dq[i], ddq[i]]
+        for i in range(len(x)-1):
+            x_in = [x[i], dx[i], ddx[i]]
 
-            if len(q_desired) == 1:
-                q_d = [q_desired[0][i]]
-            elif len(q_desired) == 2:
-                q_d = [q_desired[0][i], q_desired[1][i]]
-            elif len(q_desired) == 3:
-                q_d = [q_desired[0][i], q_desired[1][i], q_desired[2][i]]
+            if len(x_desired) == 1:
+                x_d = [x_desired[0][i]]
+            elif len(x_desired) == 2:
+                x_d = [x_desired[0][i], x_desired[1][i]]
+            elif len(x_desired) == 3:
+                x_d = [x_desired[0][i], x_desired[1][i], x_desired[2][i]]
 
-            qlist[i] = self.polynomial_from_coefs(self.generate_coefficients(q_in, q_d, t_f, t_0), t_0, t_f, n)
-            dqlist[i] = self.dpolynomial_from_coefs(1, self.generate_coefficients(q_in, q_d, t_f, t_0), t_0, t_f, n)
-            ddqlist[i] = self.dpolynomial_from_coefs(2, self.generate_coefficients(q_in, q_d, t_f, t_0), t_0, t_f, n)
+            xlist[i] = self.polynomial_from_coefs(self.generate_coefficients(x_in, x_d, t_f, t_0), t_0, t_f, n)
+            dxlist[i] = self.dpolynomial_from_coefs(1, self.generate_coefficients(x_in, x_d, t_f, t_0), t_0, t_f, n)
+            ddxlist[i] = self.dpolynomial_from_coefs(2, self.generate_coefficients(x_in, x_d, t_f, t_0), t_0, t_f, n)
 
-        qlist = qlist.T
-        dqlist = dqlist.T
-        ddqlist = ddqlist.T
+        xlist = xlist.T
+        dxlist = dxlist.T
+        ddxlist = ddxlist.T
 
-        return qlist, dqlist, ddqlist
+        return xlist, dxlist, ddxlist
 
-    def generate_trajectory(self, q_init, via_points, from_t, t_list, n_list):
+    def generate_trajectory(self, x_init, via_points, from_t, t_list, n_list):
         """
-        Generates a len(q_init)th DOF trajectory given initial and final conditions
+        Generates a len(x_init)th DOF trajectory given initial and final conditions
 
         Args:
-            q_init (list): Initial conditions (Type: Array)
+            x_init (list): Initial conditions (Type: Array)
             via_points (list): List of via points (Type: Array)
             from_t (float): Initial time
             t_list (list): List of times for each segment
@@ -180,136 +180,105 @@ class PolynomialGenerator():
         for i in range(len(n_list)):
             total = total + n_list[i]
 
-        qall_list = np.zeros((total, len(q_init[0])))
-        dqall_list = np.zeros((total, len(q_init[0])))
-        ddqall_list = np.zeros((total, len(q_init[0])))
+        xall_list = np.zeros((total, len(x_init[0])))
+        dxall_list = np.zeros((total, len(x_init[0])))
+        ddxall_list = np.zeros((total, len(x_init[0])))
         length = 0
 
         for i in range(len(via_points)):
             if i == 0:
                 via0 = via_points[0].reshape(1, 6)
-                q_temp, dq_temp, ddq_temp = self.generate_p2p_trajectory(q_init, via0, t_list[0], from_t, n_list[0])
-                qall_list[:len(q_temp)] = q_temp
-                dqall_list[:len(q_temp)] = dq_temp
-                ddqall_list[:len(q_temp)] = ddq_temp
+                x_temp, dx_temp, ddx_temp = self.generate_p2p_trajectory(x_init, via0, t_list[0], from_t, n_list[0])
+                xall_list[:len(x_temp)] = x_temp
+                dxall_list[:len(x_temp)] = dx_temp
+                ddxall_list[:len(x_temp)] = ddx_temp
             else:
-                length = length + len(q_temp)
+                length = length + len(x_temp)
                 via = via_points[i].reshape(1, 6)
-                con_temp = np.array([q_temp[-1], dq_temp[-1], ddq_temp[-1]])
-                q_temp, dq_temp, ddq_temp = self.generate_p2p_trajectory(con_temp, via, t_list[i], t_list[i-1], n_list[i])
-                qall_list[length: (length + len(q_temp))] = q_temp
-                dqall_list[length: (length + len(q_temp))] = dq_temp
-                ddqall_list[length: (length + len(q_temp))] = ddq_temp
+                con_temp = np.array([x_temp[-1], dx_temp[-1], ddx_temp[-1]])
+                x_temp, dx_temp, ddx_temp = self.generate_p2p_trajectory(con_temp, via, t_list[i], t_list[i-1], n_list[i])
+                xall_list[length: (length + len(x_temp))] = x_temp
+                dxall_list[length: (length + len(x_temp))] = dx_temp
+                ddxall_list[length: (length + len(x_temp))] = ddx_temp
 
-        return qall_list, dqall_list, ddqall_list
+        return xall_list, dxall_list, ddxall_list
 
-    def q_to_pose(self, urdf_path, joint_names, ee_link, q, dq, ddq):
+    def plot_all(self, x, dx, ddx):
         """
-        Converts joint values to pose values
+        Plots the pose values, velocities and accelerations with respect to time
 
         Args:
-            q (np.array): Joint values
-            dq (np.array): Joint velocities
-            ddq (np.array): Joint accelerations
+            x (np.array): pose values
+            dx (np.array): pose velocities
+            ddx (np.array): pose accelerations
 
         Returns:
-            A list of pose values
+            A plot of the pose values, velocities and accelerations with respect to time
         """
+        x_plot = np.array(x).reshape(6, np.array(x).shape[0])
 
-
-        pose = []
-
-        for i in range(len(q)):
-            pose.append(fk(urdf_path, joint_names, q[i], export_link=ee_link))
-
-        pose_vel = []
-
-        for i in range(len(dq)):
-            pose_vel.append(jacobian.get_jacobian_from_model(urdf_path, ee_link, q[i]).dot(dq[i]))
-
-        pose_acc = []
-
-        for i in range(len(ddq)):
-            pose_acc.append(jacobian.get_jacobian_from_model(urdf_path, ee_link, q[i]).dot(ddq[i]))
-
-        return pose
-
-    def plot_all(self, q, dq, ddq):
-        """
-        Plots the joint values, velocities and accelerations with respect to time
-
-        Args:
-            q (np.array): Joint values
-            dq (np.array): Joint velocities
-            ddq (np.array): Joint accelerations
-
-        Returns:
-            A plot of the joint values, velocities and accelerations with respect to time
-        """
-        q_plot = np.array(q).reshape(6, np.array(q).shape[0])
-
-        for row in q_plot:
+        for row in x_plot:
             plt.plot(row)
             plt.ylabel("θ (rads)")
             plt.xlabel("Time (s)")
-            plt.title("Joint Values")
+            plt.title("Pose Values")
         plt.show()
 
-        dq_plot = np.array(dq).reshape(6, np.array(dq).shape[0])
+        dx_plot = np.array(dx).reshape(6, np.array(dx).shape[0])
 
-        for row in dq_plot:
+        for row in dx_plot:
             plt.plot(row)
             plt.ylabel("d(θ) (rads/second)")
             plt.xlabel("Time (s)")
-            plt.title("Joint Velocity")
+            plt.title("Pose Velocity")
         plt.show()
 
-        ddq_plot = np.array(ddq).reshape(6, np.array(dq).shape[0])
+        ddx_plot = np.array(ddx).reshape(6, np.array(dx).shape[0])
 
-        for row in ddq_plot:
+        for row in ddx_plot:
             plt.plot(row)
             plt.ylabel("d(d(θ)) (rads/second^2)")
             plt.xlabel("Time (s)")
-            plt.title("Joint Acceleration")
+            plt.title("Pose Acceleration")
         plt.show()
 
-    def plot_qi(self, q, dq, ddq, i):
+    def plot_xi(self, x, dx, ddx, i):
         """
-        Plots joint value[i], velocity[i] and acceleration[i] with respect to time
+        Plots pose value[i], velocity[i] and acceleration[i] with respect to time
 
         Args:
-            q (np.array): Joint values
-            dq (np.array): Joint velocities
-            ddq (np.array): Joint accelerations
+            x (np.array): pose values
+            dx (np.array): pose velocities
+            ddx (np.array): pose accelerations
 
         Returns:
-            A plot of the joint values, velocities and accelerations with respect to time
+            A plot of the pose values, velocities and accelerations with respect to time
         """
-        q_plot = np.array(q[:, i]).reshape(1, np.array(q).shape[0])
+        x_plot = np.array(x[:, i]).reshape(1, np.array(x).shape[0])
 
-        for row in q_plot:
+        for row in x_plot:
             plt.plot(row)
-            plt.ylabel("θ (rads)")
+            plt.ylabel("m (meters)")
             plt.xlabel("Time (s)")
-            plt.title("Joint Values")
+            plt.title("Pose Values")
         plt.show()
 
-        dq_plot = np.array(dq[:, i]).reshape(1, np.array(dq).shape[0])
+        dx_plot = np.array(dx[:, i]).reshape(1, np.array(dx).shape[0])
 
-        for row in dq_plot:
+        for row in dx_plot:
             plt.plot(row)
-            plt.ylabel("d(θ) (rads/second)")
+            plt.ylabel("d(θ) (m/second)")
             plt.xlabel("Time (s)")
-            plt.title("Joint Velocity")
+            plt.title("Pose Velocity")
         plt.show()
 
-        ddq_plot = np.array(ddq[:, i]).reshape(1, np.array(dq).shape[0])
+        ddx_plot = np.array(ddx[:, i]).reshape(1, np.array(dx).shape[0])
 
-        for row in ddq_plot:
+        for row in ddx_plot:
             plt.plot(row)
-            plt.ylabel("d(d(θ)) (rads/second^2)")
+            plt.ylabel("d(d(θ)) (m/second^2)")
             plt.xlabel("Time (s)")
-            plt.title("Joint Acceleration")
+            plt.title("Pose Acceleration")
         plt.show()
 
 def array_clean_print(sep=' ', vert='|', pad=10, precision=4):
@@ -330,15 +299,33 @@ np.set_string_function(array_clean_print(), repr=True)
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
+    from kinematics import jacobian as j
+    from polynomial_trajectory import PolynomialGenerator
 
     pg = PolynomialGenerator()
+    pgc = PolynomialGeneratorCart()
+
+    x0 = [0, 0, 0, 0, 0, 0]
+    dx0 = [0, 0, 0, 0, 0, 0]
+    ddx0 = [0, 0, 0, 0, 0, 0]
+    x_start = np.array([x0, dx0, ddx0])
+
+    via_points = np.array([[0.0757261258, -0.12336681, 0.482877920, 0.2, 0, 1.1],
+                           [0.07568567, -0.1744927, 0.359509, 0.5, 0, 0.2],
+                           [0.07572613, -0.166367, 0.49851318, 0.38947682, -0.35442642, 1.06596763],
+                           [7.5685673e-02, -2.2696000e-05, 5.3397900e-01, 0, 0, 0]])
+
+    t_list = np.array([10.0, 15.0, 20.0, 21.0])
+    n_list = np.array([100, 50, 50, 10])
+
+    x, dx, ddx = pgc.generate_trajectory(x_start, via_points, 0, t_list, n_list)
 
     q0 = [0, 0, 0, 0, 0, 0]
     dq0 = [0, 0, 0, 0, 0, 0]
     ddq0 = [0, 0, 0, 0, 0, 0]
     q_start = np.array([q0, dq0, ddq0])
-    via_points = np.array([[0, np.pi/4, -np.pi/4, 0, 1.1, 0.2],
-                           [0, np.pi/2, -np.pi/2, 0, 0.2, 0.5],
+    via_points = np.array([[0, np.pi / 4, -np.pi / 4, 0, 1.1, 0.2],
+                           [0, np.pi / 2, -np.pi / 2, 0, 0.2, 0.5],
                            [0, 0.3, 0.2, 0.1, 1.1, 0.2],
                            [0, 0, 0, 0, 0, 0]])
     t_list = np.array([10.0, 15.0, 20.0, 21.0])
@@ -346,8 +333,11 @@ if __name__ == '__main__':
 
     q, dq, ddq = pg.generate_trajectory(q_start, via_points, 0, t_list, n_list)
 
-    print(q)
+    i = 54
+    print(ddq[i])
 
-    pg.plot_all(q, dq, ddq)
+    q_ddq = np.linalg.inv(j.get_jacobian_from_model(q[i]))@(ddx[i] - j.get_jacobian_deriv(q[i], dq[i])@dq[i])
+
+    print(q_ddq)
 
 

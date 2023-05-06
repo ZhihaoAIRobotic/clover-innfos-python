@@ -320,11 +320,19 @@ class ArmInterface(Clover_MINTASCA):
 
     def setVelocityMode(self):
         """
-        set robot arm into safe position control mode
+        set robot arm into safe velocity control mode
         :param: None
         :return: None
         """
         self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Profile_Vel)
+
+    def setCurrentMode(self):
+        """
+        set robot arm into safe current control mode
+        :param: None
+        :return: None
+        """
+        self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Cur)
 
     def getArmPosition(self):
         """

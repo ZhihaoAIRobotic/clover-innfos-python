@@ -29,7 +29,7 @@ input("Move to zero")
 arm.home()  # Will set position to profile mode
 
 arm.safePositionMode(max_vel=30 * 60, min_pos=-360, max_pos=+360)
-# arm.setPositionMode()
+arm.setCurrentMode()
 
 input("Ready")
 

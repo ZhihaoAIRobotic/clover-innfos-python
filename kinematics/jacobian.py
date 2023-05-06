@@ -1,7 +1,11 @@
 import numpy as np
+import pinocchio as pin
+
+file_path = '/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf'
+ee_link_name = '6_Link'
 
 
-def get_jacobian_from_model(file_path, ee_link_name, joint_values):
+def get_jacobian_from_model(joint_values):
     """
     Get the Jacobian matrix J of the robot from the 3D model, \dot x= J \dot q
     :param file_path:
@@ -28,12 +32,55 @@ def get_jacobian_from_model(file_path, ee_link_name, joint_values):
 
     return J
 
+def get_jacobian_deriv(q, v):
+    """
+        Get the dJ/dt of the robot from the 3D model
+        :param file_path:
+        :param joint_values:
+        :return:
+    """
+
+    # Create a model
+    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
+
+    # Create a data object
+    data = model.createData()
+
+    J = pin.computeJointJacobiansTimeVariation(model, data, q, v)
+
+    return J
+
+def get_jacobian(q):
+    """
+            Get the dJ/dt of the robot from the 3D model
+            :param file_path:
+            :param joint_values:
+            :return:
+        """
+
+    # Create a model
+    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
+
+    # Create a data object
+    data = model.createData()
+    joint_id = model.getJointId('axis_joint_6')
+    frame = model.getJointId('dummy_joint')
+
+    J = pin.computeJointJacobian(model, data, joint_id, )
+
+    return J
+
 
 if __name__ == '__main__':
     import kinpy as kp
-    urdf_path = '/home/ubuntu/Rofunc/rofunc/simulator/assets/urdf/gluon/gluon.urdf'
-    joint_values = [0, np.pi / 2.0, -np.pi / 2.0, np.pi/2, np.pi/2, 0]
-    J = get_jacobian_from_model(urdf_path, ee_link_name='6_Link', joint_values=joint_values)
+    q = np.array([0, 0, 0, 0, 0, 0])
+    joint_vel = np.array([0, 0.1383, -0.1383, 0, -0.3181, 0])
+
+    J = get_jacobian_from_model(q)
+    J_also = get_jacobian(q)
+
+
+    dJ = get_jacobian_deriv(q, joint_vel)
 
 
     ################# np.array pretty print #################################
@@ -53,4 +100,6 @@ if __name__ == '__main__':
     np.set_string_function(array_clean_print(), repr=True)
 
     print(J)
+    print(J_also)
+    print(dJ)
 
