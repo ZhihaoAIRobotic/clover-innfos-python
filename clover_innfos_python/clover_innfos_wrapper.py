@@ -358,7 +358,7 @@ class ArmInterface(Clover_MINTASCA):
         :param positions: list/numpy array of 6 floats
         :return: None
         """
-        self.setPositions(np.array(positions), units=(Radians/minute))
+        self.setPositions(np.array(positions), units=Radians)
 
     def setArmVelocity(self, velocity):
         """
