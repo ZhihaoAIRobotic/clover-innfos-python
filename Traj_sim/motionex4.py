@@ -8,9 +8,9 @@ from scps.dynamics import gravity, inertia, centrifugalterms
 from scps.controller import PD_controller
 import pandas as pd
 import time
-from coffee_project.polynomial_trajectory import PolynomialGenerator
+from coffee_project.polynomial_trajectory_cartesian import PolynomialGeneratorCart
 
-pg = PolynomialGenerator()
+pg = PolynomialGeneratorCart()
 
 ASSETS = {}
 root_path = '/home/ubuntu/Github/clover-innfos-python/environment models/meshes'
@@ -23,20 +23,19 @@ for file in files:
 model = mujoco.MjModel.from_xml_path("/home/ubuntu/Github/clover-innfos-python/environment models/gluon_robot.xml", ASSETS)
 data = mujoco.MjData(model)
 
-pg = PolynomialGenerator()
+x0 = [0, 0, 0, 0, 0, 0]
+dx0 = [0, 0, 0, 0, 0, 0]
+ddx0 = [0, 0, 0, 0, 0, 0]
+x_start = np.array([x0, dx0, ddx0])
 
-q0 = [0, 0, 0, 0, 0, 0]
-dq0 = [0, 0, 0, 0, 0, 0]
-ddq0 = [0, 0, 0, 0, 0, 0]
-q_start = np.array([q0, dq0, ddq0])
-via_points = np.array([[0, np.pi/4, -np.pi/4, 0, 1.1, 0.2],
-                       [0, np.pi/2, -np.pi/2, 0, 0.2, 0.5],
-                       [0, 0.3, 0.2, 0.1, 1.1, 0.2],
-                       [0, 0, 0, 0, 0, 0]])
-t_list = np.array([1.0, 1.50, 2.0, 2.10])
-n_list = np.array([200, 100, 100, 20])
+via_points = np.array([[0.07568567, -0.06065414, 0.5092126, -0.10471976, 0, 0],
+                       [0.07569469, -0.17449179, 0.359509, 0.5, 0, 0],
+                       [0.07568567, -0.1744927, 0.359509, 0, 0, 0]])
 
-q, dq, ddq = pg.generate_trajectory(q_start, via_points, 0, t_list, n_list)
+t_list = np.array([10.0, 15.0, 20.0])
+n_list = np.array([100, 50, 50])
+
+q, dq, ddq = pg.generate_trajectory(x_start, via_points, 0, t_list, n_list)
 
 viewer = mujoco_viewer.MujocoViewer(model, data)
 
@@ -44,7 +43,7 @@ i = 0
 
 for i in range(len(q)):
 
-    data.qvel[:] = dq[i]
+    data.qvel[:] = q[i]
 
     mujoco.mj_step(model, data)
     viewer.render()

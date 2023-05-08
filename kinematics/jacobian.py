@@ -1,5 +1,12 @@
 import numpy as np
 
+<<<<<<< HEAD
+=======
+
+
+file_path = '/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf'
+ee_link_name = '6_Link'
+>>>>>>> master
 
 def get_jacobian_from_model(file_path, ee_link_name, joint_values):
     """
@@ -28,12 +35,73 @@ def get_jacobian_from_model(file_path, ee_link_name, joint_values):
 
     return J
 
+<<<<<<< HEAD
 
 if __name__ == '__main__':
     import kinpy as kp
     urdf_path = '/home/ubuntu/Rofunc/rofunc/simulator/assets/urdf/gluon/gluon.urdf'
     joint_values = [0, np.pi / 2.0, -np.pi / 2.0, np.pi/2, np.pi/2, 0]
     J = get_jacobian_from_model(urdf_path, ee_link_name='6_Link', joint_values=joint_values)
+=======
+def get_jacobian_deriv(q, v):
+    """
+        Get the dJ/dt of the robot from the 3D model
+        :param file_path:
+        :param joint_values:
+        :return:
+    """
+
+    # Create a model
+    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
+
+    # Create a data object
+    data = model.createData()
+
+    J = pin.computeJointJacobiansTimeVariation(model, data, q, v)
+
+    joint_id = model.getJointId('axis_joint_1')
+    frame = model.getFrameId('6_Link')
+
+    dJ = pin.getJointJacobianTimeVariation(model, data, joint_id, pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)
+    # dJ = pin.getFrameJacobianTimeVariation(model, data, frame, pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)
+
+    return dJ, data.J
+
+def get_jacobian(q):
+    """
+            Get the dJ/dt of the robot from the 3D model
+            :param file_path:
+            :param joint_values:
+            :return:
+        """
+
+    # Create a model
+    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
+
+    # Create a data object
+    data = model.createData()
+    joint_id = model.getFrameId("6_Link")
+
+
+    J = pin.computeJointJacobian(model, data, q, model.getJointId('axis_joint_6'))
+    # J = pin.computeJointJacobians(model, data, q)
+
+    # J = pin.getJointJacobian(model, data, joint_id, pin.ReferenceFrame.LOCAL)
+
+    return J
+
+
+if __name__ == '__main__':
+    import kinpy as kp
+    q = np.array([0, 0, 0, 0, 0, 0])
+    joint_vel = np.array([0, 1, 0.4, 0.4, 0.2, 0])
+
+    J = get_jacobian_from_model(q)
+    J_also = get_jacobian(q)
+
+
+    # dJ, dt = get_jacobian_deriv(q, joint_vel)
+>>>>>>> master
 
 
     ################# np.array pretty print #################################
@@ -53,4 +121,10 @@ if __name__ == '__main__':
     np.set_string_function(array_clean_print(), repr=True)
 
     print(J)
+<<<<<<< HEAD
+=======
+    print(J_also)
+    # print(dJ)
+    # print(dt)
+>>>>>>> master
 

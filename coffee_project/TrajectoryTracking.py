@@ -55,6 +55,7 @@ while 1:
         int = time.time()
         theta = arm.getArmPosition()
         theta_dot = arm.getArmVelocity()
+<<<<<<< HEAD
         u = dy.inertia(q[i]) @ (ddq[i] + Kp*(q[i] - theta) + Kd*(dq[i] - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
         u = u*0.01
         # arm.setArmTorque(u)
@@ -63,3 +64,10 @@ while 1:
         now = time.time() - int
 
         time.sleep(0.1 - now)
+=======
+        u = dy.inertia(q) @ (ddq + Kp*(q - theta) + Kd*(dq - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
+
+        arm.setArmTorque(u)
+
+    arm.setArmTorque(np.zeros(6))
+>>>>>>> master

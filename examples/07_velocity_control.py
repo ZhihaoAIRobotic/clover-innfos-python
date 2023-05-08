@@ -34,7 +34,12 @@ init_time = time.time()
 now_time = 0
 
 while now_time < 8:
+<<<<<<< HEAD
     arm.setArmVelocity([-1, -1, 0, -1, -1, -1])
+=======
+    arm.setVelocityMode()
+    arm.setArmVelocity([-0.3, -0.3, 0, -0.3, -0.3, -0.3])
+>>>>>>> master
 
     print(arm.getArmVelocity())
 
