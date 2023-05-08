@@ -26,14 +26,14 @@ arm.setVelocityMode()
 input("Ready")
 
 arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
-# arm.setArmVelocity(np.array([0, 0, 0, 0, 0, 0]))
+arm.setArmVelocity(np.array([0, 0, 0, 0, 0, 0]))
 
 init_time = time.time()
 
 now_time = 0
 
 while now_time < 8:
-
+    arm.setVelocityMode()
     arm.setArmVelocity([-0.3, -0.3, 0, -0.3, -0.3, -0.3])
 
     print(arm.getArmVelocity())

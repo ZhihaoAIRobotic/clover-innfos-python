@@ -23,15 +23,20 @@ for file in files:
 model = mujoco.MjModel.from_xml_path("/home/ubuntu/Github/clover-innfos-python/environment models/gluon_robot.xml", ASSETS)
 data = mujoco.MjData(model)
 
+pg = PolynomialGenerator()
+
 q0 = [0, 0, 0, 0, 0, 0]
 dq0 = [0, 0, 0, 0, 0, 0]
 ddq0 = [0, 0, 0, 0, 0, 0]
 q_start = np.array([q0, dq0, ddq0])
+via_points = np.array([[0, np.pi/4, -np.pi/4, 0, 1.1, 0.2],
+                       [0, np.pi/2, -np.pi/2, 0, 0.2, 0.5],
+                       [0, 0.3, 0.2, 0.1, 1.1, 0.2],
+                       [0, 0, 0, 0, 0, 0]])
+t_list = np.array([1.0, 1.50, 2.0, 2.10])
+n_list = np.array([200, 100, 100, 20])
 
-qf = [0, np.pi / 4, -np.pi / 4, np.pi/4, 0, 0]
-q_final = np.array([qf])
-
-q, dq, ddq = pg.generate_p2p_trajectory(q_start, q_final, 10, 0, 100)
+q, dq, ddq = pg.generate_trajectory(q_start, via_points, 0, t_list, n_list)
 
 viewer = mujoco_viewer.MujocoViewer(model, data)
 
@@ -39,7 +44,7 @@ i = 0
 
 for i in range(len(q)):
 
-    data.qpos[:] = q[i]
+    data.qvel[:] = dq[i]
 
     mujoco.mj_step(model, data)
     viewer.render()

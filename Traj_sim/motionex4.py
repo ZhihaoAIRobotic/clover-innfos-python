@@ -43,7 +43,7 @@ i = 0
 
 for i in range(len(q)):
 
-    data.qpos[:] = q[i]
+    data.qvel[:] = q[i]
 
     mujoco.mj_step(model, data)
     viewer.render()

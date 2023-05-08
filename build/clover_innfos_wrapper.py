@@ -94,9 +94,7 @@ class Clover_MINTASCA(ActuatorControllerPython):
         Base class for a Mintasca actuators. This class works for 
     """
 
-    # def __init__(self, actuator_id_list=None, on_Exception=Actuator.ActuatorMode.Mode_Vel, mode_on_Exit=Actuator.ActuatorMode.Mode_Vel, qt=None):
-    def __init__(self, actuator_id_list=None, on_Exception=Actuator.ActuatorMode.Mode_Pos, mode_on_Exit=Actuator.ActuatorMode.Mode_Vel, qt=None):
-        self.mode_on_Exit = mode_on_Exit
+    def __init__(self, actuator_id_list=None, on_Exception=Actuator.ActuatorMode.Mode_Vel, qt=None):
         super().__init__()
         err = Actuator.ErrorsDefine(0) # Create object to store errors during actuator lookup
         jointlist = self.lookupActuators(err)
@@ -140,32 +138,7 @@ class Clover_MINTASCA(ActuatorControllerPython):
         for i, myid in enumerate(self.actuator_id_list):
             self.joint_idxs[myid] = self.actuator_id_list.index(myid)
 
-        # ToDo: Replace set_safety_values with detailed default values for all parameters including gains
         self.set_safety_values(max_acc=400, max_dec=-200, max_vel=500, min_pos=-9, max_pos=9)
-
-        """
-        # Hardcoded safe default limits for GLUON arm
-        safe_acceleration_defaults = A([400, 400, 400, 400, 400, 400, 400])
-        safe_deceleration_defaults = -np.abs(A([-200, -200, -200, -200, -200, -200, -200]))
-        safe_maxvelocity_defaults = A([500, 500, 500, 500, 500, 500, 500])
-        safe_minposition_defaults = A([-90,-90,-90,-90,-90,-90]) * Degrees
-        safe_maxposition_defaults = A([90,90,90,90,90,90]) * 
-        safe_PositionKp = A([0.35, 0.35, 0.35, 0.35, 0.35, 0.35])
-
-        
-        self.setProfilePositionAccelerations( safe_acceleration_defaults )
-        self.setProfilePositionDecelerations( safe_deceleration_defaults )
-        self.setProfilePositionMaxVelocitys( safe_maxvelocity_defaults )
-        self.setMinimumPosition( safe_minposition_defaults )
-        self.setMaximumPosition( safe_maxposition_defaults )
-        self.setPositionKps( safe_PositionKp )
-        
-        raise Exception(" TODO! Set defaults for all actuator parameters!!!!!)
-        """
-    def end_operation(self):
-        self.setVelocityKis([0,0,0,0,0,0])
-        self.setVelocityKps([1,1,1,1,1,1])
-        self.activateActuatorModeInBantch(self.jointlist, self.mode_on_Exit)
 
     def set_safety_values(self, max_acc, max_dec, max_vel, min_pos, max_pos):
         for i in self.actuator_id_list:
@@ -190,21 +163,6 @@ class Clover_MINTASCA(ActuatorControllerPython):
     def setPositions(self, pos, units = innfos_position_units):
         pos = A(pos)[:self.dof]*units# Coerce pos to be np.array with self.dof elements
         return [self.setPosition(i,q) for i,q in zip(self.actuator_id_list,pos)]
-
-    def getVelocitys(self, bRefresh=True, units = innfos_velocity_units):
-        vel = A([self.getVelocity(i, bRefresh=bRefresh) for i in self.actuator_id_list])
-        return (vel)/units
-
-    def setVelocitys(self, vel, units = innfos_velocity_units):
-        vel = A(vel)[:self.dof]*units
-        return [self.setVelocity(i,v) for i,v in zip(self.actuator_id_list, vel)]
-
-    def getCurrent(self, bRefresh=True):
-        return A([self.getCurrent(i,bRefresh=bRefresh) for i in self.actuator_id_list])
-
-    def setCurrent(self, current):
-        current = A(current)[:self.dof]
-        return [self.setCurrent(i,c) for i,c in zip(self.actuator_id_list, current)]
 
     def report(self, pos_unit = innfos_position_units, vel_unit = innfos_velocity_units):
         def quickstring(func, unit=1.0):
@@ -308,32 +266,24 @@ class ArmInterface(Clover_MINTASCA):
             return np.array(x)
 
         if max_pos is not None:
-            self.setMaximumPositions(coerce_to_array(max_pos)*Radians)
+            self.setMaximumPositions(coerce_to_array(max_pos)*Degrees)
         if min_pos is not None:
-            self.setMinimumPositions(coerce_to_array(min_pos)*Radians)
+            self.setMinimumPositions(coerce_to_array(min_pos)*Degrees)
         if max_acc is not None:
-            self.setProfilePositionAccelerations(coerce_to_array(max_acc*Radians/minute**2))
+            self.setProfilePositionAccelerations(coerce_to_array(max_acc*Degrees/minute**2))
         if max_dec is not None:
-            self.setProfilePositionDecelerations(coerce_to_array( -abs(max_dec)*Radians/minute**2))
+            self.setProfilePositionDecelerations(coerce_to_array( -abs(max_dec)*Degrees/minute**2))
         if max_vel is not None:
-            self.setProfilePositionMaxVelocitys(coerce_to_array(max_vel*Radians/minute))
+            self.setProfilePositionMaxVelocitys(coerce_to_array(max_vel*Degrees/minute))
 
 
     def setVelocityMode(self):
         """
-        set robot arm into safe velocity control mode
+        set robot arm into safe position control mode
         :param: None
         :return: None
         """
         self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Profile_Vel)
-
-    def setCurrentMode(self):
-        """
-        set robot arm into safe current control mode
-        :param: None
-        :return: None
-        """
-        self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Cur)
 
     def getArmPosition(self):
         """
@@ -350,15 +300,7 @@ class ArmInterface(Clover_MINTASCA):
         :param: None
         :return: joint velocity
         """
-        return self.getVelocitys(units=Radians/second)
-
-    def getArmTorque(self):
-        """
-        get robot arm joint position
-        :param: None
-        :return: joint position
-        """
-        return self.getCurrent(bRefresh=True) * 4.6
+        return self.getVelocitys(bRefresh=True) / (Radians/second)
 
     def setArmPosition(self, positions):
         """
@@ -366,26 +308,16 @@ class ArmInterface(Clover_MINTASCA):
         :param positions: list/numpy array of 6 floats
         :return: None
         """
-        self.setPositions(np.array(positions), units=Radians)
+        self.setPositions(np.array(positions),units=Radians)
 
     def setArmVelocity(self, velocity):
-        """
-        set robot arm joint velocity
-        :param positions: list/numpy array of 6 floats
-        :return: None
-        """
-        # velocity = np.array(velocity) / minute
-        self.setVelocitys(np.array(velocity), units=Radians/second)
-
-    def setArmTorque(self, Torque):
         """
         set robot arm joint position
         :param positions: list/numpy array of 6 floats
         :return: None
         """
-        # velocity = np.array(velocity) / minute
-        current = np.array(Torque)/4.6
-        self.setCurrent(current)
+        velocity = np.array(velocity) * Radians / second
+        self.setVelocitys(velocity)
 
     def joint_trajectory_tracking(self, trajectory_generator):
         """

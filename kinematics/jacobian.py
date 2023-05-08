@@ -1,6 +1,8 @@
 import numpy as np
 import pinocchio as pin
 
+
+
 file_path = '/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf'
 ee_link_name = '6_Link'
 
@@ -48,7 +50,13 @@ def get_jacobian_deriv(q, v):
 
     J = pin.computeJointJacobiansTimeVariation(model, data, q, v)
 
-    return J
+    joint_id = model.getJointId('axis_joint_1')
+    frame = model.getFrameId('6_Link')
+
+    dJ = pin.getJointJacobianTimeVariation(model, data, joint_id, pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)
+    # dJ = pin.getFrameJacobianTimeVariation(model, data, frame, pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)
+
+    return dJ, data.J
 
 def get_jacobian(q):
     """
@@ -63,10 +71,13 @@ def get_jacobian(q):
 
     # Create a data object
     data = model.createData()
-    joint_id = model.getJointId('axis_joint_6')
-    frame = model.getJointId('dummy_joint')
+    joint_id = model.getFrameId("6_Link")
 
-    J = pin.computeJointJacobian(model, data, joint_id, )
+
+    J = pin.computeJointJacobian(model, data, q, model.getJointId('axis_joint_6'))
+    # J = pin.computeJointJacobians(model, data, q)
+
+    # J = pin.getJointJacobian(model, data, joint_id, pin.ReferenceFrame.LOCAL)
 
     return J
 
@@ -74,13 +85,13 @@ def get_jacobian(q):
 if __name__ == '__main__':
     import kinpy as kp
     q = np.array([0, 0, 0, 0, 0, 0])
-    joint_vel = np.array([0, 0.1383, -0.1383, 0, -0.3181, 0])
+    joint_vel = np.array([0, 1, 0.4, 0.4, 0.2, 0])
 
     J = get_jacobian_from_model(q)
     J_also = get_jacobian(q)
 
 
-    dJ = get_jacobian_deriv(q, joint_vel)
+    # dJ, dt = get_jacobian_deriv(q, joint_vel)
 
 
     ################# np.array pretty print #################################
@@ -101,5 +112,6 @@ if __name__ == '__main__':
 
     print(J)
     print(J_also)
-    print(dJ)
+    # print(dJ)
+    # print(dt)
 

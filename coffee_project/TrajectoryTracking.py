@@ -58,3 +58,5 @@ while 1:
         u = dy.inertia(q) @ (ddq + Kp*(q - theta) + Kd*(dq - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
 
         arm.setArmTorque(u)
+
+    arm.setArmTorque(np.zeros(6))
