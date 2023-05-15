@@ -7,10 +7,12 @@ import clover_innfos_python
 from clover_innfos_python import Actuator
 import matplotlib.pyplot as plt
 from coffee_project.polynomial_trajectory import PolynomialGenerator
+from coffee_project.polynomial_trajectory_cartesian import PolynomialGeneratorCart
 from scps import dynamics
-from kinematics import jacobian
+from kinematics import jacobian, fkin
 
 pg = PolynomialGenerator()
+pgc = PolynomialGeneratorCart()
 dy = dynamics
 
 pi = np.pi
@@ -55,7 +57,10 @@ while 1:
 
         theta = arm.getArmPosition()
         theta_dot = arm.getArmVelocity()
-        u = dy.inertia(q) @ (ddq + Kp*(q - theta) + Kd*(dq - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
+        j = jacobian.get_jacobian_from_model(theta)
+        # y = np.linalg.inv(j) @ (ddx + Kd * (dx - j@theta_dot) + Kp * (x - fkin.fk_pose(theta)) - jacobian.get_dJ(theta, theta_dot) @ theta_dot)
+        y = np.linalg.inv(j) @ (ddx + Kd * (dx - j @ theta_dot) + Kp * (x - fkin.fk_pose(theta)) - jacobian.get_eng_dJ(theta, theta_dot) @ theta_dot)
+        u = dy.inertia(q) @ y + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
 
         arm.setArmTorque(u)
 

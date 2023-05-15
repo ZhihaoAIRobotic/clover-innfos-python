@@ -131,6 +131,7 @@ class PolynomialGeneratorCart():
             xf = x_final[0]
             dxf = x_final[1]
             x_desired = [xf, dxf]
+
         elif len(x_final) == 3:
             xf = x_final[0]
             dxf = x_final[1]
@@ -141,7 +142,8 @@ class PolynomialGeneratorCart():
         dxlist = np.zeros((len(dx), n))
         ddxlist = np.zeros((len(ddx), n))
 
-        for i in range(len(x)-1):
+
+        for i in range(len(x)):
             x_in = [x[i], dx[i], ddx[i]]
 
             if len(x_desired) == 1:
@@ -158,6 +160,29 @@ class PolynomialGeneratorCart():
         xlist = xlist.T
         dxlist = dxlist.T
         ddxlist = ddxlist.T
+
+        omegalist = np.zeros((len(dxlist), 6))
+        for i in range(len(dxlist)):
+            sigma, theta, si = xlist[i][3:]
+            T = np.array([[0, -np.sin(sigma), np.cos(sigma)*np.sin(theta)],
+                          [0, np.cos(sigma), np.sin(sigma)*np.sin(theta)],
+                          [1, 0, np.cos(theta)]])
+
+            omegalist[i][3:] = np.matmul(T, dxlist[i][3:])
+            omegalist[i][:3] = dxlist[i][:3]
+
+        omegadotlist = np.zeros((len(dxlist), 6))
+
+        for i in range(len(ddxlist)):
+            omegadotlist[i][:3] = ddxlist[i][:3]
+            sigma, theta, si = xlist[i][3:]
+            sigmadot, thetadot, sidot = dxlist[i][3:]
+            sigmaddot, thetaddot, siddot = ddxlist[i][3:]
+
+            omegadotlist[i][3] = -sigmadot*thetadot*np.cos(sigma) - np.sin(sigma)*thetaddot + sigmadot*np.sin(sigma)*np.sin(theta)*sidot + thetadot*np.cos(theta)*np.cos(sigma)*sidot + np.cos(sigma)*np.sin(theta)*siddot
+            omegadotlist[i][4] = -sigmadot*np.sin(sigma)*thetadot + np.cos(sigma)*thetaddot + sigmadot*np.cos(sigma)*np.sin(theta)*sidot + thetadot*np.cos(theta)*np.sin(sigma)*sidot + np.sin(sigma)*np.sin(theta)*siddot
+            omegadotlist[i][5] = sigmaddot - thetadot*np.sin(theta)*sidot + np.cos(theta)*siddot
+
 
         return xlist, dxlist, ddxlist
 
@@ -305,39 +330,27 @@ if __name__ == '__main__':
     pg = PolynomialGenerator()
     pgc = PolynomialGeneratorCart()
 
-    x0 = [0, 0, 0, 0, 0, 0]
+    x0 = [0.0756856730, -0.0000226960000, 0.533979, 0, 1.57079633, 0]
     dx0 = [0, 0, 0, 0, 0, 0]
     ddx0 = [0, 0, 0, 0, 0, 0]
     x_start = np.array([x0, dx0, ddx0])
 
-    via_points = np.array([[0.0757261258, -0.12336681, 0.482877920, 0.2, 0, 1.1],
-                           [0.07568567, -0.1744927, 0.359509, 0.5, 0, 0.2],
-                           [0.07572613, -0.166367, 0.49851318, 0.38947682, -0.35442642, 1.06596763],
-                           [7.5685673e-02, -2.2696000e-05, 5.3397900e-01, 0, 0, 0]])
+    via_points = np.array([[0.0757261258, -0.12336681, 0.482877920, 1.57079633, 1.37079633, 2.67079633],
+                           [0.07568567, -0.1744927, 0.359509, 1.57079633, 1.07079633, 1.77079633],
+                           [0.07572613, -0.166367, 0.49851318, 0.79827042, 1.05037231, 1.93485616]])
 
-    t_list = np.array([10.0, 15.0, 20.0, 21.0])
-    n_list = np.array([100, 50, 50, 10])
+    t_list = np.array([10.0, 20.0, 30.0])
+    n_list = np.array([100, 100, 50])
+
+    target = [0.07572613, -0.166367, 0.49851318, 0.79827042, 1.05037231, 1.93485616]
+    x_final = [target]
 
     x, dx, ddx = pgc.generate_trajectory(x_start, via_points, 0, t_list, n_list)
 
-    q0 = [0, 0, 0, 0, 0, 0]
-    dq0 = [0, 0, 0, 0, 0, 0]
-    ddq0 = [0, 0, 0, 0, 0, 0]
-    q_start = np.array([q0, dq0, ddq0])
-    via_points = np.array([[0, np.pi / 4, -np.pi / 4, 0, 1.1, 0.2],
-                           [0, np.pi / 2, -np.pi / 2, 0, 0.2, 0.5],
-                           [0, 0.3, 0.2, 0.1, 1.1, 0.2],
-                           [0, 0, 0, 0, 0, 0]])
-    t_list = np.array([10.0, 15.0, 20.0, 21.0])
-    n_list = np.array([100, 50, 50, 10])
+    # x, dx, ddx = pgc.generate_p2p_trajectory(x_start, x_final, 0, 10, 100)
+    pgc.plot_xi(x, dx, ddx, 3)
 
-    q, dq, ddq = pg.generate_trajectory(q_start, via_points, 0, t_list, n_list)
-
-    i = 54
-    print(ddq[i])
-
-    q_ddq = np.linalg.inv(j.get_jacobian_from_model(q[i]))@(ddx[i] - j.get_jacobian_deriv(q[i], dq[i])@dq[i])
-
-    print(q_ddq)
-
+    for i in range(len(x)):
+        now = x[i]
+        print(i, now)
 

@@ -1,5 +1,4 @@
 import numpy as np
-import pinocchio as pin
 
 
 
@@ -26,75 +25,77 @@ def get_jacobian_from_model(joint_values):
     J = chain.jacobian(joint_values)
     J = np.asarray(J)
 
-    # ret = chain.forward_kinematics(joint_values, end_only=False)
-
-    # viz = kp.Visualizer()
-    # viz.add_robot(ret, chain.visuals_map(), mesh_file_path="/home/ubuntu/Github/Manipulation/kinpy/examples/kuka_iiwa/", axes=True)
-    # viz.spin()
-
     return J
 
-def get_jacobian_deriv(q, v):
+def get_dJ(q, dq):
     """
         Get the dJ/dt of the robot from the 3D model
         :param file_path:
         :param joint_values:
         :return:
     """
+    import fkin
 
-    # Create a model
-    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
+    T = fk.fkall(q)
 
-    # Create a data object
-    data = model.createData()
+    Q = np.zeros([len(T), 3, 3])
+    z = np.zeros([len(T), 3, 1])
+    a = np.zeros([len(T), 3, 1])
 
-    J = pin.computeJointJacobiansTimeVariation(model, data, q, v)
+    for i in range(len(T)):
+        Q[i] = T[i][:3, :3]
+        z[i] = T[i][:3, 2].reshape(3, 1)
+        a[i] = T[i][:3, 3].reshape(3, 1)
 
-    joint_id = model.getJointId('axis_joint_1')
-    frame = model.getFrameId('6_Link')
+    # Calculate the omega vectors
+    w = np.zeros([len(dq), 3, 1])
 
-    dJ = pin.getJointJacobianTimeVariation(model, data, joint_id, pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)
-    # dJ = pin.getFrameJacobianTimeVariation(model, data, frame, pin.ReferenceFrame.LOCAL_WORLD_ALIGNED)
+    i = 0
+    w[0] = dq[0] * z[0]
+    for i in range(1, len(dq)):
+        # w[i] = dq[i]*z[i]
+        w[i] = dq[i]*z[i] + np.matmul(Q[i].T, w[i - 1])
+        i = i + 1
 
-    return dJ, data.J
+    # Calculate dz/dt
+    z_dot = np.zeros([len(dq), 3, 1])
+    z_dot[0] = 0
+    for j in range(1, len(dq)):
+        z_dot[j] = np.cross(w[j].reshape(3), z[j].reshape(3)).reshape(3, 1)
+        j = j + 1
 
-def get_jacobian(q):
+    # Calculate dr/dt
+    r_dot = np.zeros([len(dq), 3, 1])
+    for p in range(len(dq)):
+        r_dot[p] = np.cross(w[p].reshape(3), a[p].reshape(3)).reshape(3, 1)
+
+    # Calculate du/dt
+    u_dot = np.zeros([len(dq), 3, 1])
+    u_dot[0] = np.cross(z[0].reshape(3), r_dot[0].reshape(3)).reshape(3, 1)
+    for k in range(1, len(dq)):
+        r = a[-1] - a[k]
+        u_dot[k] = np.cross(z_dot[k].reshape(3), r.reshape(3)).reshape(3, 1) + np.cross(z[k].reshape(3), r_dot[k - 1].reshape(3)).reshape(3, 1)
+
+    j_dot = np.zeros([6, len(dq)])
+    for l in range(len(dq)):
+        j_dot[:, l] = np.vstack((z_dot[l], u_dot[l])).reshape(6)
+
+    return j_dot
+
+def get_eng_dJ(q):
     """
-            Get the dJ/dt of the robot from the 3D model
-            :param file_path:
-            :param joint_values:
-            :return:
-        """
+        Get the dJ/dt with and engineering method for lower computational cost
+        :param file_path:
+        :param joint_values:
+        :return:
+    """
+    delta_q = q*0.001
+    dJ = (get_jacobian_from_model(q+delta_q) - get_jacobian_from_model(q-delta_q))/(2*delta_q)
 
-    # Create a model
-    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
-
-    # Create a data object
-    data = model.createData()
-    joint_id = model.getFrameId("6_Link")
-
-
-    J = pin.computeJointJacobian(model, data, q, model.getJointId('axis_joint_6'))
-    # J = pin.computeJointJacobians(model, data, q)
-
-    # J = pin.getJointJacobian(model, data, joint_id, pin.ReferenceFrame.LOCAL)
-
-    return J
-
+    return dJ
 
 if __name__ == '__main__':
-    import kinpy as kp
-    q = np.array([0, 0, 0, 0, 0, 0])
-    joint_vel = np.array([0, 1, 0.4, 0.4, 0.2, 0])
 
-    J = get_jacobian_from_model(q)
-    J_also = get_jacobian(q)
-
-
-    # dJ, dt = get_jacobian_deriv(q, joint_vel)
-
-
-    ################# np.array pretty print #################################
     def array_clean_print(sep=' ', vert='|', pad=10, precision=4):
         def prettyprint(a):
             s = "\n"
@@ -106,12 +107,19 @@ if __name__ == '__main__':
 
         return prettyprint
 
-
     np.set_string_function(array_clean_print(), repr=False)
     np.set_string_function(array_clean_print(), repr=True)
 
-    print(J)
-    print(J_also)
-    # print(dJ)
-    # print(dt)
+    import kinpy as kp
+    q = np.array([0.4, 0.2, 0.5, 0.7, 0.2, 0.1])
+    joint_vel = np.array([1, 1, 0.4, 0.4, 0.2, 1.1])
+
+    J = get_jacobian_from_model(q)
+
+    dJ = get_dJ(q, joint_vel)
+    #
+    print(dJ)
+
+    dJ = get_eng_dJ(q)
+    print(dJ)
 

@@ -141,7 +141,7 @@ class PolynomialGenerator():
         dqlist = np.zeros((len(dq), n))
         ddqlist = np.zeros((len(ddq), n))
 
-        for i in range(len(q)-1):
+        for i in range(len(q)):
             q_in = [q[i], dq[i], ddq[i]]
 
             if len(q_desired) == 1:
