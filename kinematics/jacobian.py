@@ -1,12 +1,14 @@
 import numpy as np
 
+<<<<<<< HEAD
+=======
 
 
 file_path = '/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf'
 ee_link_name = '6_Link'
+>>>>>>> master
 
-
-def get_jacobian_from_model(joint_values):
+def get_jacobian_from_model(file_path, ee_link_name, joint_values):
     """
     Get the Jacobian matrix J of the robot from the 3D model, \dot x= J \dot q
     :param file_path:
@@ -27,7 +29,19 @@ def get_jacobian_from_model(joint_values):
 
     return J
 
+<<<<<<< HEAD
 def get_dJ(q, dq):
+=======
+<<<<<<< HEAD
+
+if __name__ == '__main__':
+    import kinpy as kp
+    urdf_path = '/home/ubuntu/Rofunc/rofunc/simulator/assets/urdf/gluon/gluon.urdf'
+    joint_values = [0, np.pi / 2.0, -np.pi / 2.0, np.pi/2, np.pi/2, 0]
+    J = get_jacobian_from_model(urdf_path, ee_link_name='6_Link', joint_values=joint_values)
+=======
+def get_jacobian_deriv(q, v):
+>>>>>>> master
     """
         Get the dJ/dt of the robot from the 3D model
         :param file_path:
@@ -96,6 +110,14 @@ def get_eng_dJ(q):
 
 if __name__ == '__main__':
 
+<<<<<<< HEAD
+=======
+    # dJ, dt = get_jacobian_deriv(q, joint_vel)
+>>>>>>> master
+
+
+    ################# np.array pretty print #################################
+>>>>>>> master
     def array_clean_print(sep=' ', vert='|', pad=10, precision=4):
         def prettyprint(a):
             s = "\n"
@@ -110,6 +132,7 @@ if __name__ == '__main__':
     np.set_string_function(array_clean_print(), repr=False)
     np.set_string_function(array_clean_print(), repr=True)
 
+<<<<<<< HEAD
     import kinpy as kp
     q = np.array([0.4, 0.2, 0.5, 0.7, 0.2, 0.1])
     joint_vel = np.array([1, 1, 0.4, 0.4, 0.2, 1.1])
@@ -122,4 +145,13 @@ if __name__ == '__main__':
 
     dJ = get_eng_dJ(q)
     print(dJ)
+=======
+    print(J)
+<<<<<<< HEAD
+=======
+    print(J_also)
+    # print(dJ)
+    # print(dt)
+>>>>>>> master
+>>>>>>> master
 

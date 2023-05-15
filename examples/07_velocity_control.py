@@ -23,6 +23,7 @@ arm.home()  # Will set position to profile mode
 arm.safePositionMode(max_vel=30 * 60, min_pos=-360, max_pos=+360)
 arm.setVelocityMode()
 
+
 input("Ready")
 
 arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
@@ -32,14 +33,15 @@ init_time = time.time()
 
 now_time = 0
 
-while now_time < 8:
+while now_time < 3:
     arm.setVelocityMode()
-    arm.setArmVelocity([-0.3, -0.3, 0, -0.3, -0.3, -0.3])
+    arm.setArmVelocity([-0.1, -0.1, 0, -0.1, -0.1, -0.1])
 
     print(arm.getArmVelocity())
 
     now_time = time.time()-init_time
 
-arm.setArmPosition([0, 0, 0, 0, 0, 0])
+arm.setArmVelocity([0, 0, 0, 0, 0, 0])
+arm.getArmVelocity([0, 0, 0, 0, 0, 0])
 
-arm.end_operation()
+# arm.end_operation()

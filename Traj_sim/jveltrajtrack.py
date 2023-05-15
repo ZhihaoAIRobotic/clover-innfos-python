@@ -1,7 +1,7 @@
 import sys
 
 import numpy as np
-from scps.ikpykinematics import Kinematics
+# from scps.ikpykinematics import Kinematics
 from scps.controller import PD_controller
 import time
 import pandas as pd
@@ -9,7 +9,7 @@ import pandas as pd
 import clover_innfos_python
 from clover_innfos_python import Actuator
 
-kin = Kinematics()
+# kin = Kinematics()
 # con = PD_controller(0.0001, 0.0001)
 
 
@@ -22,13 +22,14 @@ arm.enableAllActuators()
 
 arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Cur)
 
-xcel_data = pd.read_excel('/home/clover/Github/clover-innfos-python/trajectories/test_traj/test_ilqr3d_100it_dt002.xlsx')
-q_dot = pd.DataFrame(xcel_data, columns=['u1', 'u2', 'u3', 'u4', 'u5', 'u6'])
+xcel_data = pd.read_excel("/home/clover/Github/clover-innfos-python/trajectories/test_traj/test_ilqr3d_002s.xlsx")
+u = pd.DataFrame(xcel_data, columns=['u1', 'u2', 'u3', 'u4', 'u5', 'u6'])
 x = pd.DataFrame(xcel_data, columns=['J_dot_1', 'J_dot_2', 'J_dot_3', 'J_dot_4', 'J_dot_5', 'J_dot_6'])
 
+
 x = x.to_numpy()
-print(x)
-print(x.shape)
+u = u.to_numpy()
+print(u)
 
 input("Move to zero")
 arm.home()  # Will set position to profile mode
@@ -40,21 +41,27 @@ input("Ready")
 
 arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
 
+Kp = 1
 
 i = 0
 
-while i in range(len(x)):
+while i in range(len(u)):
 
     init_time = time.time()
 
-    arm.setArmVelocity(x[i])
+    arm.setArmVelocity(u[i]*3)
+    xt = arm.getArmPosition()
 
-    print(arm.getArmPosition())
+    ut = Kp*(x[i]-xt)*0.01
 
-    dt = time.time() - init_time
+    arm.setArmVelocity(ut)
 
-    if dt < 0.2:
-        time.sleep((0.2-dt))
+    # dt = time.time() - init_time
+    print(arm.getArmVelocity())
 
-    i = i+1
+    # if dt < 0.02:
+    # time.sleep((0.02-dt))
+    time.sleep(0.2)
+    i = i + 1
+
 

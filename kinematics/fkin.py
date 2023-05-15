@@ -61,8 +61,17 @@ def fk_pose(joint_value):
 
 if __name__ == '__main__':
     import numpy as np
+<<<<<<< HEAD:kinematics/fkin.py
     joint_value = np.array([1.0, 1.40, -1.10, 1.30, 0.2, 0.8])
     export_pose = fk(joint_value)
+=======
+
+    urdf_path = "/home/ubuntu/Rofunc/rofunc/simulator/assets/urdf/gluon/gluon.urdf"
+    joint_name = ["axis_joint_1", "axis_joint_2", "axis_joint_3", "axis_joint_4", "axis_joint_5", "axis_joint_6"]
+    link_name = ["1_Link", "2_Link", "3_Link", "4_Link", "5_Link", "6_Link"]
+    joint_value = np.array([0, np.pi/2, -np.pi/2, 0, 0, 0])
+    robot, export_pose, cfg = fk("/home/ubuntu/Rofunc/rofunc/simulator/assets/urdf/gluon/gluon.urdf", joint_name, joint_value, export_link='6_Link')
+>>>>>>> master:kinematics/fk.py
 
     print(export_pose)
 

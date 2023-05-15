@@ -1,5 +1,9 @@
+#! /usr/bin/env python3
+
 import pinocchio as pin
 import numpy as np
+
+file_path = '/home/clover/Github/clover-innfos-python/Urdf/gluon2.urdf'
 
 def gravity(q):
     """
@@ -13,7 +17,7 @@ def gravity(q):
     """
 
     # Create a model
-    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
+    model = pin.buildModelFromUrdf(file_path)
 
     # Create a data object
     data = model.createData()
@@ -35,7 +39,7 @@ def inertia(q):
     """
 
     # Create a model
-    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
+    model = pin.buildModelFromUrdf(file_path)
 
     # Create a data object
     data = model.createData()
@@ -48,7 +52,7 @@ def inertia(q):
 def centrifugalterms(q, qd):
 
     # Create a model
-    model = pin.buildModelFromUrdf("/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf")
+    model = pin.buildModelFromUrdf(file_path)
 
     # Create a data object
     data = model.createData()

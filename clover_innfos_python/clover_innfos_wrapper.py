@@ -199,10 +199,10 @@ class Clover_MINTASCA(ActuatorControllerPython):
         vel = A(vel)[:self.dof]*units
         return [self.setVelocity(i,v) for i,v in zip(self.actuator_id_list, vel)]
 
-    def getCurrent(self, bRefresh=True):
+    def getCurrents(self, bRefresh=True):
         return A([self.getCurrent(i,bRefresh=bRefresh) for i in self.actuator_id_list])
 
-    def setCurrent(self, current):
+    def setCurrents(self, current):
         current = A(current)[:self.dof]
         return [self.setCurrent(i,c) for i,c in zip(self.actuator_id_list, current)]
 
@@ -321,19 +321,11 @@ class ArmInterface(Clover_MINTASCA):
 
     def setVelocityMode(self):
         """
-        set robot arm into safe velocity control mode
+        set robot arm into safe position control mode
         :param: None
         :return: None
         """
         self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Profile_Vel)
-
-    def setCurrentMode(self):
-        """
-        set robot arm into safe current control mode
-        :param: None
-        :return: None
-        """
-        self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Cur)
 
     def getArmPosition(self):
         """
@@ -358,7 +350,7 @@ class ArmInterface(Clover_MINTASCA):
         :param: None
         :return: joint position
         """
-        return self.getCurrent(bRefresh=True) * 4.6
+        return self.getCurrent() * 4.6
 
     def setArmPosition(self, positions):
         """
@@ -385,7 +377,7 @@ class ArmInterface(Clover_MINTASCA):
         """
         # velocity = np.array(velocity) / minute
         current = np.array(Torque)/4.6
-        self.setCurrent(current)
+        self.setCurrents(current)
 
     def joint_trajectory_tracking(self, trajectory_generator):
         """

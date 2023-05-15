@@ -9,7 +9,11 @@ import matplotlib.pyplot as plt
 from coffee_project.polynomial_trajectory import PolynomialGenerator
 from coffee_project.polynomial_trajectory_cartesian import PolynomialGeneratorCart
 from scps import dynamics
+<<<<<<< HEAD
 from kinematics import jacobian, fkin
+=======
+
+>>>>>>> master
 
 pg = PolynomialGenerator()
 pgc = PolynomialGeneratorCart()
@@ -31,7 +35,7 @@ input("Move to zero")
 arm.home()  # Will set position to profile mode
 
 arm.safePositionMode(max_vel=30 * 60, min_pos=-360, max_pos=+360)
-arm.setCurrentMode()
+arm.setVelocityMode()
 
 input("Ready")
 
@@ -54,13 +58,25 @@ q, dq, ddq = pg.generate_trajectory(q_start, via_points, 0, t_list, n_list)
 
 while 1:
     for i in range(len(q)):
-
+        int = time.time()
         theta = arm.getArmPosition()
         theta_dot = arm.getArmVelocity()
+<<<<<<< HEAD
         j = jacobian.get_jacobian_from_model(theta)
         # y = np.linalg.inv(j) @ (ddx + Kd * (dx - j@theta_dot) + Kp * (x - fkin.fk_pose(theta)) - jacobian.get_dJ(theta, theta_dot) @ theta_dot)
         y = np.linalg.inv(j) @ (ddx + Kd * (dx - j @ theta_dot) + Kp * (x - fkin.fk_pose(theta)) - jacobian.get_eng_dJ(theta, theta_dot) @ theta_dot)
         u = dy.inertia(q) @ y + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
+=======
+        u = dy.inertia(q[i]) @ (ddq[i] + Kp*(q[i] - theta) + Kd*(dq[i] - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
+        u = u*0.01
+        # arm.setArmTorque(u)
+        arm.setArmPosition(q[i]*0.5)
+        # print(arm.getArmTorque())
+        now = time.time() - int
+
+        time.sleep(0.1 - now)
+        u = dy.inertia(q) @ (ddq + Kp*(q - theta) + Kd*(dq - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
+>>>>>>> master
 
         arm.setArmTorque(u)
 

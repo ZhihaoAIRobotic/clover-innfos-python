@@ -1,6 +1,5 @@
 import numpy as np
 from math import comb, factorial
-from kinematics import fk, jacobian
 
 class PolynomialGenerator():
     """
@@ -202,38 +201,6 @@ class PolynomialGenerator():
                 ddqall_list[length: (length + len(q_temp))] = ddq_temp
 
         return qall_list, dqall_list, ddqall_list
-
-    def q_to_pose(self, urdf_path, joint_names, ee_link, q, dq, ddq):
-        """
-        Converts joint values to pose values
-
-        Args:
-            q (np.array): Joint values
-            dq (np.array): Joint velocities
-            ddq (np.array): Joint accelerations
-
-        Returns:
-            A list of pose values
-        """
-
-
-        pose = []
-
-        for i in range(len(q)):
-            pose.append(fk(urdf_path, joint_names, q[i], export_link=ee_link))
-
-        pose_vel = []
-
-        for i in range(len(dq)):
-            pose_vel.append(jacobian.get_jacobian_from_model(urdf_path, ee_link, q[i]).dot(dq[i]))
-
-        pose_acc = []
-
-        for i in range(len(ddq)):
-            pose_acc.append(jacobian.get_jacobian_from_model(urdf_path, ee_link, q[i]).dot(ddq[i]))
-
-        return pose
-
     def plot_all(self, q, dq, ddq):
         """
         Plots the joint values, velocities and accelerations with respect to time
@@ -345,8 +312,6 @@ if __name__ == '__main__':
     n_list = np.array([100, 50, 50, 10])
 
     q, dq, ddq = pg.generate_trajectory(q_start, via_points, 0, t_list, n_list)
-
-    print(q)
 
     pg.plot_all(q, dq, ddq)
 

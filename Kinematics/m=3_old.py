@@ -386,7 +386,7 @@ if __name__ == "__main__":
 
     robot_chain = [DH(*DH_parameters[i]) for i in range(1, 7)]
 
-    joint_value = [0, 0, 0, 0, 0, 0]
+    joint_value = [1, 1, 0, -1.1, 0, 0]
 
     forward_kinematics = fk(robot_chain, joint_value)
     print("Forward kinematics", forward_kinematics)
