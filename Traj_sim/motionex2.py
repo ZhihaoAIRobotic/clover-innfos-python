@@ -1,6 +1,6 @@
 import numpy as np
 import mujoco_viewer
-from mujoco_py import MjSim, load_model_from_path
+# from mujoco_py import MjSim, load_model_from_path
 import mujoco
 import matplotlib.pyplot as plt
 import os
@@ -12,14 +12,14 @@ import time
 
 
 ASSETS = {}
-root_path = '/home/ubuntu/Github/clover-innfos-python/environment models/meshes'
+root_path = '/home/hengyi/GitHub/clover-innfos-python/Urdf/meshes'
 files = os.listdir(root_path)
 for file in files:
     f = open(os.path.join(root_path, file), 'rb')
     num = file.split('_')[0]
     ASSETS['{}_Link.stl'.format(num)] = f.read()
 
-model = mujoco.MjModel.from_xml_path("/home/ubuntu/Github/clover-innfos-python/environment models/gluon_robot.xml", ASSETS)
+model = mujoco.MjModel.from_xml_path("/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml", ASSETS)
 data = mujoco.MjData(model)
 
 viewer = mujoco_viewer.MujocoViewer(model, data)

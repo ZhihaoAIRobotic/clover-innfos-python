@@ -1,14 +1,14 @@
 import numpy as np
-
-<<<<<<< HEAD
-=======
+from urdfpy.urdf import URDF
 
 
-file_path = '/home/ubuntu/Github/clover-innfos-python/Urdf/gluon2.urdf'
-ee_link_name = '6_Link'
->>>>>>> master
+path = "/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon.urdf"
+joint_name = ["axis_joint_1", "axis_joint_2", "axis_joint_3", "axis_joint_4", "axis_joint_5", "axis_joint_6"]
+Link_name = ["1_Link", "2_Link", "3_Link", "4_Link", "5_Link", "6_Link"]
+ee_link_name = "6_Link"
 
-def get_jacobian_from_model(file_path, ee_link_name, joint_values):
+
+def get_J(joint_values):
     """
     Get the Jacobian matrix J of the robot from the 3D model, \dot x= J \dot q
     :param file_path:
@@ -17,6 +17,7 @@ def get_jacobian_from_model(file_path, ee_link_name, joint_values):
     """
     import kinpy as kp
     from lxml import etree
+    file_path = path
     if file_path.endswith('.urdf'):
         data = open(file_path)
         xslt_content = data.read().encode()
@@ -29,26 +30,16 @@ def get_jacobian_from_model(file_path, ee_link_name, joint_values):
 
     return J
 
-<<<<<<< HEAD
-def get_dJ(q, dq):
-=======
-<<<<<<< HEAD
 
-if __name__ == '__main__':
-    import kinpy as kp
-    urdf_path = '/home/ubuntu/Rofunc/rofunc/simulator/assets/urdf/gluon/gluon.urdf'
-    joint_values = [0, np.pi / 2.0, -np.pi / 2.0, np.pi/2, np.pi/2, 0]
-    J = get_jacobian_from_model(urdf_path, ee_link_name='6_Link', joint_values=joint_values)
-=======
-def get_jacobian_deriv(q, v):
->>>>>>> master
+def get_dJ(q, dq):
+
     """
         Get the dJ/dt of the robot from the 3D model
         :param file_path:
         :param joint_values:
         :return:
     """
-    import fkin
+    import fkin as fk
 
     T = fk.fkall(q)
 
@@ -104,20 +95,12 @@ def get_eng_dJ(q):
         :return:
     """
     delta_q = q*0.001
-    dJ = (get_jacobian_from_model(q+delta_q) - get_jacobian_from_model(q-delta_q))/(2*delta_q)
+    dJ = (get_J(q+delta_q) - get_J(q-delta_q))/(2*delta_q)
 
     return dJ
 
 if __name__ == '__main__':
-
-<<<<<<< HEAD
-=======
-    # dJ, dt = get_jacobian_deriv(q, joint_vel)
->>>>>>> master
-
-
     ################# np.array pretty print #################################
->>>>>>> master
     def array_clean_print(sep=' ', vert='|', pad=10, precision=4):
         def prettyprint(a):
             s = "\n"
@@ -132,26 +115,19 @@ if __name__ == '__main__':
     np.set_string_function(array_clean_print(), repr=False)
     np.set_string_function(array_clean_print(), repr=True)
 
-<<<<<<< HEAD
-    import kinpy as kp
+
     q = np.array([0.4, 0.2, 0.5, 0.7, 0.2, 0.1])
     joint_vel = np.array([1, 1, 0.4, 0.4, 0.2, 1.1])
 
-    J = get_jacobian_from_model(q)
-
+    J = get_J(q)
     dJ = get_dJ(q, joint_vel)
     #
     print(dJ)
 
     dJ = get_eng_dJ(q)
     print(dJ)
-=======
     print(J)
-<<<<<<< HEAD
-=======
-    print(J_also)
+
     # print(dJ)
     # print(dt)
->>>>>>> master
->>>>>>> master
 

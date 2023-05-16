@@ -340,17 +340,28 @@ if __name__ == '__main__':
                            [0.07572613, -0.166367, 0.49851318, 0.79827042, 1.05037231, 1.93485616]])
 
     t_list = np.array([10.0, 20.0, 30.0])
-    n_list = np.array([100, 100, 50])
+    n_list = np.array([50, 50, 50])
 
     target = [0.07572613, -0.166367, 0.49851318, 0.79827042, 1.05037231, 1.93485616]
     x_final = [target]
 
     x, dx, ddx = pgc.generate_trajectory(x_start, via_points, 0, t_list, n_list)
 
+    via_points = np.array([[0, np.pi / 4, -np.pi / 4, 0, 1.1, 0.2],
+                           [0, np.pi / 2, -np.pi / 2, 0, 0.2, 0.5],
+                           [0, 0.3, 0.2, 0.1, 1.1, 0.2]])
+
+    q, dq, ddq = pg.generate_trajectory(x_start, via_points, 0, t_list, n_list)
+
+
     # x, dx, ddx = pgc.generate_p2p_trajectory(x_start, x_final, 0, 10, 100)
-    pgc.plot_xi(x, dx, ddx, 3)
+    # pgc.plot_xi(x, dx, ddx, 3)
 
     for i in range(len(x)):
         now = x[i]
-        print(i, now)
+
+        vel_control = np.linalg.inv(j.get_J(q[i])) @ dx[i]
+
+
+        print(i, vel_control)
 

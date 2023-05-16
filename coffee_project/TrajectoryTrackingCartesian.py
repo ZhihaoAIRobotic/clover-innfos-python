@@ -43,30 +43,24 @@ dq0 = [0, 0, 0, 0, 0, 0]
 ddq0 = [0, 0, 0, 0, 0, 0]
 q_start = np.array([q0, dq0, ddq0])
 
-via_points = np.array([[0, np.pi/4, -np.pi/4, 0, 1.1, 0.2],
-                       [0, np.pi/2, -np.pi/2, 0, 0.2, 0.5],
-                       [0, 0.3, 0.2, 0.1, 1.1, 0.2],
-                       [0, 0, 0, 0, 0, 0]])
-t_list = np.array([10.0, 15.0, 20.0, 21.0])
-n_list = np.array([100, 50, 50, 10])
+via_points = np.array([[0.0757261258, -0.12336681, 0.482877920, 1.57079633, 1.37079633, 2.67079633],
+                           [0.07568567, -0.1744927, 0.359509, 1.57079633, 1.07079633, 1.77079633],
+                           [0.07572613, -0.166367, 0.49851318, 0.79827042, 1.05037231, 1.93485616]])
 
-q, dq, ddq = pg.generate_trajectory(q_start, via_points, 0, t_list, n_list)
+t_list = np.array([10.0, 15.0, 20.0])
+n_list = np.array([100, 50, 50])
+
+x, dx, ddx = pgc.generate_trajectory(q_start, via_points, 0, t_list, n_list)
 
 while 1:
-    for i in range(len(q)):
+    for i in range(len(x)):
         int = time.time()
         theta = arm.getArmPosition()
         theta_dot = arm.getArmVelocity()
-
-        u = dy.inertia(q[i]) @ (ddq[i] + Kp*(q[i] - theta) + Kd*(dq[i] - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
-        u = u*0.01
-        # arm.setArmTorque(u)
-        arm.setArmPosition(q[i]*0.5)
-        # print(arm.getArmTorque())
-        now = time.time() - int
-
-        time.sleep(0.1 - now)
-        u = dy.inertia(q) @ (ddq + Kp*(q - theta) + Kd*(dq - theta_dot)) + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
+        j = jacobian.get_jacobian_from_model(theta)
+        # y = np.linalg.inv(j) @ (ddx + Kd * (dx - j@theta_dot) + Kp * (x - fkin.fk_pose(theta)) - jacobian.get_dJ(theta, theta_dot) @ theta_dot)
+        y = np.linalg.inv(j) @ (ddx + Kd * (dx - j @ theta_dot) + Kp * (x - fkin.fk_pose(theta)) - jacobian.get_eng_dJ(theta, theta_dot) @ theta_dot)
+        u = dy.inertia(theta) @ y + dy.gravity(theta) + dy.centrifugalterms(theta, theta_dot)
 
         arm.setArmTorque(u)
 

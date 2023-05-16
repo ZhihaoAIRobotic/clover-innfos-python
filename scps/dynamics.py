@@ -3,7 +3,7 @@
 import pinocchio as pin
 import numpy as np
 
-file_path = '/home/clover/Github/clover-innfos-python/Urdf/gluon2.urdf'
+file_path = '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon.urdf'
 
 def gravity(q):
     """
