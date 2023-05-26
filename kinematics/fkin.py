@@ -1,5 +1,6 @@
 import numpy as np
 from urdfpy.urdf import URDF
+from scipy.spatial.transform import Rotation as R
 
 urdf_path = "/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon.urdf"
 joint_name = ["axis_joint_1", "axis_joint_2", "axis_joint_3", "axis_joint_4", "axis_joint_5", "axis_joint_6"]
@@ -55,21 +56,21 @@ def fk_pose(joint_value):
 
     T = fk(joint_value)
     rot = R.from_matrix(np.array([T[:3, :3]]))
-    eul = rot.as_euler('xyz')
+    quat = rot.as_quat()
 
-    return np.array([*T[:3, 3], *eul[0]])
+    return np.array([*T[:3, 3], *quat[0]])
 
 
 
 if __name__ == '__main__':
     import numpy as np
-    joint_value = np.array([1.0, 1.40, -1.10, 1.30, 0.2, 0.8])
+    joint_value = np.array([0, 0, -np.pi/2, -np.pi/2, np.pi/2, 0])
     export_pose = fk(joint_value)
 
     joint_name = ["axis_joint_1", "axis_joint_2", "axis_joint_3", "axis_joint_4", "axis_joint_5", "axis_joint_6"]
     link_name = ["1_Link", "2_Link", "3_Link", "4_Link", "5_Link", "6_Link"]
-    joint_value = np.array([0, np.pi/2, -np.pi/2, 0, 0, 0])
-    export_pose = fk(joint_value)
+    # joint_value = np.array([0, np.pi/2, -np.pi/2, 0, 0, 0])
+    # export_pose = fk(joint_value)
 
     print(export_pose)
 
@@ -80,7 +81,7 @@ if __name__ == '__main__':
 
     print(q)
 
-    eul = rot.as_euler('xyz')
-    print(eul)
-
-    print(fk_pose(joint_value))
+    # eul = rot.as_euler('xyz')
+    # print(eul)
+    #
+    # print(fk_pose(joint_value))

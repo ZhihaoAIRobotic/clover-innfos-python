@@ -1,6 +1,6 @@
+import numpy
 import numpy as np
-from urdfpy.urdf import URDF
-
+import pinocchio as pin
 
 path = "/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon.urdf"
 joint_name = ["axis_joint_1", "axis_joint_2", "axis_joint_3", "axis_joint_4", "axis_joint_5", "axis_joint_6"]
@@ -30,6 +30,27 @@ def get_J(joint_values):
 
     return J
 
+def get_Jas(joint_values):
+    """
+        Get the Jacobian matrix J of the robot from the 3D model
+        :param file_path:
+        :param joint_values:
+        :return:
+    """
+    model = pin.buildModelFromUrdf("/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon.urdf")
+    data = model.createData()
+    # print(data)
+    jid = model.getJointId(ee_link_name)
+
+    # jid = ee_link_name
+
+    # Ja = pin.computeJointJacobians(model, data, joint_values)
+    Ja = pin.computeJointJacobian(model, data, joint_values, jid)
+
+
+
+    return Ja
+
 
 def get_dJ(q, dq):
 
@@ -39,7 +60,7 @@ def get_dJ(q, dq):
         :param joint_values:
         :return:
     """
-    import fkin as fk
+    import kinematics.fkin as fk
 
     T = fk.fkall(q)
 
@@ -100,33 +121,16 @@ def get_eng_dJ(q):
     return dJ
 
 if __name__ == '__main__':
-    ################# np.array pretty print #################################
-    def array_clean_print(sep=' ', vert='|', pad=10, precision=4):
-        def prettyprint(a):
-            s = "\n"
-            if len(a.shape) == 1:
-                a = [a]  # Make array appear 2D if it's 1D
-            for row in a:
-                s += vert + sep + sep.join([f"{x: ^ {pad}.{precision}g}" for x in row]) + vert + "\n"
-            return s
-
-        return prettyprint
-
-    np.set_string_function(array_clean_print(), repr=False)
-    np.set_string_function(array_clean_print(), repr=True)
-
-
     q = np.array([0.4, 0.2, 0.5, 0.7, 0.2, 0.1])
     joint_vel = np.array([1, 1, 0.4, 0.4, 0.2, 1.1])
 
     J = get_J(q)
-    dJ = get_dJ(q, joint_vel)
-    #
-    print(dJ)
-
-    dJ = get_eng_dJ(q)
-    print(dJ)
     print(J)
+    #
+    # J = get_Jas(q)
+    # print(J)
+
+
 
     # print(dJ)
     # print(dt)

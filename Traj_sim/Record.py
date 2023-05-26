@@ -43,7 +43,9 @@ while 1:
 
     arm.setArmTorque(u*0.1)
 
+    time.sleep(5)
     print(arm.getArmPosition())
+    print(kin.fk(arm.getArmPosition()))
 
 
 

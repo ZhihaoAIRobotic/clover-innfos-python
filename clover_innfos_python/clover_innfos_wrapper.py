@@ -333,7 +333,13 @@ class ArmInterface(Clover_MINTASCA):
         :param: None
         :return: joint position
         """
+
         ret = self.getPositions(units=Radians)
+        ret[0] = -ret[0]
+        ret[1] = -ret[1]
+        ret[4] = -ret[4]
+        ret[5] = -ret[5]
+
         return ret
 
     def getArmVelocity(self):
@@ -342,7 +348,13 @@ class ArmInterface(Clover_MINTASCA):
         :param: None
         :return: joint velocity
         """
-        return self.getVelocitys(units=Radians/second)
+        vel = self.getVelocitys(units=Radians/second)
+        vel[0] = -vel[0]
+        vel[1] = -vel[1]
+        vel[4] = -vel[4]
+        vel[5] = -vel[5]
+
+        return vel
 
     def getArmTorque(self):
         """
@@ -358,6 +370,11 @@ class ArmInterface(Clover_MINTASCA):
         :param positions: list/numpy array of 6 floats
         :return: None
         """
+        positions[0] = -positions[0]
+        positions[1] = -positions[1]
+        positions[4] = -positions[4]
+        positions[5] = -positions[5]
+
         self.setPositions(np.array(positions), units=Radians)
 
     def setArmVelocity(self, velocity):
@@ -366,7 +383,14 @@ class ArmInterface(Clover_MINTASCA):
         :param positions: list/numpy array of 6 floats
         :return: None
         """
-        # velocity = np.array(velocity) / minute
+        velocity[0] = -velocity[0]
+        velocity[1] = -velocity[1]
+        velocity[4] = -velocity[4]
+        velocity[5] = -velocity[5]
+
+        # velocity = velocity[0]
+        # print(velocity)
+
         self.setVelocitys(np.array(velocity), units=Radians/second)
 
     def setArmTorque(self, Torque):
@@ -375,7 +399,11 @@ class ArmInterface(Clover_MINTASCA):
         :param positions: list/numpy array of 6 floats
         :return: None
         """
-        # velocity = np.array(velocity) / minute
+        Torque[0] = -Torque[0]
+        Torque[1] = -Torque[1]
+        Torque[4] = -Torque[4]
+        Torque[5] = -Torque[5]
+
         current = np.array(Torque)/4.6
         self.setCurrents(current)
 

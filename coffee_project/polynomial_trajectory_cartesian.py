@@ -1,6 +1,6 @@
 import numpy as np
 from math import comb, factorial
-from kinematics import fk, jacobian
+from kinematics import fkin, jacobian
 
 class PolynomialGeneratorCart():
     """
@@ -14,7 +14,7 @@ class PolynomialGeneratorCart():
         """
         Get the time constraint submatrix for a given time t
 
-        Args:
+        Args:pi
             t (float): time constraint
             n (int): number of constraints
 

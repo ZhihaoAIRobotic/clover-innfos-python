@@ -1,0 +1,59 @@
+Joint Trajectory for Coffee Making - Change to Cartesian Trajectory later on
+
+Coffee Arm
+Point 1 - 90 degree
+[-0.0008155, 0.0004599, 1.573, 0.001566, -0.07335, -1.537]
+
+Point 2 - Down Position
+[-0.4893, 0.08859, 2.515, -0.2508, 0.1371, -2.795]
+
+Point 3 - Moving towards the coffee machine
+[-1.057     -0.1384      2.523    -0.6967     -0.03537     -2.957 ]
+
+Point 4 - Under the Coffee Machine
+[-1.162    -0.09485     2.405    -0.7339     0.4551     -3.131 ]
+
+Other arm press button, wait for 20 seconds
+
+Point 5 - Move away from  Coffee Machine
+[-1.135    -0.05781     2.512    -0.5725     0.5564     -3.154]
+
+Point 6 - 90 degree
+[-0.0008155, 0.0004599, 1.573, 0.001566, -0.07335, -1.537]
+
+Wait for Milk jug arm to finish
+
+Point 7 - Move to front of button
+[]
+
+Point 8 - Press button
+[]
+
+Milk jug arm
+Point 1 - 90 degree
+[0, 0, -1.566, -1.619, 1.672, 0]
+
+Point 2 - In position
+[0.07727, 0.1417, -1.775, -0.7093, 2.057, -0.8062]
+
+Point 3 - Press button
+[0.1149, 0.1325, -1.846, -0.8331, 2.18, -0.6235]
+
+Point 4 - Milk frothing position
+[]
+
+Point 5 - Under steamer
+[]
+
+Point 6 - Up the steamer wand
+[]
+
+Pause for 1 minute
+
+Point 7 - Down the steamer wand
+[]
+
+Point 8 - 90 degree
+[2.15e-05, 2.15e-05, -1.566, -1.619, 1.672, 2.15e-05]
+
+Milk Jug Arm, Coffee Art making - sin curve

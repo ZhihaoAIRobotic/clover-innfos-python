@@ -10,7 +10,12 @@ DT = 1e-1
 damp = 1e-12
 
 
-def ik(model, POSE, ORI, JOINT_ID):
+def ik(POSE, ORI):
+
+    model = pinocchio.buildModelFromUrdf("/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon.urdf")
+
+    JOINT_ID = model.getJointId("6_Link")
+    print(JOINT_ID)
     data = model.createData()
 
     oMdes = pinocchio.SE3(ORI, np.array(POSE))
@@ -48,7 +53,7 @@ def ik(model, POSE, ORI, JOINT_ID):
     print('\nfinal error: %s' % err.T)
     return q_ik
 
-
+#
 # if __name__ == '__main__':
 #     model = pinocchio.buildModelFromUrdf(
 #         "/home/ubuntu/Rofunc/rofunc/simulator/assets/urdf/curi/urdf/curi_pinocchio_test.urdf")
