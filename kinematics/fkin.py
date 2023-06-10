@@ -64,7 +64,7 @@ def fk_pose(joint_value):
 
 if __name__ == '__main__':
     import numpy as np
-    joint_value = np.array([0, 0, -np.pi/2, -np.pi/2, np.pi/2, 0])
+    joint_value = np.array([0, 0, -1.570796, -1.570796, 1.570796, 0])
     export_pose = fk(joint_value)
 
     joint_name = ["axis_joint_1", "axis_joint_2", "axis_joint_3", "axis_joint_4", "axis_joint_5", "axis_joint_6"]
@@ -78,8 +78,11 @@ if __name__ == '__main__':
 
     rot = R.from_matrix(np.array([export_pose[:3, :3]]))
     q = rot.as_quat()
-
+    q = q[0]
     print(q)
+
+    pose = [export_pose[0, 3], export_pose[1, 3], export_pose[2, 3], q[0], q[1], q[2], q[3]]
+    print(pose)
 
     # eul = rot.as_euler('xyz')
     # print(eul)

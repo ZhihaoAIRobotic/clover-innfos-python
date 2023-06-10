@@ -57,3 +57,9 @@ Point 8 - 90 degree
 [2.15e-05, 2.15e-05, -1.566, -1.619, 1.672, 2.15e-05]
 
 Milk Jug Arm, Coffee Art making - sin curve
+
+Point 1 - 90 degree
+[0, 0, -1.566, -1.619, 1.672, 0]
+
+Point 2 - tilt
+[-0.000887   -0.03569    -1.563    -0.8339      1.712    1.065e-05]

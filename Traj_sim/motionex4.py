@@ -3,8 +3,8 @@ import mujoco_viewer
 import mujoco
 import os
 from kinematics.jacobian import get_J
-from coffee_project.polynomial_trajectory_cartesian import PolynomialGeneratorCart
-from coffee_project.polynomial_trajectory import PolynomialGenerator
+from coffee_project.trajectory_generation.polynomial_trajectory_cartesian import PolynomialGeneratorCart
+from coffee_project.trajectory_generation.polynomial_trajectory import PolynomialGenerator
 
 pg = PolynomialGenerator()
 pgc = PolynomialGeneratorCart()

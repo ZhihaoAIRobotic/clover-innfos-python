@@ -14,7 +14,7 @@ actuator_ids = [1, 2, 3, 4, 5, 6]
 arm = clover_innfos_python.ArmInterface()
 arm.enableAllActuators()
 
-arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Cur)
+arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Vel)
 
 
 input("Move to zero")
@@ -42,6 +42,4 @@ while now_time < 3:
     now_time = time.time()-init_time
 
 arm.setArmVelocity([0, 0, 0, 0, 0, 0])
-# arm.getArmVelocity([0, 0, 0, 0, 0, 0])
-
-# arm.end_operation()
+arm.getArmVelocity([0, 0, 0, 0, 0, 0])

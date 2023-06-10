@@ -1,6 +1,7 @@
 import numpy as np
 from ikpy import chain
 from ikpy import inverse_kinematics as ik
+from scipy.spatial.transform import Rotation as R
 
 class Kinematics:
 
@@ -42,17 +43,30 @@ class Kinematics:
         Joint_Target = np.array([0, *Joint_Target])
         return self.urdf.forward_kinematics(Joint_Target, full_kinematics=False)
 
+    def fk_to_pose(self, Joint_Target):
+
+        T = self.fk(Joint_Target)
+        rot = R.from_matrix(T[0:3, 0:3])
+        quat = rot.as_quat()
+
+        pose = np.array([*T[:3, 3], *quat[:3]])
+        return pose
+
 if __name__ == '__main__':
 
     kin = Kinematics()
 
-    theta = np.array([1.0, 1.2, 0, 0, 0, 0])
+    theta = np.array([0, 0, -1.570796, -0.785398, 1.570796, 0])
     forward = kin.fk(theta)
     print(forward)
-    print(theta.shape)
+    # print(theta.shape)
 
-    theta_new = kin.ik(forward, initial_position=None, orientation="all")
+    theta = np.array([0, *theta])
+    theta_new = kin.ik(forward, initial_position=theta, orientation="all")
     print(theta_new)
+
+    forward = kin.fk_to_pose(theta)
+    # print(forward)
 
     # forward_new = kin.fk(theta_new[1:7])
     # print(forward_new)

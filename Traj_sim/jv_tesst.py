@@ -23,7 +23,7 @@ actuator_ids = [1, 2, 3, 4, 5, 6]
 arm = clover_innfos_python.ArmInterface()
 arm.enableAllActuators()
 
-arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Cur)
+arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Pos)
 
 
 input("Move to zero")
@@ -33,7 +33,7 @@ arm.safePositionMode(max_vel=30 * 60, min_pos=-360, max_pos=+360)
 arm.setPositionMode()
 
 input("Ready")
-
+# 0, 0, 1.570796, -1.570796, 0, 3.141592
 arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
 
 while 1:
@@ -45,12 +45,9 @@ while 1:
     op = list(map(float, jp.split(',')))
     op = np.asarray(op)
 
-
-    # op[0] = -op[0]
-    # op[1] = -op[1]
-    # op[4] = -op[4]
-    # op[5] = op[5]
     print(op)
-    print(kin.fk(op))
+    # print(kin.fk(op))
 
     arm.setArmPosition(op)
+    time.sleep(10)
+    print(arm.getArmPosition())

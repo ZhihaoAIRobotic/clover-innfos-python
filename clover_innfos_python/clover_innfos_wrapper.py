@@ -200,7 +200,7 @@ class Clover_MINTASCA(ActuatorControllerPython):
         return [self.setVelocity(i,v) for i,v in zip(self.actuator_id_list, vel)]
 
     def getCurrents(self, bRefresh=True):
-        return A([self.getCurrent(i,bRefresh=bRefresh) for i in self.actuator_id_list])
+        return A([self.getCurrent(i, bRefresh=bRefresh) for i in self.actuator_id_list])
 
     def setCurrents(self, current):
         current = A(current)[:self.dof]
@@ -327,6 +327,14 @@ class ArmInterface(Clover_MINTASCA):
         """
         self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Profile_Vel)
 
+    def setCurrentMode(self):
+        """
+        set robot arm into safe position control mode
+        :param: None
+        :return: None
+        """
+        self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Cur)
+
     def getArmPosition(self):
         """
         get robot arm joint position
@@ -362,7 +370,13 @@ class ArmInterface(Clover_MINTASCA):
         :param: None
         :return: joint position
         """
-        return self.getCurrent() * 4.6
+        cur = self.getCurrents() * 4.6
+        cur[0] = -cur[0]
+        cur[1] = -cur[1]
+        cur[4] = -cur[4]
+        cur[5] = -cur[5]
+
+        return cur
 
     def setArmPosition(self, positions):
         """

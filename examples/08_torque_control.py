@@ -1,23 +1,14 @@
 import sys
 
+import numpy as np
 
 from scps.ikpykinematics import Kinematics
 
-
-kin = Kinematics()
-
+from scps.controller import PD_controller
 import time
 
-import numpy as np
 import clover_innfos_python
 from clover_innfos_python import Actuator
-from scps.dynamics import gravity
-
-pi = np.pi
-pi_2 = np.pi/2
-
-# 0.1728     -0.389     -1.932     -2.279      2.598    -0.09785
-
 
 actuator_ids = [1, 2, 3, 4, 5, 6]
 arm = clover_innfos_python.ArmInterface()
@@ -30,25 +21,26 @@ input("Move to zero")
 arm.home()  # Will set position to profile mode
 
 arm.safePositionMode(max_vel=30 * 60, min_pos=-360, max_pos=+360)
-arm.setPositionMode()
+arm.setCurrentMode()
+
 
 input("Ready")
 
 arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
+arm.setArmVelocity(np.array([0, 0, 0, 0, 0, 0]))
+arm.setArmTorque(np.array([0, 0, 0, 0, 0, 0]))
 
-while 1:
+init_time = time.time()
 
-    arm.end_operation()
+now_time = 0
 
-    i = 0
+while now_time < 3:
+    arm.setCurrentMode()
+    arm.setArmTorque([0, 0, 0, 0, -1, -2])
 
-    u = gravity(arm.getArmPosition())
+    print(arm.getArmTorque())
 
-    arm.setArmTorque(u*0.1)
+    now_time = time.time()-init_time
 
-    time.sleep(5)
-    print(arm.getArmPosition())
-    print(kin.fk(arm.getArmPosition()))
-
-
-
+arm.setArmTorque([0, 0, 0, 0, 0, 0])
+# arm.getArmVelocity([0, 0, 0, 0, 0, 0])

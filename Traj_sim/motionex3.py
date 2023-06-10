@@ -1,13 +1,9 @@
 import numpy as np
 import mujoco_viewer
 import mujoco
-import matplotlib.pyplot as plt
 import os
-from scps.dynamics import gravity, inertia, centrifugalterms
-from scps.controller import PD_controller
-import pandas as pd
-import time
-from coffee_project.polynomial_trajectory import PolynomialGenerator
+from scps.dynamics import gravity
+from coffee_project.trajectory_generation.polynomial_trajectory import PolynomialGenerator
 
 pg = PolynomialGenerator()
 

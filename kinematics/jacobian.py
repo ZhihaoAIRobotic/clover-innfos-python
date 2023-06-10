@@ -124,11 +124,11 @@ if __name__ == '__main__':
     q = np.array([0.4, 0.2, 0.5, 0.7, 0.2, 0.1])
     joint_vel = np.array([1, 1, 0.4, 0.4, 0.2, 1.1])
 
+    # J = get_dJ(q, joint_vel)
+    # print(J.shape)
+    #
     J = get_J(q)
     print(J)
-    #
-    # J = get_Jas(q)
-    # print(J)
 
 
 
