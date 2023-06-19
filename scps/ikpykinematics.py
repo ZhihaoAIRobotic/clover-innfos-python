@@ -56,16 +56,22 @@ if __name__ == '__main__':
 
     kin = Kinematics()
 
-    theta = np.array([0, 0, -1.570796, -0.785398, 1.570796, 0])
+    theta = np.array([0, 0, 1.570796, -1.570796, 1.570796, -3.141593])
     forward = kin.fk(theta)
     print(forward)
-    # print(theta.shape)
 
+    theta = [0, 0, 1.570796, -1.570796, 1.570796, -3.141593]
+    # theta = [0, 1, 0, 0.2, 0.3, 0.6]
     theta = np.array([0, *theta])
+    pose = np.array([[0, 1, 0, 0.075731],
+                     [0, 0, -1, -0.176746],
+                     [-1, 0, 0, 0.2],
+                     [0, 0, 0, 1]])
+
     theta_new = kin.ik(forward, initial_position=theta, orientation="all")
     print(theta_new)
 
-    forward = kin.fk_to_pose(theta)
+    # forward = kin.fk_to_pose(theta)
     # print(forward)
 
     # forward_new = kin.fk(theta_new[1:7])

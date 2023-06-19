@@ -16,15 +16,11 @@ from scps.dynamics import gravity
 pi = np.pi
 pi_2 = np.pi/2
 
-# 0.1728     -0.389     -1.932     -2.279      2.598    -0.09785
-
-
 actuator_ids = [1, 2, 3, 4, 5, 6]
 arm = clover_innfos_python.ArmInterface()
 arm.enableAllActuators()
 
 arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Cur)
-
 
 input("Move to zero")
 arm.home()  # Will set position to profile mode

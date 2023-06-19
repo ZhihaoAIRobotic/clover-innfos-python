@@ -180,7 +180,7 @@ class Clover_MINTASCA(ActuatorControllerPython):
         """
         self.activateActuatorModeInBantch(self.jointlist, Actuator.ActuatorMode.Mode_Homing)
         self.setHomingPositions(position)
-        time.sleep(0.1) # Without sleep, there is a race condition and homing may or may not fail
+        time.sleep(1) # Without sleep, there is a race condition and homing may or may not fail
         self.activateActuatorModeInBantch(self.jointlist, then_switch_to_mode)
 
     def getPositions(self,bRefresh=True, units = innfos_position_units):
@@ -318,6 +318,8 @@ class ArmInterface(Clover_MINTASCA):
         if max_vel is not None:
             self.setProfilePositionMaxVelocitys(coerce_to_array(max_vel*Radians/minute))
 
+    def safeVelocityMode(self):
+        pass
 
     def setVelocityMode(self):
         """

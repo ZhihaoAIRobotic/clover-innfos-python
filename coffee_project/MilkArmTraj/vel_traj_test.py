@@ -52,7 +52,7 @@ errorall = []
 Press the button
 """
 
-pb_traj = np.load('complete_mkpressbutton_joint.npy')
+pb_traj = np.load('buttonpressjoint.npy')
 
 pb_q = np.zeros([len(pb_traj), 6])
 pb_dq = np.zeros([len(pb_traj), 6])
@@ -67,7 +67,7 @@ for i in range(len(pb_traj)):
 Return to init pose after button pressing
 """
 
-apb_traj = np.load('complete_mkafterpressbutton_joint.npy')
+apb_traj = np.load('buttonunpressjoint.npy')
 
 apb_q = np.zeros([len(apb_traj), 6])
 apb_dq = np.zeros([len(apb_traj), 6])
@@ -169,7 +169,7 @@ error = pb_q[-1] - arm.getArmPosition()
 Ensure the button is pressed!
 """
 
-while np.linalg.norm(error) > 0.08:
+while np.linalg.norm(error) > 0.1:
     u = Kp * (pb_q[-1] - arm.getArmPosition()) + Ki * int_er * 0.1
 
     u = u * 0.5
@@ -181,12 +181,10 @@ while np.linalg.norm(error) > 0.08:
 
     error_list.append(np.linalg.norm(error))
     errorall.append(error)
-
+#
 arm.setPositionMode()
 arm.setArmPosition(arm.getArmPosition())
-arm.setArmPosition([0.210, -0.32, -1.96, -2.35, 2.7, 0.02685])
-time.sleep(2)
-arm.setArmPosition([0.23, -0.29, -1.9, -2.20, 2.7, 0.02685])
+arm.setArmPosition([0.5351, -0.125, -1.35, 1.569, -1.2, 3.167])
 
 time.sleep(4)
 
@@ -222,7 +220,7 @@ for i in range(len(apb_q)):
 orgin = [0, 0, 0, 0, 0, 0]
 error = apb_q[-1] - arm.getArmPosition()
 
-while np.linalg.norm(error) > 0.02:
+while np.linalg.norm(error) > 0.1:
     u = Kp * (orgin - arm.getArmPosition()) + Ki * int_er * 0.1
 
     u = u * 0.8

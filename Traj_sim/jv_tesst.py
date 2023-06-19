@@ -25,16 +25,17 @@ arm.enableAllActuators()
 
 arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Pos)
 
-
+print(arm.getArmPosition())
 input("Move to zero")
 arm.home()  # Will set position to profile mode
-
-arm.safePositionMode(max_vel=30 * 60, min_pos=-360, max_pos=+360)
+print(arm.getArmPosition())
+arm.safePositionMode(max_vel=1 * 60, min_pos=-360, max_pos=+360)
 arm.setPositionMode()
 
 input("Ready")
-# 0, 0, 1.570796, -1.570796, 0, 3.141592
-arm.setArmPosition(np.array([0, 0, 0, 0, 0, 0]))
+
+print(arm.getArmPosition())
+# arm.setArmPosition(arm.getArmPosition())
 
 while 1:
 
@@ -49,5 +50,5 @@ while 1:
     # print(kin.fk(op))
 
     arm.setArmPosition(op)
-    time.sleep(10)
+    # time.sleep(10)
     print(arm.getArmPosition())

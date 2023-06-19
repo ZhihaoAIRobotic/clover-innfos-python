@@ -31,7 +31,7 @@ arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Vel)
 input("Move to zero")
 arm.home()  # Will set position to profile mode
 
-arm.safePositionMode(max_vel=20 * 60, min_pos=-360, max_pos=+360)
+arm.safePositionMode(max_vel=5 * 60, min_pos=-360, max_pos=+360)
 arm.setVelocityMode()
 
 input("Ready")
@@ -49,7 +49,7 @@ int_er = 0
 Press the button
 """
 
-pb_traj = np.load('complete_mkpressbutton_joint.npy')
+pb_traj = np.load('buttonpressjoint.npy')
 
 pb_q = np.zeros([len(pb_traj), 6])
 pb_dq = np.zeros([len(pb_traj), 6])
@@ -64,7 +64,7 @@ for i in range(len(pb_traj)):
 Return to init pose after button pressing
 """
 
-apb_traj = np.load('complete_mkafterpressbutton_joint.npy')
+apb_traj = np.load('buttonunpressjoint.npy')
 
 apb_q = np.zeros([len(apb_traj), 6])
 apb_dq = np.zeros([len(apb_traj), 6])
@@ -173,27 +173,24 @@ error = pb_q[-1] - arm.getArmPosition()
 Ensure the button is pressed!
 """
 
-while np.linalg.norm(error) > 0.07:
+while np.linalg.norm(error) > 0.1:
     u = Kp * (pb_q[-1] - arm.getArmPosition()) + Ki * int_er * 0.1
 
-    u = u
+    u = u * 0.5
 
     arm.setArmVelocity(u)
 
     error = pb_q[-1] - arm.getArmPosition()
     int_er = int_er + error
 
-    # error_list.append(np.linalg.norm(error))
-    # errorall.append(error)
-
+    error_list.append(np.linalg.norm(error))
+    errorall.append(error)
+#
 arm.setPositionMode()
 arm.setArmPosition(arm.getArmPosition())
-arm.setArmPosition([0.210, -0.32, -1.96, -2.35, 2.7, 0.02685])
-time.sleep(2)
-arm.setArmPosition([0.25, -0.31, -1.9, -2.3, 2.7, 0.02685])
+arm.setArmPosition([0.5351, -0.125, -1.35, 1.569, -1.2, 3.167])
 
-
-time.sleep(4)
+time.sleep(1)
 
 print("Button Pressed!")
 
@@ -224,10 +221,26 @@ for i in range(len(apb_q)):
     print("Time Elapsed: " + str(now - ini_t))
     print(np.linalg.norm(error))
 
+orgin = [0, 0, 0, 0, 0, 0]
+error = apb_q[-1] - arm.getArmPosition()
+
+while np.linalg.norm(error) > 0.1:
+    u = Kp * (orgin - arm.getArmPosition()) + Ki * int_er * 0.1
+
+    u = u * 0.8
+
+    arm.setArmVelocity(u)
+
+    error = orgin - arm.getArmPosition()
+    int_er = int_er + error
+
+    error_list.append(np.linalg.norm(error))
+    errorall.append(error)
+
 arm.setPositionMode()
 arm.setArmPosition(arm.getArmPosition())
 
-time.sleep(60)
+time.sleep(20)
 
 arm.setVelocityMode()
 
@@ -258,7 +271,7 @@ for i in range(len(sw_q)):
 arm.setPositionMode()
 arm.setArmPosition(arm.getArmPosition())
 
-time.sleep(80)
+time.sleep(70)
 
 arm.setVelocityMode()
     
@@ -291,7 +304,7 @@ error = osw_q[-1] - arm.getArmPosition()
 while np.linalg.norm(error) > 0.08:
     u = Kp * (osw_q[-1] - arm.getArmPosition()) + Ki * int_er * 0.1
 
-    u = u * 1.2
+    u = u * 0.6
 
     arm.setArmVelocity(u)
 
@@ -370,7 +383,7 @@ graphlist = np.array(error_list).reshape(1, np.array(error_list).shape[0])
 for i in range(len(graphlist)):
     # print(row)
     plt.plot(graphlist[i])
-    plt.ylabel("normalized error value (meters)")
+    plt.ylabel("normalized error value (rads)")
     plt.xlabel("time_steps (0.01 seconds per step)")
     plt.title("Error")
 plt.show()
@@ -386,23 +399,21 @@ plt.show()
 # plt.show()
 
 errorall = np.array(errorall)
-print(errorall.shape)
 error1 = errorall[:, 0]
 error2 = errorall[:, 1]
 error3 = errorall[:, 2]
 error4 = errorall[:, 3]
 error5 = errorall[:, 4]
 error6 = errorall[:, 5]
-print(error1)
 
 graphlist3 = np.array(error1).reshape(1, np.array(error1).shape[0])
 
 for i in range(len(graphlist3)):
     # print(row)
     plt.plot(graphlist3[i])
-    plt.ylabel("normalized error value (meters)")
+    plt.ylabel("Error value (rads)")
     plt.xlabel("time_steps (0.01 seconds per step)")
-    plt.title("Error")
+    plt.title("Joint 1 Error")
 plt.show()
 
 graphlist4 = np.array(error2).reshape(1, np.array(error2).shape[0])
@@ -410,9 +421,9 @@ graphlist4 = np.array(error2).reshape(1, np.array(error2).shape[0])
 for i in range(len(graphlist4)):
     # print(row)
     plt.plot(graphlist4[i])
-    plt.ylabel("normalized error value (meters)")
+    plt.ylabel("Error value (rads)")
     plt.xlabel("time_steps (0.01 seconds per step)")
-    plt.title("Error")
+    plt.title("Joint 2 Error")
 plt.show()
 
 graphlist5 = np.array(error3).reshape(1, np.array(error3).shape[0])
@@ -420,9 +431,9 @@ graphlist5 = np.array(error3).reshape(1, np.array(error3).shape[0])
 for i in range(len(graphlist5)):
     # print(row)
     plt.plot(graphlist5[i])
-    plt.ylabel("normalized error value (meters)")
+    plt.ylabel("Error value (rads)")
     plt.xlabel("time_steps (0.01 seconds per step)")
-    plt.title("Error")
+    plt.title("Joint 3 Error")
 plt.show()
 
 graphlist6 = np.array(error4).reshape(1, np.array(error4).shape[0])
@@ -430,9 +441,9 @@ graphlist6 = np.array(error4).reshape(1, np.array(error4).shape[0])
 for i in range(len(graphlist6)):
     # print(row)
     plt.plot(graphlist6[i])
-    plt.ylabel("normalized error value (meters)")
+    plt.ylabel("Error value (rads)")
     plt.xlabel("time_steps (0.01 seconds per step)")
-    plt.title("Error")
+    plt.title("Joint 4 Error")
 plt.show()
 
 graphlist7 = np.array(error5).reshape(1, np.array(error5).shape[0])
@@ -440,9 +451,9 @@ graphlist7 = np.array(error5).reshape(1, np.array(error5).shape[0])
 for i in range(len(graphlist7)):
     # print(row)
     plt.plot(graphlist7[i])
-    plt.ylabel("normalized error value (meters)")
+    plt.ylabel("Error value (rads)")
     plt.xlabel("time_steps (0.01 seconds per step)")
-    plt.title("Error")
+    plt.title("Joint 5 Error")
 plt.show()
 
 graphlist7 = np.array(error6).reshape(1, np.array(error6).shape[0])
@@ -450,9 +461,26 @@ graphlist7 = np.array(error6).reshape(1, np.array(error6).shape[0])
 for i in range(len(graphlist7)):
     # print(row)
     plt.plot(graphlist7[i])
-    plt.ylabel("normalized error value (meters)")
+    plt.ylabel("Error value (rads)")
     plt.xlabel("time_steps (0.01 seconds per step)")
-    plt.title("Error")
+    plt.title("Joint 6 Error")
 plt.show()
 
 # np.save("error", graphlist)
+
+average_error1 = np.average(error1)
+average_error2 = np.average(error2)
+average_error3 = np.average(error3)
+average_error4 = np.average(error4)
+average_error5 = np.average(error5)
+average_error6 = np.average(error6)
+
+average_errornorm = np.average(error_list)
+
+print(average_error1)
+print(average_error2)
+print(average_error3)
+print(average_error4)
+print(average_error5)
+print(average_error6)
+print(average_errornorm)
