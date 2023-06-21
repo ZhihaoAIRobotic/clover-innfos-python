@@ -21,6 +21,8 @@ input("Move to zero")
 arm.home()  # Will set position to profile mode
 
 arm.safePositionMode(max_vel=30 * 60, min_pos=-360, max_pos=+360)
+
+arm.safeVelocityMode(max_acc=400, max_dec=200, max_vel=5 * 60)
 arm.setVelocityMode()
 
 
@@ -35,11 +37,20 @@ now_time = 0
 
 while now_time < 3:
     arm.setVelocityMode()
-    arm.setArmVelocity([-1, -1, 0, -1, -1, -1])
+
+    u = np.array([0, 0, 0, 0, 1.2, 0])
+
+    # Safety Check
+    if any(q > 1 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
+
+    arm.setArmVelocity(u)
 
     print(arm.getArmVelocity())
 
     now_time = time.time()-init_time
 
 arm.setArmVelocity([0, 0, 0, 0, 0, 0])
-arm.getArmVelocity([0, 0, 0, 0, 0, 0])
+arm.getArmVelocity()

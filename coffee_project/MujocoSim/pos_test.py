@@ -22,7 +22,7 @@ data = mujoco.MjData(model)
 
 viewer = mujoco_viewer.MujocoViewer(model, data)
 # q, T, x, y = sin_traj(np.array([0, 0, -np.pi/2, -np.pi/2, np.pi/2, 0]), 1, 100)
-traj = np.load("../MilkArmTraj/buttonpressjoint.npy")
+traj = np.load("milkpitchupmid.npy")
 # q = traj
 
 q = np.zeros([len(traj), 6])

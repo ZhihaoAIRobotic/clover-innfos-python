@@ -58,19 +58,34 @@ for i in range(len(apb_traj)):
     apb_ddq[i] = apb_traj[i, 12:]
 
 """
-Move to under steam wand
+Move to under steam wand mid
 """
 
-sw_traj = np.load('complete_moveupsteamwand_joint.npy')
+msw_traj = np.load('milkpitchupmid.npy')
 
-sw_q = np.zeros([len(sw_traj), 6])
-sw_dq = np.zeros([len(sw_traj), 6])
-sw_ddq = np.zeros([len(sw_traj), 6])
+msw_q = np.zeros([len(msw_traj), 6])
+msw_dq = np.zeros([len(msw_traj), 6])
+msw_ddq = np.zeros([len(msw_traj), 6])
 
-for i in range(len(sw_traj)):
-    sw_q[i] = sw_traj[i, 0:6]
-    sw_dq[i] = sw_traj[i, 6:12]
-    sw_ddq[i] = sw_traj[i, 12:]
+for i in range(len(msw_traj)):
+    msw_q[i] = msw_traj[i, 0:6]
+    msw_dq[i] = msw_traj[i, 6:12]
+    msw_ddq[i] = msw_traj[i, 12:]
+
+"""
+Move to under steam wand top
+"""
+
+tsw_traj = np.load('milkpitchupfull.npy')
+
+tsw_q = np.zeros([len(tsw_traj), 6])
+tsw_dq = np.zeros([len(tsw_traj), 6])
+tsw_ddq = np.zeros([len(tsw_traj), 6])
+
+for i in range(len(tsw_traj)):
+    tsw_q[i] = tsw_traj[i, 0:6]
+    tsw_dq[i] = tsw_traj[i, 6:12]
+    tsw_ddq[i] = tsw_traj[i, 12:]
 
 """
 Move out of steam wand
@@ -121,188 +136,20 @@ error_list = []
 errorall = []
 
 """
-Commence trajectory tracking............................................................................................
+Commence trajectory tracking Simulation.................................................................................
 """
 
-"""
-Pressing the button
-"""
-
-for i in range(len(pb_q)):
-    ini_t = time.time()
-
-    theta = data.qpos
-    d_theta = data.qvel
-
-    u = Kd * (pb_dq[i] - data.qvel) + Kp * (pb_q[i] - data.qpos) + Ki * int_er * 0.1
-
-    data.qpos[:] = u
-
-    error = pb_q[i] - data.qpos
-    int_er = int_er + error
-
-    now = time.time()
-
-    # error_list.append(np.linalg.norm(error))
-    # errorall.append(error)
-
-    print("Time Elapsed: " + str(now - ini_t))
-    print(np.linalg.norm(error))
-
-error = pb_q[-1] - data.qpos
-
-"""
-Ensure the button is pressed!
-"""
-
-"""
-Return to init pose after pressing button
-"""
-
-for i in range(len(apb_q)):
-    ini_t = time.time()
-
-    theta = data.qpos
-    d_theta = data.qvel
-
-    u = Kd * (apb_dq[i] - data.qvel) + Kp * (apb_q[i] - data.qpos) + Ki * int_er * 0.1
-
-    data.qvel[:] = u
-
-    error = apb_q[i] - data.qpos
-    int_er = int_er + error
-
-    now = time.time()
-
-    # error_list.append(np.linalg.norm(error))
-    # errorall.append(error)
-
-    print("Time Elapsed: " + str(now - ini_t))
-    print(np.linalg.norm(error))
-
-error = apb_q[-1] - data.qpos
-
-while np.linalg.norm(error) > 0.08:
-    u = Kp * (apb_q[-1] - data.qpos) + Ki * int_er * 0.1
-
-    u = u * 0.6
-
-    data.qvel[:] = u
-
-    error = apb_q[-1] - data.qpos
-    int_er = int_er + error
-
-time.sleep(5)
-
-"""
-Move arm to under steam wand
-"""
-
-for i in range(len(sw_q)):
-    ini_t = time.time()
-
-    theta = data.qpos
-    d_theta = data.qvel
-
-    u = Kd * (sw_dq[i] - data.qvel) + Kp * (sw_q[i] - data.qpos) + Ki * int_er * 0.1
-
-    data.qvel[:] = u
-
-    error = sw_q[i] - data.qpos
-    int_er = int_er + error
-    # error_list.append(np.linalg.norm(error))
-    # errorall.append(error)
-
-    now = time.time()
-
-    print("Time Elapsed: " + str(now - ini_t))
-    print(np.linalg.norm(error))
-
-"""
-Move arm out of under the steam wand
-"""
-
-for i in range(len(sw_q)):
-    ini_t = time.time()
-
-    theta = data.qpos
-    d_theta = data.qvel
-
-    u = Kd * (osw_dq[i] - data.qpos) + Kp * (osw_q[i] - data.qpos) + Ki * int_er * 0.1
-
-    data.qvel[:] = u
-
-    error = osw_q[i] - data.qpos
-    int_er = int_er + error
-    # error_list.append(np.linalg.norm(error))
-    # errorall.append(error)
-
-    now = time.time()
-
-    print("Time Elapsed: " + str(now - ini_t))
-    print(np.linalg.norm(error))
-
-error = osw_q[-1] - data.qpos
-
-while np.linalg.norm(error) > 0.08:
-    u = Kp * (osw_q[-1] - data.qpos) + Ki * int_er * 0.1
-
-    u = u * 0.6
-
-    data.qvel[:] = u
-
-    error = osw_q[-1] - data.qpos
-    int_er = int_er + error
-
-    # error_list.append(np.linalg.norm(error))
-    # errorall.append(error)
-
-"""
-Tilt the end-effector
-"""
-
-for i in range(len(tilt_q)):
-    ini_t = time.time()
-
-    theta = data.qpos
-    d_theta = data.qvel
-
-    u = Kd * (tilt_dq[i] - data.qvel) + Kp * (tilt_q[i] - data.qpos) + Ki * int_er * 0.1
-
-    data.qvel[:] = u
-
-    error = tilt_q[i] - data.qpos
-    int_er = int_er + error
-    # error_list.append(np.linalg.norm(error))
-    # errorall.append(error)
-
-    now = time.time()
-
-    print("Time Elapsed: " + str(now - ini_t))
-    print(np.linalg.norm(error))
-
-print("now we make art!")
-
-"""
-Commence coffee art making
-"""
-
-for i in range(len(art_q)):
-    ini_t = time.time()
-
-    theta = data.qpos
-    d_theta = data.qvel
-
-    u = Kd * (art_dq[i] - data.qvel) + Kp * (art_q[i] - data.qpos) + Ki * int_er * 0.1
-
-    data.qvel[:] = u
-
-    error = art_q[i] - data.qpos
-    int_er = int_er + error
-    error_list.append(np.linalg.norm(error))
-    errorall.append(error)
-
-    now = time.time()
-
-    print("Time Elapsed: " + str(now - ini_t))
-    print(np.linalg.norm(error))
+while 1:
+    for i in range(len(msw_q)):
+        data.qpos[:] = msw_q[i]
+
+        mujoco.mj_step(model, data)
+        viewer.render()
+        time.sleep(0.01)
+
+    for i in range(len(tsw_dq)):
+        data.qpos[:] = tsw_q[i]
+
+        mujoco.mj_step(model, data)
+        viewer.render()
+        time.sleep(0.01)

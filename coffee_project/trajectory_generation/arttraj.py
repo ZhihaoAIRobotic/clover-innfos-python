@@ -51,16 +51,14 @@ def T_to_pose(T):
     return pose, q
 
 """
-Design the circle motion in the base trajectory
+Design the circle motion in the base trajectory, and tilt to 65 degrees
 
 Params:
-    initial_point: The initial point of the arm (tilted at 45 degrees)
+    initial_point: The initial point of the arm, Center of the circle
     t: The time taken for the arm to complete the circle
 """
 def base(initial_point, t):
 
-    n = t/0.01
-
     init_T = fkin.fk(initial_point)
     init_x = init_T[0, 3]
     init_y = init_T[1, 3]
@@ -71,31 +69,74 @@ def base(initial_point, t):
     z_list = []
 
     T_list = []
+
+    r = 0.025
+
+    # Move to the initial point of circle
+
+    cir_x = init_x + r
+    n = 0.5 / 0.01
+
+    step = (cir_x - init_x) / n
+    x_step = np.arange(init_x, cir_x, step)
+
+    for i in range(len(x_step)):
+        x = x_step[i]
+        y = init_y
+
+        x_list.append(x)
+        y_list.append(y)
+
+    # The circle motion
+
+    n = t / 0.01
+    theta_step = 2 * pi / n
+    theta = np.arange(0, 2 * np.pi, theta_step)
+
+    for i in range(len(theta)):
+        x = r * math.cos(theta[i]) + init_x
+        y = r * math.sin(theta[i]) + init_y
+
+        x_list.append(x)
+        y_list.append(y)
+
+
+    # Tilt to 65 degrees
 
 
     return T_list, x_list, y_list, z_list
 
-"""
-This stage will readjust the arm to 0 degrees, and then tilt to 65 degrees
+def readjust(initial_point, final_point, t):
 
-Params:
-    initial point = The last point of the base trajectory
-    t: The time taken for the arm to complete the circle
-"""
+    """
+    This stage will readjust the arm to 0 degrees, and then tilt to 65 degrees
 
-def readjust(initial_point, t):
+    Params:
+        initial point = The last point of the base trajectory
+        final point = The first point of the design trajectory, moving downwards
+        t: The time taken for the arm to complete the circle
+    """
+
     n = t/0.01
 
-    init_T = fkin.fk(initial_point)
+    init_T = kin.fk(initial_point)
     init_x = init_T[0, 3]
     init_y = init_T[1, 3]
     init_z = init_T[2, 3]
 
     x_list = []
+    x_list.append(init_x)
     y_list = []
+    y_list.append(init_y)
     z_list = []
 
     T_list = []
+
+    # Move downwards
+
+    # Tilt upwards
+
+    # Tilt downwards
 
 
     return T_list, x_list, y_list, z_list
@@ -112,60 +153,81 @@ def design(initial_point, t):
     n = t / 0.01
 
     init_T = fkin.fk(initial_point)
+    print(init_T)
     init_x = init_T[0, 3]
     init_y = init_T[1, 3]
     init_z = init_T[2, 3]
-
     x_list = []
+    x_list.append(init_x)
     y_list = []
+    y_list.append(init_y)
     z_list = []
-
     T_list = []
 
-    step_size1 = (pi / 16) / (n / 5)
-    y_step1 = np.arange(0, pi / 16, step_size1)
+    step_size6 = (pi / 75 + pi / 75) / (n / 5)
+    x_step6 = np.arange(pi / 75, -pi / 75, -step_size6)
 
-    for i in range(len(y_step1)):
-        x = init_x + np.sin((pi / 2 * y_step1[i]) + 0.9) - 1.69
-        y = init_y + y_step1[i]
+    for i in range(len(x_step6)):
+        y = init_y + 0.7 * np.sin((6.5 * pi / 4 * x_step6[i]) + 1.56) - 0.6908
+        x = init_x + x_step6[i]
 
         x_list.append(x)
         y_list.append(y)
 
-    step_size2 = (pi/8) / (n / 5)
-    y_step2 = np.arange(-pi / 16, pi / 16, step_size2)
+    step_size5 = (pi / 75 + pi / 95) / (n / 5)
+    y_step5 = np.arange(-pi / 75, pi / 95, step_size5)
+
+    for i in range(len(y_step5)):
+        y = init_y + 0.6 * np.sin((6 * pi / 4 * y_step5[i]) + 1.68) - 0.606
+        x = init_x + y_step5[i]
+
+        x_list.append(x)
+        y_list.append(y)
+
+    step_size4 = (pi / 125 + pi / 95) / (n / 5)
+    y_step4 = np.arange(pi / 95, -pi / 125, -step_size4)
+
+    for i in range(len(y_step4)):
+        y = init_y + 0.8 * np.sin((6 * pi / 4 * y_step4[i]) + 1.53) - 0.822
+        x = init_x + y_step4[i]
+
+        x_list.append(x)
+        y_list.append(y)
+
+    step_size3 = (pi / 125 + pi / 140) / (n / 5)
+    y_step3 = np.arange(-pi / 125, pi / 140, step_size3)
+
+    for i in range(len(y_step3)):
+        y = init_y + np.sin((5 * pi / 4 * y_step3[i]) + 7.95) - 1.0323
+        x = init_x + y_step3[i]
+
+        x_list.append(x)
+        y_list.append(y)
+
+    step_size2 = (pi / 150 + pi / 140) / (n / 5)
+    y_step2 = np.arange(pi / 140, -pi / 150, -step_size2)
 
     for i in range(len(y_step2)):
-        x = init_x + 1.2 * np.sin((pi/2 * y_step2[i]) + pi/2) - 1.9
-        y = init_y + y_step2[i]
-
-        x_list.append(x)
-        y_list.append(y)
-
-    step_size3 = (pi / 10 + pi / 16) / (n / 5)
-    y_step3 = np.arange(pi / 16, -pi / 10, -step_size3)
-
-    for i in range(len(y_step3)):
-        x = init_x + np.sin((pi/2 * y_step3[i]) + 8.1) - 1.6
-        y = init_y + y_step3[i]
-
-        x_list.append(x)
-        y_list.append(y)
-
-    step_size4 = (pi / 10 + pi / 8) / (n / 5)
-    y_step3 = np.arange(-pi / 10, pi / 8, step_size3)
-
-    for i in range(len(y_step3)):
-        x = init_x + 0.8 * np.sin((pi / 2 * y_step3[i]) + 1.4) - 1.25
-        y = init_y + y_step3[i]
+        y = init_y + 1.2 * np.sin((5 * pi / 4 * y_step2[i]) + pi / 2) - 1.2445
+        x = init_x + y_step2[i]
 
         x_list.append(x)
         y_list.append(y)
 
 
+    step_size1 = (pi / 150) / (n / 5)
+    y_step1 = np.arange(-pi / 150, 0, step_size1)
+
+    for i in range(len(y_step1)):
+        y = init_y + np.sin((6 * pi / 4 * y_step1[i]) + 1.8) - 1.04
+        x = init_x + y_step1[i]
+
+        # T =
+
+        x_list.append(x)
+        y_list.append(y)
 
     return T_list, x_list, y_list, z_list
-
 """
 This stage will readjust the arm to 75 degrees, move upwards and to the base of the cup, then tilt to 85 degrees
 
@@ -187,6 +249,10 @@ def readjust2(initial_point, t):
     z_list = []
 
     T_list = []
+
+    # Move upwards while tilting up
+
+    # Move to the base of the cup and upwards
 
     return T_list, x_list, y_list, z_list
 
@@ -212,20 +278,29 @@ def finish(initial_point, t):
 
     T_list = []
 
+    # Move to the other side of the cup
+
+
+    # Tilt to 95 degrees
+
+
     return T_list, x_list, y_list, z_list
 
 
 if __name__ == "__main__":
 
     T, x, y, z = design(np.array([0, 0, -1.570796, -0.785398, 1.570796, 0]), 10)
+    # T, x, y, z = base(np.array([0, 0, -1.570796, -0.785398, 1.570796, 0]), 10)
+
+    print(x)
 
     graphlist = np.array(x).reshape(1, np.array(x).shape[0])
     graphlist2 = np.array(y).reshape(1, np.array(y).shape[0])
 
     for i in range(len(graphlist)):
         # print(row)
-        plt.plot(graphlist2[i], graphlist[i])
+        plt.plot(graphlist[i], graphlist2[i])
         plt.ylabel("y (meters)")
         plt.xlabel("x (meters)")
-        plt.title("Trajectory of the cup")
+        plt.title("Trajectory of the pitcher tip")
     plt.show()

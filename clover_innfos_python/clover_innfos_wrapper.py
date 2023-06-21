@@ -86,9 +86,6 @@ class ActuatorControllerPython(object):
             return getattr(self._singleton_, key)
 
 
-
-
-
 class Clover_MINTASCA(ActuatorControllerPython):
     """
         Base class for a Mintasca actuators. This class works for 
@@ -296,7 +293,7 @@ class ArmInterface(Clover_MINTASCA):
         """
         set robot arm into safe position control mode
         :max_acc: Max acceleration in Degrees/minute**2 (scalar or array)
-        :max_dec: Max deceleration in Degrees/minute**2 (scalar or array)
+        \7        :max_dec: Max deceleration in Degrees/minute**2 (scalar or array)
         :max_vel: Max velocity in Degrees/minute (scalar or array)
         :min_pos: Minimum position in Degrees (scalar or array)
         :max_pos: Maximum position in Degrees (scalar or array)
@@ -314,12 +311,30 @@ class ArmInterface(Clover_MINTASCA):
         if max_acc is not None:
             self.setProfilePositionAccelerations(coerce_to_array(max_acc*Radians/minute**2))
         if max_dec is not None:
-            self.setProfilePositionDecelerations(coerce_to_array( -abs(max_dec)*Radians/minute**2))
+            self.setProfilePositionDecelerations(coerce_to_array(-abs(max_dec)*Radians/minute**2))
         if max_vel is not None:
             self.setProfilePositionMaxVelocitys(coerce_to_array(max_vel*Radians/minute))
 
-    def safeVelocityMode(self):
-        pass
+    def safeVelocityMode(self,max_acc=None, max_dec=None, max_vel=None):
+        """
+            set robot arm into safe position control mode
+            :max_acc: Max acceleration in Degrees/minute**2 (scalar or array)
+            :max_dec: Max deceleration in Degrees/minute**2 (scalar or array)
+            :max_vel: Max velocity in Degrees/minute (scalar or array)
+            :return: None
+        """
+
+        def coerce_to_array(x):
+            if not isinstance(x, (tuple, list, np.ndarray)):
+                x = [x for i in range(self.dof)]
+            return np.array(x)
+
+        if max_acc is not None:
+            self.setProfileVelocityAccelerations(coerce_to_array(max_acc * Radians / minute ** 2))
+        if max_dec is not None:
+            self.setProfileVelocityDecelerations(coerce_to_array(-abs(max_dec) * Radians / minute ** 2))
+        if max_vel is not None:
+            self.setVelocityLimits(coerce_to_array(max_vel * Radians / minute))
 
     def setVelocityMode(self):
         """
@@ -365,6 +380,15 @@ class ArmInterface(Clover_MINTASCA):
         vel[5] = -vel[5]
 
         return vel
+
+    def getArmVelocityLimit(self):
+        """
+            get robot arm joint velocity limit
+            :param: None
+            :return: joint velocity limit
+        """
+
+        return self.getVelocityLimit(units=Radians/second)
 
     def getArmTorque(self):
         """

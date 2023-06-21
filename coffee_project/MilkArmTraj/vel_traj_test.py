@@ -31,7 +31,8 @@ arm.activateActuatorModeInBantch(arm.jointlist, Actuator.ActuatorMode.Mode_Vel)
 input("Move to zero")
 arm.home()  # Will set position to profile mode
 
-arm.safePositionMode(max_vel=10 * 60, min_pos=-360, max_pos=+360)
+arm.safePositionMode(max_vel=1 * 60, min_pos=-360, max_pos=+360)
+arm.safeVelocityMode(max_acc=400, max_dec=200, max_vel=10 * 60)
 arm.setVelocityMode()
 
 input("Ready")
@@ -79,19 +80,34 @@ for i in range(len(apb_traj)):
     apb_ddq[i] = apb_traj[i, 12:]
 
 """
-Move to under steam wand
+Move to under steam wand mid
 """
 
-sw_traj = np.load('complete_moveupsteamwand_joint.npy')
+msw_traj = np.load('milkpitchupmid.npy')
 
-sw_q = np.zeros([len(sw_traj), 6])
-sw_dq = np.zeros([len(sw_traj), 6])
-sw_ddq = np.zeros([len(sw_traj), 6])
+msw_q = np.zeros([len(msw_traj), 6])
+msw_dq = np.zeros([len(msw_traj), 6])
+msw_ddq = np.zeros([len(msw_traj), 6])
 
-for i in range(len(sw_traj)):
-    sw_q[i] = sw_traj[i, 0:6]
-    sw_dq[i] = sw_traj[i, 6:12]
-    sw_ddq[i] = sw_traj[i, 12:]
+for i in range(len(msw_traj)):
+    msw_q[i] = msw_traj[i, 0:6]
+    msw_dq[i] = msw_traj[i, 6:12]
+    msw_ddq[i] = msw_traj[i, 12:]
+    
+"""
+Move to under steam wand top
+"""
+
+tsw_traj = np.load('milkpitchupfull.npy')
+
+tsw_q = np.zeros([len(tsw_traj), 6])
+tsw_dq = np.zeros([len(tsw_traj), 6])
+tsw_ddq = np.zeros([len(tsw_traj), 6])
+
+for i in range(len(tsw_traj)):
+    tsw_q[i] = tsw_traj[i, 0:6]
+    tsw_dq[i] = tsw_traj[i, 6:12]
+    tsw_ddq[i] = tsw_traj[i, 12:]
 
 """
 Move out of steam wand
@@ -137,22 +153,28 @@ for i in range(len(art_traj)):
     art_q[i] = art_traj[i, 0:6]
     art_dq[i] = art_traj[i, 6:12]
     art_ddq[i] = art_traj[i, 12:]
-    
+
 """
-Pressing the button
+Get pitcher to just surface touching the wand
 """
 
-for i in range(len(pb_q)):
+for i in range(len(msw_q)):
     ini_t = time.time()
 
     theta = arm.getArmPosition()
     d_theta = arm.getArmVelocity()
 
-    u = Kd * (pb_dq[i] - arm.getArmVelocity()) + Kp * (pb_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
+    u = Kd * (msw_dq[i] - arm.getArmVelocity()) + Kp * (msw_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
+
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        exit()
+        # arm.setPositionMode()
+        # arm.setArmPosition(np.array(arm.getArmPosition()))
 
     arm.setArmVelocity(u)
 
-    error = pb_q[i] - arm.getArmPosition()
+    error = msw_q[i] - arm.getArmPosition()
     int_er = int_er + error
 
     now = time.time()
@@ -160,53 +182,39 @@ for i in range(len(pb_q)):
     error_list.append(np.linalg.norm(error))
     errorall.append(error)
 
+    print(u)
+
     print("Time Elapsed: " + str(now - ini_t))
     print(np.linalg.norm(error))
 
-error = pb_q[-1] - arm.getArmPosition()
-
-"""
-Ensure the button is pressed!
-"""
-
-while np.linalg.norm(error) > 0.1:
-    u = Kp * (pb_q[-1] - arm.getArmPosition()) + Ki * int_er * 0.1
-
-    u = u * 0.5
-
-    arm.setArmVelocity(u)
-
-    error = pb_q[-1] - arm.getArmPosition()
-    int_er = int_er + error
-
-    error_list.append(np.linalg.norm(error))
-    errorall.append(error)
-#
 arm.setPositionMode()
 arm.setArmPosition(arm.getArmPosition())
-arm.setArmPosition([0.5351, -0.125, -1.35, 1.569, -1.2, 3.167])
 
 time.sleep(4)
-
-print("Button Pressed!")
 
 arm.setVelocityMode()
 
 """
-Return to init pose after pressing button
+Get pitcher to under surface touching the wand
 """
 
-for i in range(len(apb_q)):
+for i in range(len(tsw_q)):
     ini_t = time.time()
 
     theta = arm.getArmPosition()
     d_theta = arm.getArmVelocity()
 
-    u = Kd * (apb_dq[i] - arm.getArmVelocity()) + Kp * (apb_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
+    u = Kd * (tsw_dq[i] - arm.getArmVelocity()) + Kp * (tsw_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
+
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        # arm.setPositionMode()
+        # arm.setArmPosition(np.array(arm.getArmPosition()))
+        exit()
 
     arm.setArmVelocity(u)
 
-    error = apb_q[i] - arm.getArmPosition()
+    error = tsw_q[i] - arm.getArmPosition()
     int_er = int_er + error
 
     now = time.time()
@@ -216,27 +224,10 @@ for i in range(len(apb_q)):
 
     print("Time Elapsed: " + str(now - ini_t))
     print(np.linalg.norm(error))
-
-orgin = [0, 0, 0, 0, 0, 0]
-error = apb_q[-1] - arm.getArmPosition()
-
-while np.linalg.norm(error) > 0.1:
-    u = Kp * (orgin - arm.getArmPosition()) + Ki * int_er * 0.1
-
-    u = u * 0.8
-
-    arm.setArmVelocity(u)
-
-    error = orgin - arm.getArmPosition()
-    int_er = int_er + error
-
-    error_list.append(np.linalg.norm(error))
-    errorall.append(error)
+    print(u)
 
 arm.setPositionMode()
 arm.setArmPosition(arm.getArmPosition())
-
-
 
 graphlist = np.array(error_list).reshape(1, np.array(error_list).shape[0])
 
