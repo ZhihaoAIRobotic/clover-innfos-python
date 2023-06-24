@@ -154,6 +154,11 @@ for i in range(len(pb_q)):
 
     u = Kd * (pb_dq[i] - arm.getArmVelocity()) + Kp * (pb_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
 
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
+
     arm.setArmVelocity(u)
 
     error = pb_q[i] - arm.getArmPosition()
@@ -177,6 +182,11 @@ while np.linalg.norm(error) > 0.1:
     u = Kp * (pb_q[-1] - arm.getArmPosition()) + Ki * int_er * 0.1
 
     u = u * 0.5
+
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
 
     arm.setArmVelocity(u)
 
@@ -208,6 +218,11 @@ for i in range(len(apb_q)):
 
     u = Kd * (apb_dq[i] - arm.getArmVelocity()) + Kp * (apb_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
 
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
+
     arm.setArmVelocity(u)
 
     error = apb_q[i] - arm.getArmPosition()
@@ -228,6 +243,11 @@ while np.linalg.norm(error) > 0.1:
     u = Kp * (orgin - arm.getArmPosition()) + Ki * int_er * 0.1
 
     u = u * 0.8
+
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
 
     arm.setArmVelocity(u)
 
@@ -255,6 +275,11 @@ for i in range(len(sw_q)):
     d_theta = arm.getArmVelocity()
 
     u = Kd * (sw_dq[i] - arm.getArmVelocity()) + Kp * (sw_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
+
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
 
     arm.setArmVelocity(u)
 
@@ -287,6 +312,11 @@ for i in range(len(sw_q)):
 
     u = Kd * (osw_dq[i] - arm.getArmVelocity()) + Kp * (osw_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
 
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
+
     arm.setArmVelocity(u)
 
     error = osw_q[i] - arm.getArmPosition()
@@ -305,6 +335,11 @@ while np.linalg.norm(error) > 0.08:
     u = Kp * (osw_q[-1] - arm.getArmPosition()) + Ki * int_er * 0.1
 
     u = u * 0.6
+
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
 
     arm.setArmVelocity(u)
 
@@ -332,6 +367,11 @@ for i in range(len(tilt_q)):
 
     u = Kd * (tilt_dq[i] - arm.getArmVelocity()) + Kp * (tilt_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
 
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
+
     arm.setArmVelocity(u)
 
     error = tilt_q[i] - arm.getArmPosition()
@@ -357,6 +397,11 @@ for i in range(len(art_q)):
     d_theta = arm.getArmVelocity()
 
     u = Kd * (art_dq[i] - arm.getArmVelocity()) + Kp * (art_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
+
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
 
     arm.setArmVelocity(u)
 
@@ -387,16 +432,6 @@ for i in range(len(graphlist)):
     plt.xlabel("time_steps (0.01 seconds per step)")
     plt.title("Error")
 plt.show()
-
-# graphlist2 = np.array(errorall).reshape(6, np.array(errorall).shape[0])
-#
-# for i in range(len(graphlist2)):
-#     # print(row)
-#     plt.plot(graphlist2[i])
-#     plt.ylabel("normalized error value (meters)")
-#     plt.xlabel("time_steps (0.01 seconds per step)")
-#     plt.title("Error")
-# plt.show()
 
 errorall = np.array(errorall)
 error1 = errorall[:, 0]

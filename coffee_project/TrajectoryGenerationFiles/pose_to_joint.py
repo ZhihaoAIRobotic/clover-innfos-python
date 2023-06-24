@@ -23,7 +23,7 @@ def pose_traj(x):
 
     q_list = np.zeros([len(x), 6])
 
-    q_list[0] = np.array([0.07875, -0.2064, -1.334, 1.55, -1.409, 3.185])
+    q_list[0] = np.array([0, 0, -1.570796, -0.785398, 1.570796, 0])
 
     i = 1
     for i in range(len(x)):
@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     from matplotlib import pyplot as plt
 
-    traj = np.load('buttonpresspose.npy')
+    traj = np.load('base_pose.npy')
 
     x = np.zeros([len(traj), 7])
     dx = np.zeros([len(traj), 7])
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     q = pose_traj(x)
     # print(q[1])
 
-    np.save('buttonpressjoint', q)
+    np.save('base_joint_test', q)
     q1 = q[:, :]
 
     # print(np.array(q[0: 100]))

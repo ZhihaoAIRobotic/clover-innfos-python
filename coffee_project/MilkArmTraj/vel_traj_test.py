@@ -168,9 +168,8 @@ for i in range(len(msw_q)):
 
     if any(abs(q) > 4.5 for q in u):
         print("uh oh, too fast")
-        exit()
-        # arm.setPositionMode()
-        # arm.setArmPosition(np.array(arm.getArmPosition()))
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
 
     arm.setArmVelocity(u)
 
@@ -208,9 +207,8 @@ for i in range(len(tsw_q)):
 
     if any(abs(q) > 4.5 for q in u):
         print("uh oh, too fast")
-        # arm.setPositionMode()
-        # arm.setArmPosition(np.array(arm.getArmPosition()))
-        exit()
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
 
     arm.setArmVelocity(u)
 
