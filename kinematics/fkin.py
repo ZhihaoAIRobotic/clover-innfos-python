@@ -64,14 +64,14 @@ def fk_pose(joint_value):
 
 if __name__ == '__main__':
     import numpy as np
-    joint_value = np.array([0, 0, -1.570796, -1.570796, 1.570796, 0])
+    joint_value = np.array([0, 0, -2.356194, -2.356194, 1.570796, 0])
     export_pose = fk(joint_value)
 
     joint_name = ["axis_joint_1", "axis_joint_2", "axis_joint_3", "axis_joint_4", "axis_joint_5", "axis_joint_6"]
     link_name = ["1_Link", "2_Link", "3_Link", "4_Link", "5_Link", "6_Link"]
     # joint_value = np.array([0, np.pi/2, -np.pi/2, 0, 0, 0])
     # export_pose = fk(joint_value)
-
+    2.36225496e-01
     print(export_pose)
 
     from scipy.spatial.transform import Rotation as R

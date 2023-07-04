@@ -1294,3 +1294,1746 @@ WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-i
 Thu Jun 22 20:06:01 2023
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.3040.
 
+Mon Jun 26 16:29:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 16:29:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 16:29:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 16:29:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 16:29:55 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 5. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 16:30:49 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 16:30:49 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 16:30:49 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 16:30:49 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 16:30:51 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 5. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 16:47:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 16:47:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 16:47:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 16:47:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 16:47:07 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Mon Jun 26 17:02:20 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:02:20 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:02:20 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:02:20 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:02:21 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Mon Jun 26 17:03:41 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:03:41 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:03:41 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:03:41 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:03:42 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Mon Jun 26 17:03:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:03:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:03:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:03:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:03:57 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Mon Jun 26 17:13:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:03 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 17:13:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:12 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 17:13:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:27 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 17:13:37 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:37 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:37 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:37 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:13:39 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 17:14:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:14:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:14:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:14:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:14:26 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 17:14:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:14:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:14:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:14:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:14:41 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 17:22:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:22:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:22:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:22:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:22:41 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Mon Jun 26 17:23:00 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:00 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:00 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:00 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:01 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Mon Jun 26 17:23:43 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:43 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:43 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:43 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:45 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 17:23:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:23:55 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Mon Jun 26 17:25:35 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:25:35 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:25:35 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:25:35 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:25:37 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:27:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:27:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:27:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:27:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:27:46 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:28:27 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:28:27 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:28:27 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:28:27 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:28:29 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:29:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:08 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:29:14 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:14 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:14 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:14 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:16 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:29:22 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:22 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:22 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:22 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:23 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:29:43 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:43 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:43 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:43 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:29:45 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:31:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:31:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:31:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:31:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:32:00 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:32:27 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:32:27 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:32:27 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:32:27 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:32:29 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:32:35 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:32:35 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:32:35 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:32:35 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:32:36 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1600.
+
+Mon Jun 26 17:34:09 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Mon Jun 26 17:34:09 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Mon Jun 26 17:34:09 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Mon Jun 26 17:34:09 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Mon Jun 26 17:34:10 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Tue Jun 27 13:33:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 13:33:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 13:33:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 13:33:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 13:33:05 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Tue Jun 27 14:52:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 14:52:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 14:52:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 14:52:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 14:52:54 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Tue Jun 27 14:53:32 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 14:53:32 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 14:53:32 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 14:53:32 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 14:53:33 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Tue Jun 27 14:53:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 14:53:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 14:53:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 14:53:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 14:53:45 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Tue Jun 27 15:24:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:24:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:24:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:24:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:26 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1200.
+
+Tue Jun 27 15:25:38 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:38 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:38 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:38 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:40 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Tue Jun 27 15:25:48 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:48 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:48 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:48 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:25:49 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Tue Jun 27 15:26:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:05 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.2040.
+
+Tue Jun 27 15:26:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:17 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0940.
+
+Tue Jun 27 15:26:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:25 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0940.
+
+Tue Jun 27 15:26:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:50 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:50 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:50 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:50 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:26:51 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0780.
+
+Tue Jun 27 15:31:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:11 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Tue Jun 27 15:31:17 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:17 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:17 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:17 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:19 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Tue Jun 27 15:31:23 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:23 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:23 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:23 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:27 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1720.
+
+Tue Jun 27 15:31:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:31:48 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0940.
+
+Tue Jun 27 15:32:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:32:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:32:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:32:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:32:25 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0940.
+
+Tue Jun 27 15:35:19 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 15:35:19 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 15:35:19 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 15:35:19 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 15:35:21 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0940.
+
+Tue Jun 27 16:02:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:02:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:02:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:02:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:02:27 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0920.
+
+Tue Jun 27 16:02:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:02:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:02:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:02:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:02:37 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0920.
+
+Tue Jun 27 16:13:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:13:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:13:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:13:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:24:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:24:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:24:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:24:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:24:35 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0920.
+
+Tue Jun 27 16:24:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:24:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:24:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:24:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:24:49 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1020.
+
+Tue Jun 27 16:25:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:03 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Tue Jun 27 16:25:20 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:20 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:20 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:20 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:23 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2520.
+
+Tue Jun 27 16:25:42 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:42 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:42 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:42 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:25:44 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1020.
+
+Tue Jun 27 16:27:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:27:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:27:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:27:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:27:32 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Tue Jun 27 16:34:21 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:34:21 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:34:21 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:34:21 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:34:22 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Tue Jun 27 16:34:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:34:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:34:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:34:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:34:40 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Tue Jun 27 16:35:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:35:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:35:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:35:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:35:18 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Tue Jun 27 16:36:37 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:36:37 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:36:37 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:36:37 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:36:38 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Tue Jun 27 16:43:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:43:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:43:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:43:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:43:32 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1200.
+
+Tue Jun 27 16:43:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:43:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:43:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:43:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:43:37 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1200.
+
+Tue Jun 27 16:51:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:51:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:51:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:51:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:51:54 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1200.
+
+Tue Jun 27 16:52:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:52:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:52:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:52:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:52:05 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1200.
+
+Tue Jun 27 16:59:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 16:59:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 16:59:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 16:59:16 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 16:59:18 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1200.
+
+Tue Jun 27 17:10:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 17:10:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 17:10:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 17:10:36 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 17:10:37 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Tue Jun 27 17:23:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Tue Jun 27 17:23:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Tue Jun 27 17:23:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Tue Jun 27 17:23:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Tue Jun 27 17:23:19 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Fri Jun 30 13:40:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 13:40:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 13:40:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 13:40:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 13:40:57 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Fri Jun 30 13:41:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:04 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Fri Jun 30 13:41:11 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:11 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:11 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:11 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:12 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Fri Jun 30 13:41:21 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:21 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:21 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:21 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 13:41:22 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Fri Jun 30 13:49:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 13:49:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 13:49:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 13:49:44 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 13:49:45 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Fri Jun 30 14:09:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 14:09:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 14:09:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 14:09:03 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 14:09:04 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Fri Jun 30 14:27:59 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 14:27:59 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 14:27:59 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 14:27:59 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 14:28:02 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2880.
+
+Fri Jun 30 14:28:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 14:28:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 14:28:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 14:28:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 14:28:28 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.2000.
+
+Fri Jun 30 14:55:09 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 14:55:09 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 14:55:09 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 14:55:09 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 14:55:12 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.3100.
+
+Fri Jun 30 14:56:32 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 14:56:32 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 14:56:32 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 14:56:32 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 14:56:33 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0560.
+
+Fri Jun 30 14:57:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 14:57:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 14:57:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 14:57:06 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 14:57:07 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0560.
+
+Fri Jun 30 15:12:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 15:12:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 15:12:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 15:12:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 15:12:37 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.3100.
+
+Fri Jun 30 15:14:31 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 15:14:31 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 15:14:31 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 15:14:31 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 15:14:34 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.3100.
+
+Fri Jun 30 15:32:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:26 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:28 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1440.
+
+Fri Jun 30 15:32:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:35 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1440.
+
+Fri Jun 30 15:32:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:53 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 15:32:55 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1440.
+
+Fri Jun 30 15:33:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 15:33:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 15:33:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 15:33:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 15:33:33 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2980.
+
+Fri Jun 30 16:39:11 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 16:39:11 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 16:39:11 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 16:39:11 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 16:39:13 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2980.
+
+Fri Jun 30 16:47:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 16:47:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 16:47:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 16:47:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 16:47:19 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0560.
+
+Fri Jun 30 17:01:48 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:01:48 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:01:48 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:01:48 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:01:50 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1800.
+
+Fri Jun 30 17:06:01 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:06:01 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:06:01 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:06:01 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:06:02 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Fri Jun 30 17:08:28 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:08:28 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:08:28 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:08:28 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:08:31 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.2880.
+
+Fri Jun 30 17:10:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:10:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:10:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:10:39 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:10:40 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Fri Jun 30 17:15:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:15:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:15:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:15:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:15:28 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.3660.
+
+Fri Jun 30 17:16:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:16:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:16:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:16:24 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:16:27 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.3780.
+
+Fri Jun 30 17:40:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:40:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:40:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:40:34 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:40:36 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 5. The simulation is unstable. Time = 0.1660.
+
+Fri Jun 30 17:46:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:46:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:46:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:46:30 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:46:31 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1700.
+
+Fri Jun 30 17:47:45 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:47:45 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:47:45 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:47:45 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:47:46 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1840.
+
+Fri Jun 30 17:53:08 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:53:08 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:53:08 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:53:08 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:53:10 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1840.
+
+Fri Jun 30 17:56:23 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 17:56:23 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 17:56:23 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 17:56:23 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 17:56:25 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1560.
+
+Fri Jun 30 18:02:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 18:02:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 18:02:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 18:02:56 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 18:02:58 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1820.
+
+Fri Jun 30 18:09:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 18:09:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 18:09:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 18:09:40 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 18:09:42 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1900.
+
+Fri Jun 30 18:10:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 18:10:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 18:10:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 18:10:10 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 18:10:12 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1900.
+
+Fri Jun 30 18:32:17 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:17 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:17 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:17 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:19 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1900.
+
+Fri Jun 30 18:32:33 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:33 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:33 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:33 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:38 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.4920.
+
+Fri Jun 30 18:32:59 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:59 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:59 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 18:32:59 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 18:33:01 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1840.
+
+Fri Jun 30 18:33:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 18:33:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 18:33:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 18:33:47 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 18:33:51 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.4000.
+
+Fri Jun 30 18:39:46 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 18:39:46 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 18:39:46 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 18:39:46 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 18:39:48 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1840.
+
+Fri Jun 30 18:42:42 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Fri Jun 30 18:42:42 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Fri Jun 30 18:42:42 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Fri Jun 30 18:42:42 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Fri Jun 30 18:42:44 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1840.
+
+Sat Jul  1 09:30:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 09:30:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 09:30:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 09:30:02 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 09:30:04 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1400.
+
+Sat Jul  1 10:12:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 10:12:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 10:12:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 10:12:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 10:12:59 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1400.
+
+Sat Jul  1 10:19:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 10:19:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 10:19:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 10:19:18 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 10:19:19 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Sat Jul  1 10:19:28 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 10:19:28 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 10:19:28 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 10:19:28 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 10:19:30 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0860.
+
+Sat Jul  1 10:24:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 10:24:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 10:24:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 10:24:25 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 10:24:26 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0940.
+
+Sat Jul  1 10:31:07 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 10:31:07 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 10:31:07 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 10:31:07 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 10:31:08 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1140.
+
+Sat Jul  1 10:34:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 10:34:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 10:34:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 10:34:04 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 10:34:05 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.1100.
+
+Sat Jul  1 10:39:52 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 10:39:52 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 10:39:52 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 10:39:52 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 10:40:33 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 10:40:33 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 10:40:33 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 10:40:33 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 10:40:34 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Sat Jul  1 11:07:38 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 11:07:38 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 11:07:38 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 11:07:38 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 11:07:40 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Sat Jul  1 11:15:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 11:15:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 11:15:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 11:15:58 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 11:15:59 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Sat Jul  1 11:16:29 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/gluon_robot.xml' with default provider at slot 1
+
+Sat Jul  1 11:16:29 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./empty_arena.xml' with default provider at slot 1
+
+Sat Jul  1 11:16:29 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_kinematics.xml' with default provider at slot 1
+
+Sat Jul  1 11:16:29 2023
+WARNING: mju_openResource: could not open resource '/home/hengyi/GitHub/clover-innfos-python/Urdf/./gluon_position_actuators.xml' with default provider at slot 1
+
+Sat Jul  1 11:16:30 2023
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1120.
+

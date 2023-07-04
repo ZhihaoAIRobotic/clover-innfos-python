@@ -45,6 +45,3 @@ while 1:
     time.sleep(5)
     print(arm.getArmPosition())
     print(kin.fk(arm.getArmPosition()))
-
-
-

@@ -19,11 +19,11 @@ def pose_ik(p, initial_guess):
 
     return q
 
-def pose_traj(x):
+def pose_traj(x, initial):
 
     q_list = np.zeros([len(x), 6])
 
-    q_list[0] = np.array([0, 0, -1.570796, -0.785398, 1.570796, 0])
+    q_list[0] = np.array(initial)
 
     i = 1
     for i in range(len(x)):
@@ -37,21 +37,27 @@ if __name__ == "__main__":
 
     from matplotlib import pyplot as plt
 
-    traj = np.load('base_pose.npy')
+    traj = np.load('basepose_lqt.npy')
+    # traj_init = np.load('readjust1joint.npy')
+
+    base_init = [0, 0, -2.356194, -2.356194, 1.570796, 0]
 
     x = np.zeros([len(traj), 7])
-    dx = np.zeros([len(traj), 7])
-    ddx = np.zeros([len(traj), 7])
 
     for i in range(len(traj)):
         x[i] = traj[i, 0:7]
-        # dx[i] = traj[i, 7:14]
-        # ddx[i] = traj[i, 14:]
 
-    q = pose_traj(x)
-    # print(q[1])
+    # x1 = np.zeros([len(traj_init), 6])
+    #
+    # for i in range(len(traj_init)):
+    #     x1[i] = traj_init[i, 0:6]
 
-    np.save('base_joint_test', q)
+
+    q = pose_traj(x, base_init)
+    # print(q[2])
+    # print(x1[-1])
+
+    np.save('basejoint.npy', q)
     q1 = q[:, :]
 
     # print(np.array(q[0: 100]))

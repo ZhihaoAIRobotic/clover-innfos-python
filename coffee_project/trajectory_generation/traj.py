@@ -83,7 +83,7 @@ def base(initial_point, t):
     # Move to the initial point of circle
 
     cir_x = init_x + r
-    n = 0.5 / 0.01
+    n = 2 / 0.01
 
     step = (cir_x - init_x) / n
     x_step = np.arange(init_x, cir_x, step)
@@ -120,7 +120,6 @@ def base(initial_point, t):
     for i in range(len(theta)):
         x = r * math.cos(theta[i]) + init_x
         y = r * math.sin(theta[i]) + y_os
-        # print(theta2[i])
 
         x_ee = x
         y_ee = y - (0.175 * np.cos(theta2[i]) + 0.03315 * np.sin(theta2[i]))
@@ -172,7 +171,7 @@ def readjust(initial_point, final_point, t):
     ee_y_list = []
     ee_z_list = []
 
-    # Tilt upwards and move upwards
+    # Tilt upwards and move downwards
 
     theta_step = (pi / 3) / (n / 2)
     theta = np.arange(pi / 3, 0, -theta_step)
@@ -217,14 +216,15 @@ def readjust(initial_point, final_point, t):
 
     for i in range(int(n / 2)):
 
-        x_ee = x_s[-1]
-        y_ee = y_s[-1]
-        z_ee = z_s[-1]
+        x_ee = x_s[i]
+        y_ee = y_s[i]
+        z_ee = z_s[i]
 
         T = np.array([[0, -1, -0, x_ee],
                       [-np.sin(theta2[i]), 0, np.cos(theta2[i]), y_ee],
                       [-np.cos(theta2[i]), 0, -np.sin(theta2[i]), z_ee],
                       [0, 0, 0, 1]])
+
         T_list.append(T)
 
         x = x_ee
@@ -253,6 +253,9 @@ def design(initial_point, t):
     n = t / 0.01
 
     init_T = fkin.fk(initial_point)
+
+    init_T[2, 3] = init_T[2, 3] + 0.15
+
     init_x = init_T[0, 3]
     init_y = init_T[1, 3]
     init_z = init_T[2, 3]
@@ -261,11 +264,8 @@ def design(initial_point, t):
     z_os = init_z - (0.175 * np.sin(np.pi / 3) - 0.03315 * np.cos(np.pi / 3))
 
     x_list = []
-    x_list.append(init_x)
     y_list = []
-    y_list.append(y_os)
     z_list = []
-    z_list.append(z_os)
 
     ee_x_list = []
     ee_y_list = []
@@ -275,11 +275,11 @@ def design(initial_point, t):
 
     theta_step = ((4 * pi) / 9 - pi / 3) / (n + 3)
     theta = np.arange(pi / 3, 4 * pi / 9, theta_step)
-    step_size6 = (pi / 75 + pi / 75) / (n / 6)
-    x_step6 = np.arange(pi / 75, -pi / 75, -step_size6)
+    step_size6 = (pi / 250 + pi / 250) / (n / 6)
+    x_step6 = np.arange(pi / 190, -pi / 190, -step_size6)
 
     for i in range(len(x_step6)):
-        y = y_os + 0.7 * np.sin((6.5 * pi / 4 * x_step6[i]) + 1.56) - 0.6908
+        y = y_os + 0.8 * np.sin((9 * pi / 4 * x_step6[i]) + 1.57) - 0.816
         x = init_x + x_step6[i]
 
         x_ee = x
@@ -300,11 +300,11 @@ def design(initial_point, t):
         ee_y_list.append(y_ee)
         ee_z_list.append(z_ee)
 
-    step_size5 = (pi / 75 + pi / 95) / (n / 6)
-    y_step5 = np.arange(-pi / 75, pi / 95, step_size5)
+    step_size5 = (pi / 250 + pi / 300) / (n / 6)
+    y_step5 = np.arange(-pi / 250, pi / 300, step_size5)
 
     for i in range(len(y_step5)):
-        y = y_os + 0.6 * np.sin((6 * pi / 4 * y_step5[i]) + 1.68) - 0.606
+        y = y_os + 0.7 * np.sin((8 * pi / 4 * y_step5[i]) + 1.62) - 0.7189
         x = init_x + y_step5[i]
 
         x_ee = x
@@ -325,11 +325,11 @@ def design(initial_point, t):
         ee_y_list.append(y_ee)
         ee_z_list.append(z_ee)
 
-    step_size4 = (pi / 125 + pi / 95) / (n / 6)
-    y_step4 = np.arange(pi / 95, -pi / 125, -step_size4)
+    step_size4 = (pi / 300 + pi / 350) / (n / 6)
+    y_step4 = np.arange(pi / 300, -pi / 350, -step_size4)
 
     for i in range(len(y_step4)):
-        y = y_os + 0.8 * np.sin((6 * pi / 4 * y_step4[i]) + 1.53) - 0.822
+        y = y_os + 0.8 * np.sin((7 * pi / 4 * y_step4[i]) + 1.53) - 0.82341
         x = init_x + y_step4[i]
 
         x_ee = x
@@ -350,11 +350,11 @@ def design(initial_point, t):
         ee_y_list.append(y_ee)
         ee_z_list.append(z_ee)
 
-    step_size3 = (pi / 125 + pi / 140) / (n / 6)
-    y_step3 = np.arange(-pi / 125, pi / 140, step_size3)
+    step_size3 = (pi / 350 + pi / 400) / (n / 6)
+    y_step3 = np.arange(-pi / 350, pi / 400, step_size3)
 
     for i in range(len(y_step3)):
-        y = y_os + np.sin((5 * pi / 4 * y_step3[i]) + 7.95) - 1.0323
+        y = y_os + np.sin((8 * pi / 4 * y_step3[i]) + 7.89) - 1.02645
         x = init_x + y_step3[i]
 
         x_ee = x
@@ -375,11 +375,11 @@ def design(initial_point, t):
         ee_y_list.append(y_ee)
         ee_z_list.append(z_ee)
 
-    step_size2 = (pi / 150 + pi / 140) / (n / 6)
-    y_step2 = np.arange(pi / 140, -pi / 150, -step_size2)
+    step_size2 = (pi / 400 + pi / 500) / (n / 6)
+    y_step2 = np.arange(pi / 400, -pi / 500, -step_size2)
 
     for i in range(len(y_step2)):
-        y = y_os + 1.2 * np.sin((5 * pi / 4 * y_step2[i]) + pi / 2) - 1.2445
+        y = y_os + 1.2 * np.sin((6 * pi / 4 * y_step2[i]) + pi / 2) - 1.22926
         x = init_x + y_step2[i]
 
         x_ee = x
@@ -400,11 +400,11 @@ def design(initial_point, t):
         ee_y_list.append(y_ee)
         ee_z_list.append(z_ee)
 
-    step_size1 = (pi / 150) / (n / 6)
-    y_step1 = np.arange(-pi / 150, 0, step_size1)
+    step_size1 = (pi / 500) / (n / 6)
+    y_step1 = np.arange(-pi / 500, 0, step_size1)
 
     for i in range(len(y_step1)):
-        y = y_os + np.sin((6 * pi / 4 * y_step1[i]) + 1.8) - 1.04
+        y = y_os + np.sin((8 * pi / 4 * y_step1[i]) + 1.7) - 1.02576
         x = init_x + y_step1[i]
 
         x_ee = x
@@ -428,7 +428,7 @@ def design(initial_point, t):
     return T_list, x_list, y_list, z_list, ee_x_list, ee_y_list, ee_z_list
 
 """
-This stage will readjust the arm to 75 degrees, move upwards and to the base of the cup, then tilt to 85 degrees
+This stage will readjust the arm to 70 degrees, move upwards and to the base of the cup, then tilt to 80 degrees
 
 Params:
     initial point = The last point of the design trajectory
@@ -438,25 +438,88 @@ Params:
 def readjust2(initial_point, t):
     n = t / 0.01
 
-    init_T = fkin.fk(initial_point)
+    init_T = initial_point
     init_x = init_T[0, 3]
     init_y = init_T[1, 3]
     init_z = init_T[2, 3]
+
+    y_os = init_y + 0.175 * np.cos(4 * np.pi / 9) + 0.03315 * np.sin(4 * np.pi / 9)
+    z_os = init_z - (0.175 * np.sin(4 * np.pi / 9) - 0.03315 * np.cos(4 * np.pi / 9))
 
     x_list = []
     y_list = []
     z_list = []
 
+    ee_x_list = []
+    ee_y_list = []
+    ee_z_list = []
+
     T_list = []
 
     # Move upwards while tilting up
+    l = 0.05
+    z_s = l / (n/2)
+    z_step = np.arange(z_os, z_os + l, z_s)
 
-    # Move to the base of the cup and upwards
+    theta_step = (4 * (pi/9) - pi/3)/ (n/2)
+    theta = np.arange(4 * (pi/9), pi/3, -theta_step)
 
-    return T_list, x_list, y_list, z_list
+    for i in range(int(n/2)):
+        x = init_x
+        y = y_os
+        z = z_step[i]
+
+        x_ee = x
+        y_ee = y - (0.175 * np.cos(theta[i]) + 0.03315 * np.sin(theta[i]))
+        z_ee = z + 0.175 * np.sin(theta[i]) - 0.03315 * np.cos(theta[i])
+
+        T = np.array([[0, -1, -0, x_ee],
+                      [-np.sin(theta[i]), 0, np.cos(theta[i]), y_ee],
+                      [-np.cos(theta[i]), 0, -np.sin(theta[i]), z_ee],
+                      [0, 0, 0, 1]])
+        T_list.append(T)
+
+        x_list.append(x)
+        y_list.append(y)
+        z_list.append(z)
+
+        ee_x_list.append(x_ee)
+        ee_y_list.append(y_ee)
+        ee_z_list.append(z_ee)
+
+    # Move to finish start point
+
+    # z_step2 = np.arange(z_os + l, z_os, -z_s)
+    theta_step = (4 * (pi/9) - pi / 3) / (n/2)
+    theta = np.arange(pi/3, 4 * (pi/9), theta_step)
+
+    for i in range(int(n/2)):
+        x = init_x
+        y = y_os
+        z = z_os + l
+
+        x_ee = x
+        y_ee = y - (0.175 * np.cos(theta[i]) + 0.03315 * np.sin(theta[i]))
+        z_ee = z + 0.175 * np.sin(theta[i]) - 0.03315 * np.cos(theta[i])
+
+        T = np.array([[0, -1, -0, x_ee],
+                      [-np.sin(theta[i]), 0, np.cos(theta[i]), y_ee],
+                      [-np.cos(theta[i]), 0, -np.sin(theta[i]), z_ee],
+                      [0, 0, 0, 1]])
+        T_list.append(T)
+
+        x_list.append(x)
+        y_list.append(y)
+        z_list.append(z)
+
+        ee_x_list.append(x_ee)
+        ee_y_list.append(y_ee)
+        ee_z_list.append(z_ee)
+
+    return T_list, x_list, y_list, z_list, ee_x_list, ee_y_list, ee_z_list
 
 """
-The finish simply moves to the other side of the cup, and tilt to 95 degrees from 85 degrees
+The finish simply moves to the other side of the cup, and tilt to 90 degrees from 80 degrees
 
 Params:
     initial point = The last point of the readjust2 trajectory
@@ -466,7 +529,62 @@ Params:
 def finish(initial_point, t):
     n = t / 0.01
 
-    init_T = fkin.fk(initial_point)
+    init_T = initial_point
+    init_x = init_T[0, 3]
+    init_y = init_T[1, 3]
+    init_z = init_T[2, 3]
+
+    y_os = init_y + 0.175 * np.cos(4 * np.pi / 9) + 0.03315 * np.sin(4 * np.pi / 9)
+    z_os = init_z - (0.175 * np.sin(4 * np.pi / 9) - 0.03315 * np.cos(4 * np.pi / 9))
+
+    x_list = []
+    y_list = []
+    z_list = []
+
+    ee_x_list = []
+    ee_y_list = []
+    ee_z_list = []
+
+    T_list = []
+
+    # Move to the other side of the cup
+    l = 0.045
+    y_s = l/n
+    y_step = np.arange(y_os, y_os + l, y_s)
+    theta_step = (pi / 2 - 4 * (pi/9))/n
+    theta = np.arange(4 * (pi/9), pi/2, theta_step)
+
+    for i in range(int(n)):
+        x = init_x
+        y = y_step[i]
+        z = z_os
+
+        ee_x = x
+        ee_y = y - (0.175 * np.cos(theta[i]) + 0.03315 * np.sin(theta[i]))
+        ee_z = z + 0.175 * np.sin(theta[i]) - 0.03315 * np.cos(theta[i])
+
+        T = np.array([[0, -1, -0, ee_x],
+                      [-np.sin(theta[i]), 0, np.cos(theta[i]), ee_y],
+                      [-np.cos(theta[i]), 0, -np.sin(theta[i]), ee_z],
+                      [0, 0, 0, 1]])
+        T_list.append(T)
+
+        x_list.append(x)
+        y_list.append(y)
+        z_list.append(z)
+
+        ee_x_list.append(ee_x)
+        ee_y_list.append(ee_y)
+        ee_z_list.append(ee_z)
+
+    return T_list, x_list, y_list, z_list, ee_x_list, ee_y_list, ee_z_list
+
+
+def cof_readjust(initial, t):
+
+    n = t / 0.01
+
+    init_T = initial
     init_x = init_T[0, 3]
     init_y = init_T[1, 3]
     init_z = init_T[2, 3]
@@ -475,40 +593,49 @@ def finish(initial_point, t):
     y_list = []
     z_list = []
 
+    ee_x_list = []
+    ee_y_list = []
+    ee_z_list = []
+
     T_list = []
 
-    # Move to the other side of the cup
+    x = init_x
+    y = init_y + 0.125
 
-    # Tilt to 95 degrees
 
-    return T_list, x_list, y_list, z_list
 
-def concatenate_x(x1, x2, x3):
+def concatenate_x(x1, x2, x3, x4, x5):
     x1 = np.array(x1).reshape(len(x1), 1)
     x2 = np.array(x2).reshape(len(x2), 1)
     x3 = np.array(x3).reshape(len(x3), 1)
+    x4 = np.array(x4).reshape(len(x4), 1)
+    x5 = np.array(x5).reshape(len(x5), 1)
 
-    x = np.vstack((np.array(x1), np.array(x2), np.array(x3)))
+    x = np.vstack((np.array(x1), np.array(x2), np.array(x3), np.array(x4), np.array(x5)))
     return x
 
-def concatenate_y(y1, y2, y3):
+def concatenate_y(y1, y2, y3, y4, y5):
     y1 = np.array(y1).reshape(len(y1), 1)
     y2 = np.array(y2).reshape(len(y2), 1)
     y3 = np.array(y3).reshape(len(y3), 1)
+    y4 = np.array(y4).reshape(len(y4), 1)
+    y5 = np.array(y5).reshape(len(y5), 1)
     
-    y = np.vstack((np.array(y1), np.array(y2), np.array(y3)))
+    y = np.vstack((np.array(y1), np.array(y2), np.array(y3), np.array(y4), np.array(y5)))
     return y
 
-def concatenate_z(z1, z2, z3):
+def concatenate_z(z1, z2, z3, z4, z5):
     z1 = np.array(z1).reshape(len(z1), 1)
     z2 = np.array(z2).reshape(len(z2), 1)
     z3 = np.array(z3).reshape(len(z3), 1)
+    z4 = np.array(z4).reshape(len(z4), 1)
+    z5 = np.array(z5).reshape(len(z5), 1)
     
-    z = np.vstack((np.array(z1), np.array(z2), np.array(z3)))
+    z = np.vstack((np.array(z1), np.array(z2), np.array(z3), np.array(z4), np.array(z5)))
     return z
 
-def concatenate_T(T1, T2, T3):
-    T = np.vstack((np.array(T1), np.array(T2), np.array(T3)))
+def concatenate_T(T1, T2, T3, T4, T5):
+    T = np.vstack((np.array(T1), np.array(T2), np.array(T3), np.array(T4), np.array(T5)))
     return T
 
 
@@ -516,22 +643,38 @@ if __name__ == "__main__":
 
     from mpl_toolkits import mplot3d
 
-    T1, x1, y1, z1, ee_x1, ee_y1, ee_z1 = base(np.array([0, 0, -1.570796, -1.570796, 1.570796, 0]), 10)
-    T2, x2, y2, z2, ee_x2, ee_y2, ee_z2 = design(np.array([0, 0, -1.570796, -0.785398, 1.570796, 0]), 10)
-    T, x, y, z, ee_x, ee_y, ee_z = readjust(np.array(T1[-1]), T2[0], 5)
+    T1, x1, y1, z1, ee_x1, ee_y1, ee_z1 = base(np.array([0, 0, -2.356194, -2.356194, 1.570796, 0]), 5)
+    T3, x3, y3, z3, ee_x3, ee_y3, ee_z3 = design(np.array([0, 0, -2.356194, -1.308997, 1.570796, 0]), 5)
+    T2, x2, y2, z2, ee_x2, ee_y2, ee_z2 = readjust(np.array(T1[-1]), T3[1], 4)
+    T4, x4, y4, z4, ee_x4, ee_y4, ee_z4 = readjust2(np.array(T3[-1]), 3)
+    T5, x5, y5, z5, ee_x5, ee_y5, ee_z5 = finish(np.array(T4[-1]), 5)
 
-    x = concatenate_x(x1, x, x2)
-    y = concatenate_y(y1, y, y2)
-    z = concatenate_z(z1, z, z2)
+    print(T3[1])
+    print(T3[-1])
+    print(y3[-1])
 
-    ee_x = concatenate_x(ee_x1, ee_x, ee_x2)
-    ee_y = concatenate_y(ee_y1, ee_y, ee_y2)
-    ee_z = concatenate_z(ee_z1, ee_z, ee_z2)
+    x = concatenate_x(x1, x2, x3, x4, x5)
+    y = concatenate_y(y1, y2, y3, y4, y5)
+    z = concatenate_z(z1, z2, z3, z4, z5)
 
-    # T = np.array(T)
-    # print(T.shape)
-    #
-    # pose, q = T_to_pose(T)
+    ee_x = concatenate_x(ee_x1, ee_x2, ee_x3, ee_x4, ee_x5)
+    ee_y = concatenate_y(ee_y1, ee_y2, ee_y3, ee_y4, ee_y5)
+    ee_z = concatenate_z(ee_z1, ee_z2, ee_z3, ee_z4, ee_z5)
+
+    pose1, q = T_to_pose(T1)
+    np.save("base", pose1)
+
+    pose2, q = T_to_pose(T2)
+    np.save("readjust1", pose2)
+
+    pose3, q = T_to_pose(T3)
+    np.save("design", pose3)
+
+    pose4, q = T_to_pose(T4)
+    np.save("readjust2", pose4)
+
+    pose5, q = T_to_pose(T5)
+    np.save("finish", pose5)
 
     fig = plt.figure()
     ax = plt.axes(projection='3d')
@@ -556,5 +699,3 @@ if __name__ == "__main__":
     # 3D plot
     ax.plot3D(graphlist4, graphlist5, graphlist6, 'red')
     plt.show()
-
-    # np.save("base_pose", pose)

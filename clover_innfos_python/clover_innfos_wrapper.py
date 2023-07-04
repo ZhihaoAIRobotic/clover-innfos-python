@@ -323,7 +323,6 @@ class ArmInterface(Clover_MINTASCA):
             :max_vel: Max velocity in Degrees/minute (scalar or array)
             :return: None
         """
-
         def coerce_to_array(x):
             if not isinstance(x, (tuple, list, np.ndarray)):
                 x = [x for i in range(self.dof)]

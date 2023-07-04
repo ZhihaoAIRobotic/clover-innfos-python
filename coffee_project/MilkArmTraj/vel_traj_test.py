@@ -139,11 +139,26 @@ for i in range(len(tilt_traj)):
     tilt_dq[i] = tilt_traj[i, 6:12]
     tilt_ddq[i] = tilt_traj[i, 12:]
 
+# """
+# Set up the coffee art trajectory
+# """
+#
+# art_traj = np.load("coffee_art_pose_fix_10sec.npy")
+#
+# art_q = np.zeros([len(art_traj), 6])
+# art_dq = np.zeros([len(art_traj), 6])
+# art_ddq = np.zeros([len(art_traj), 6])
+#
+# for i in range(len(art_traj)):
+#     art_q[i] = art_traj[i, 0:6]
+#     art_dq[i] = art_traj[i, 6:12]
+#     art_ddq[i] = art_traj[i, 12:]
+#
 """
 Set up the coffee art trajectory
 """
 
-art_traj = np.load("coffee_art_pose_fix_10sec.npy")
+art_traj = np.load("art_lqt.npy")
 
 art_q = np.zeros([len(art_traj), 6])
 art_dq = np.zeros([len(art_traj), 6])
@@ -153,6 +168,37 @@ for i in range(len(art_traj)):
     art_q[i] = art_traj[i, 0:6]
     art_dq[i] = art_traj[i, 6:12]
     art_ddq[i] = art_traj[i, 12:]
+
+"""
+Return to init pose after frothing
+"""
+
+pitch_init_traj = np.load("pitch_to_init.npy")
+
+pitchi_q = np.zeros([len(pitch_init_traj), 6])
+pitchi_dq = np.zeros([len(pitch_init_traj), 6])
+pitchi_ddq = np.zeros([len(pitch_init_traj), 6])
+
+for i in range(len(pitch_init_traj)):
+    pitchi_q[i] = pitch_init_traj[i, 0:6]
+    pitchi_dq[i] = pitch_init_traj[i, 6:12]
+    pitchi_ddq[i] = pitch_init_traj[i, 12:]
+
+"""
+Set up the art init trajectory
+"""
+
+art_init_traj = np.load("art_init.npy")
+print(art_init_traj.shape)
+
+arti_q = np.zeros([len(art_init_traj), 6])
+arti_dq = np.zeros([len(art_init_traj), 6])
+arti_ddq = np.zeros([len(art_init_traj), 6])
+
+for i in range(len(art_init_traj)):
+    arti_q[i] = art_init_traj[i, 0:6]
+    arti_dq[i] = art_init_traj[i, 6:12]
+    arti_ddq[i] = art_init_traj[i, 12:]
 
 """
 Get pitcher to just surface touching the wand
@@ -189,6 +235,8 @@ for i in range(len(msw_q)):
 arm.setPositionMode()
 arm.setArmPosition(arm.getArmPosition())
 
+arm.setArmPosition([0.4853, 0.08625, -1.905, 1.305, -2.517, 3.1])
+
 time.sleep(4)
 
 arm.setVelocityMode()
@@ -206,6 +254,7 @@ for i in range(len(tsw_q)):
     u = Kd * (tsw_dq[i] - arm.getArmVelocity()) + Kp * (tsw_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
 
     if any(abs(q) > 4.5 for q in u):
+        print("......" * 100)
         print("uh oh, too fast")
         arm.setPositionMode()
         arm.setArmPosition(np.array(arm.getArmPosition()))
@@ -213,6 +262,95 @@ for i in range(len(tsw_q)):
     arm.setArmVelocity(u)
 
     error = tsw_q[i] - arm.getArmPosition()
+    int_er = int_er + error
+
+    now = time.time()
+
+    error_list.append(np.linalg.norm(error))
+    errorall.append(error)
+
+    print("Time Elapsed: " + str(now - ini_t))
+    print(np.linalg.norm(error))
+    print(u)
+
+arm.setPositionMode()
+arm.setArmPosition(arm.getArmPosition())
+
+time.sleep(5)
+
+arm.setVelocityMode()
+
+"""
+Pitch to init
+"""
+
+for i in range(len(pitchi_q)):
+    ini_t = time.time()
+
+    theta = arm.getArmPosition()
+    d_theta = arm.getArmVelocity()
+
+    u = Kd * (pitchi_dq[i] - arm.getArmVelocity()) + Kp * (pitchi_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
+
+    if any(abs(q) > 5.5 for q in u):
+        print("......" * 100)
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
+
+    arm.setArmVelocity(u)
+
+    error = pitchi_q[i] - arm.getArmPosition()
+    int_er = int_er + error
+
+    now = time.time()
+
+    error_list.append(np.linalg.norm(error))
+    errorall.append(error)
+
+    print("Time Elapsed: " + str(now - ini_t))
+    print(np.linalg.norm(error))
+    print(u)
+
+arm.setPositionMode()
+arm.setArmPosition(arm.getArmPosition())
+time.sleep(1)
+arm.setArmPosition([0, 0, -2.356194, -2.356194, 1.570796, 0])
+print("****" * 100)
+print("Time to make art!")
+print("****" * 100)
+
+arm.setVelocityMode()
+
+"""
+Make Coffee Art
+"""
+
+for i in range(len(art_q)):
+    ini_t = time.time()
+
+    theta = arm.getArmPosition()
+    d_theta = arm.getArmVelocity()
+
+    u = Kd * (art_dq[i] - arm.getArmVelocity()) + Kp * (art_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
+    if i == 2:
+        u = u * 0.8
+
+    if i == 3:
+        u = u * 0.8
+
+    if any(abs(q) > 4.5 for q in u):
+        print("......" * 100)
+        print(arm.getArmPosition())
+        print(art_q[i])
+        print(art_dq[i])
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
+
+    arm.setArmVelocity(u)
+
+    error = art_q[i] - arm.getArmPosition()
     int_er = int_er + error
 
     now = time.time()
@@ -236,6 +374,5 @@ for i in range(len(graphlist)):
     plt.xlabel("time_steps (0.01 seconds per step)")
     plt.title("Error")
 plt.show()
-
 
 np.save("error", graphlist)
