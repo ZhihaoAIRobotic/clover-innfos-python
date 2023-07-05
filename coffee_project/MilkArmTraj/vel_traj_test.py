@@ -292,7 +292,7 @@ for i in range(len(pitchi_q)):
 
     u = Kd * (pitchi_dq[i] - arm.getArmVelocity()) + Kp * (pitchi_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
 
-    if any(abs(q) > 5.5 for q in u):
+    if any(abs(q) > 4.5 for q in u):
         print("......" * 100)
         print("uh oh, too fast")
         arm.setPositionMode()
@@ -333,11 +333,6 @@ for i in range(len(art_q)):
     d_theta = arm.getArmVelocity()
 
     u = Kd * (art_dq[i] - arm.getArmVelocity()) + Kp * (art_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
-    if i == 2:
-        u = u * 0.8
-
-    if i == 3:
-        u = u * 0.8
 
     if any(abs(q) > 4.5 for q in u):
         print("......" * 100)

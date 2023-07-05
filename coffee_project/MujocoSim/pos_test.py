@@ -39,7 +39,7 @@ for i in range(len(traj)):
 i = 0
 
 for i in range(len(q)):
-    print(q[i])
+    # print(q[i])
     data.qpos[:] = q[i]
     print(dq[i])
     print(">>>>>"*100)

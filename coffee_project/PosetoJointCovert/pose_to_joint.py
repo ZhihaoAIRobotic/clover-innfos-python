@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     from matplotlib import pyplot as plt
 
-    traj = np.load('basepose_lqt.npy')
+    traj = np.load('base.npy')
     # traj_init = np.load('readjust1joint.npy')
 
     base_init = [0, 0, -2.356194, -2.356194, 1.570796, 0]
