@@ -37,10 +37,10 @@ if __name__ == "__main__":
 
     from matplotlib import pyplot as plt
 
-    traj = np.load('base.npy')
-    # traj_init = np.load('readjust1joint.npy')
+    traj = np.load('cof_design.npy')
+    traj_init = np.load('cof_readjust.npy')
 
-    base_init = [0, 0, -2.356194, -2.356194, 1.570796, 0]
+    base_init = [0, 0, 0, 0, 0, 0]
 
     x = np.zeros([len(traj), 7])
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     # print(q[2])
     # print(x1[-1])
 
-    np.save('basejoint.npy', q)
+    np.save('cof_design.npy', q)
     q1 = q[:, :]
 
     # print(np.array(q[0: 100]))

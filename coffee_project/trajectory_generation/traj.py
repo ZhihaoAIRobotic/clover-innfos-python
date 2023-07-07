@@ -583,7 +583,6 @@ def cof_to_init(initial, t):
     n = t / 0.01
 
     init_T = kin.fk(initial)
-    print(init_T)
     init_x = init_T[0, 3]
     init_y = init_T[1, 3]
     init_z = init_T[2, 3]
@@ -612,8 +611,8 @@ def cof_to_init(initial, t):
         z = z_step[i] + 0.05
 
         # print(i)
-        T = np.array([[0, -1, 0, init_x],
-                      [0, 0, 1, y_step[i]],
+        T = np.array([[0, 1, 0, init_x],
+                      [0, 0, -1, y_step[i]],
                       [-1, 0, 0, z_step[i]],
                       [0, 0, 0, 1]])
 
@@ -626,8 +625,6 @@ def cof_to_init(initial, t):
         ee_x_list.append(init_x)
         ee_y_list.append(y_step[i])
         ee_z_list.append(z_step[i])
-
-        print(T)
 
     return T_list, x_list, y_list, z_list, ee_x_list, ee_y_list, ee_z_list
 def cof_readjust(initial, t):
@@ -667,12 +664,10 @@ def cof_readjust(initial, t):
         ee_y = y + (0.12525 * np.cos(theta[i]) + 0.05 * np.sin(theta[i]))
         ee_z = z + 0.12525 * np.sin(theta[i]) - 0.05 * np.cos(theta[i])
 
-        T = np.array([[0, -1, 0, ee_x],
+        T = np.array([[0, 1, 0, ee_x],
                       [np.sin(theta[i]), 0, -np.cos(theta[i]), ee_y],
                       [-np.cos(theta[i]), 0, -np.sin(theta[i]), ee_z],
                       [0, 0, 0, 1]])
-
-        print(theta[i])
 
         T_list.append(T)
 
@@ -722,7 +717,7 @@ def cof_design(initial, t):
         ee_y = y + (0.12525 * np.cos(theta[i]) + 0.05 * np.sin(theta[i]))
         ee_z = z + 0.12525 * np.sin(theta[i]) - 0.05 * np.cos(theta[i])
 
-        T = np.array([[0, -1, 0, ee_x],
+        T = np.array([[0, 1, 0, ee_x],
                       [np.sin(theta[i]), 0, -np.cos(theta[i]), ee_y],
                       [-np.cos(theta[i]), 0, -np.sin(theta[i]), ee_z],
                       [0, 0, 0, 1]])
@@ -819,9 +814,7 @@ if __name__ == "__main__":
 
     CT1, Cx1, Cy1, Cz1, Cee_x1, Cee_y1, Cee_z1 = cof_to_init(np.array([0, 0, 0, 0, 0, 0]), 5)
     CT2, Cx2, Cy2, Cz2, Cee_x2, Cee_y2, Cee_z2 = cof_readjust(CT1[-1], 5)
-    print(Cy2[-1])
     CT3, Cx3, Cy3, Cz3, Cee_x3, Cee_y3, Cee_z3 = cof_design(CT2[-1], 5)
-    print(Cy3[0])
     #
     # print(T3[1])
     # print(T3[-1])
@@ -857,6 +850,15 @@ if __name__ == "__main__":
 
     pose5, q = T_to_pose(T5)
     np.save("finish", pose5)
+
+    posec1, q = T_to_pose(CT1)
+    np.save("cof_to_init", posec1)
+
+    posec2, q = T_to_pose(CT2)
+    np.save("cof_readjust", posec2)
+
+    posec3, q = T_to_pose(CT3)
+    np.save("cof_design", posec3)
 
     fig = plt.figure()
     ax = plt.axes(projection='3d')

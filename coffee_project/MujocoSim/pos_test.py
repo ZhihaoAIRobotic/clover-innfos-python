@@ -22,7 +22,7 @@ data = mujoco.MjData(model)
 
 viewer = mujoco_viewer.MujocoViewer(model, data)
 # q, T, x, y = sin_traj(np.array([0, 0, -np.pi/2, -np.pi/2, np.pi/2, 0]), 1, 100)
-traj = np.load("basejoint_lqt.npy")
+traj = np.load("cof_to_init.npy")
 # q = traj
 
 q = np.zeros([len(traj), 6])
@@ -30,8 +30,8 @@ dq = np.zeros([len(traj), 6])
 ddq = np.zeros([len(traj), 6])
 
 for i in range(len(traj)):
-    q[i] = traj[i, 0:6]
-    dq[i] = traj[i, 6:12]
+    q[i] = np.array([*traj[i, 0:6]])
+    # dq[i] = traj[i, 6:12]
     # ddq[i] = traj[i, 12:]
 
 # print(ddq)
@@ -39,9 +39,9 @@ for i in range(len(traj)):
 i = 0
 
 for i in range(len(q)):
-    # print(q[i])
+    print(q[i])
     data.qpos[:] = q[i]
-    print(dq[i])
+    # print(dq[i])
     print(">>>>>"*100)
     mujoco.mj_step(model, data)
     viewer.render()

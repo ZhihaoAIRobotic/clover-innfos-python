@@ -32,8 +32,7 @@ input("Move to zero")
 arm.home()  # Will set position to profile mode
 
 arm.safePositionMode(max_vel=10 * 60, min_pos=-360, max_pos=+360)
-# arm.set_safety_values()
-# arm.setPositionMode()
+arm.safeVelocityMode(max_acc=400, max_dec=200, max_vel=10 * 60)
 arm.setVelocityMode()
 
 input("Ready")
@@ -76,7 +75,7 @@ for i in range(len(ocm_traj)):
     ocm_q[i] = ocm_traj[i, 0:6]
     ocm_dq[i] = ocm_traj[i, 6:12]
     ocm_ddq[i] = ocm_traj[i, 12:]
-# 
+
 # """
 # Press the button
 # """
@@ -91,22 +90,37 @@ for i in range(len(ocm_traj)):
 #     bp_q[i] = bp_traj[i, 0:6]
 #     bp_dq[i] = bp_traj[i, 6:12]
 #     bp_ddq[i] = bp_traj[i, 12:]
-# 
-# """
-# Move to pouring pose
-# """
-# 
-# pp_traj = np.load('complete_neutral.npy')
-# 
-# pp_q = np.zeros([len(pp_traj), 6])
-# pp_dq = np.zeros([len(pp_traj), 6])
-# pp_ddq = np.zeros([len(pp_traj), 6])
-# 
-# for i in range(len(pp_traj)):
-#     pp_q[i] = pp_traj[i, 0:6]
-#     pp_dq[i] = pp_traj[i, 6:12]
-#     pp_ddq[i] = pp_traj[i, 12:]
-# 
+ 
+"""
+Move to design init pose
+""" 
+
+di_traj = np.load('complete_neutral.npy')
+
+di_q = np.zeros([len(di_traj), 6])
+di_dq = np.zeros([len(di_traj), 6])
+di_ddq = np.zeros([len(di_traj), 6])
+
+for i in range(len(di_traj)):
+    di_q[i] = di_traj[i, 0:6]
+    di_dq[i] = di_traj[i, 6:12]
+    di_ddq[i] = di_traj[i, 12:]
+    
+"""
+Design trajectory
+"""
+
+dt_traj = np.load('complete_neutral.npy')
+
+dt_q = np.zeros([len(dt_traj), 6])
+dt_dq = np.zeros([len(dt_traj), 6])
+dt_ddq = np.zeros([len(dt_traj), 6])
+
+for i in range(len(dt_traj)):
+    dt_q[i] = dt_traj[i, 0:6]
+    dt_dq[i] = dt_traj[i, 6:12]
+    dt_ddq[i] = dt_traj[i, 12:]
+
 # """
 # Move to serving pose
 # """
@@ -137,6 +151,11 @@ for i in range(len(ucm_q)):
 
     u = Kd * (ucm_dq[i] - arm.getArmVelocity()) + Kp * (ucm_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
 
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
+
     arm.setArmVelocity(u)
 
     error = ucm_q[i] - arm.getArmPosition()
@@ -149,18 +168,6 @@ for i in range(len(ucm_q)):
 
     print("Time Elapsed: " + str(now - ini_t))
     print(np.linalg.norm(error))
-
-error = ucm_q[-1] - arm.getArmPosition()
-
-while np.linalg.norm(error) > 0.06:
-    u = Kp * (ucm_q[-1] - arm.getArmPosition()) + Ki * int_er * 0.1
-
-    u = u * 0.6
-
-    arm.setArmVelocity(u)
-
-    error = ucm_q[-1] - arm.getArmPosition()
-    int_er = int_er + error
 
 arm.setPositionMode()
 arm.setArmPosition(arm.getArmPosition())
@@ -181,6 +188,11 @@ for i in range(len(ocm_q)):
 
     u = Kd * (ocm_dq[i] - arm.getArmVelocity()) + Kp * (ocm_q[i] - arm.getArmPosition()) + Ki * int_er * 0.1
 
+    if any(abs(q) > 4.5 for q in u):
+        print("uh oh, too fast")
+        arm.setPositionMode()
+        arm.setArmPosition(np.array(arm.getArmPosition()))
+
     arm.setArmVelocity(u)
 
     error = ocm_q[i] - arm.getArmPosition()
@@ -192,18 +204,6 @@ for i in range(len(ocm_q)):
     errorall.append(error)
 
     print("Time Elapsed: " + str(now - ini_t))
-
-error = ocm_q[-1] - arm.getArmPosition()
-
-while np.linalg.norm(error) > 0.06:
-    u = Kp * (ucm_q[-1] - arm.getArmPosition()) + Ki * int_er * 0.1
-
-    u = u * 0.6
-
-    arm.setArmVelocity(u)
-
-    error = ocm_q[-1] - arm.getArmPosition()
-    int_er = int_er + error
 
 arm.setPositionMode()
 arm.setArmPosition(arm.getArmPosition())
