@@ -6,6 +6,7 @@ from scps.ikpykinematics import Kinematics
 from kinematics import fkin
 from coffee_project.trajectory_generation.cart_sin_traj import sin_traj
 import time
+from bimanualconcat import get_cof, get_milk, get_bimanual
 
 
 kin = Kinematics()
@@ -78,32 +79,6 @@ for i in range(len(tsw_traj)):
     tsw_dq[i] = tsw_traj[i, 6:12]
     tsw_ddq[i] = tsw_traj[i, 12:]
 
-# Move out of steam wand
-
-osw_traj = np.load('complete_movedownsteamwand_joint.npy')
-
-osw_q = np.zeros([len(osw_traj), 6])
-osw_dq = np.zeros([len(osw_traj), 6])
-osw_ddq = np.zeros([len(osw_traj), 6])
-
-for i in range(len(osw_traj)):
-    osw_q[i] = osw_traj[i, 0:6]
-    osw_dq[i] = osw_traj[i, 6:12]
-    osw_ddq[i] = osw_traj[i, 12:]
-
-# Set up the milk jug tilt to pour pose
-
-tilt_traj = np.load('complete_tilt.npy')
-
-tilt_q = np.zeros([len(tilt_traj), 6])
-tilt_dq = np.zeros([len(tilt_traj), 6])
-tilt_ddq = np.zeros([len(tilt_traj), 6])
-
-for i in range(len(tilt_traj)):
-    tilt_q[i] = tilt_traj[i, 0:6]
-    tilt_dq[i] = tilt_traj[i, 6:12]
-    tilt_ddq[i] = tilt_traj[i, 12:]
-
 # Set up the coffee art trajectory
 
 art_traj = np.load("art_lqt.npy")
@@ -175,7 +150,7 @@ for i in range(len(ocm_traj)):
     ocm_ddq[i] = ocm_traj[i, 12:]
 
 # Press the button
-#
+
 # bp_traj = np.load('complete_button_press.npy')
 #
 # bp_q = np.zeros([len(bp_traj), 6])
@@ -189,16 +164,16 @@ for i in range(len(ocm_traj)):
 
 # Move to design init pose
 
-di_traj = np.load('complete_neutral.npy')
-
-di_q = np.zeros([len(di_traj), 6])
-di_dq = np.zeros([len(di_traj), 6])
-di_ddq = np.zeros([len(di_traj), 6])
-
-for i in range(len(di_traj)):
-    di_q[i] = di_traj[i, 0:6]
-    di_dq[i] = di_traj[i, 6:12]
-    di_ddq[i] = di_traj[i, 12:]
+# di_traj = np.load('complete_neutral.npy')
+#
+# di_q = np.zeros([len(di_traj), 6])
+# di_dq = np.zeros([len(di_traj), 6])
+# di_ddq = np.zeros([len(di_traj), 6])
+#
+# for i in range(len(di_traj)):
+#     di_q[i] = di_traj[i, 0:6]
+#     di_dq[i] = di_traj[i, 6:12]
+#     di_ddq[i] = di_traj[i, 12:]
 
 # Design trajectory
 
@@ -232,11 +207,28 @@ Bimanual Trajectory
 
 # Get the coffee traj
 
+# Get the coffee
+getcoffee1 = get_cof(np.array([0, 0, 0, 0, 0, 0]), ucm_q)
+getcoffee2 = get_milk(pb_q, ucm_q[-1])
+getcoffee3 = get_milk(apb_q, ucm_q[-1])
+getcoffee4 = get_milk(apb_q[-1], ocm_q)
+
 # Get the milk froth traj
+getmilkfroth1 = get_milk(msw_q, ocm_q[-1])
+getmilkfroth2 = get_cof(msw_q[-1], bp_q)
+getmilkfroth3 = get_cof(msw_q[-1], di_q)
+getmilkfroth4 = get_milk(tsw_q, di_q[-1])
 
 # Get to init traj
+get_init = get_milk(pitchi_q, di_q[-1])
 
 # Art time
+get_art1 = get_milk(base_q, di_q[-1])
+get_art2 = get_bimanual(read1_q, cofread_q[-1])
+get_art3 = get_bimanual(design_q, cofdes_q)
+get_art4 = get_milk(read2_q, cofdes_q[-1])
+get_art5 = get_milk(fin_q, cofdes_q[-1])
+
 
 """
 run the simulation

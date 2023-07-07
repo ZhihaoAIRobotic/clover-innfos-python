@@ -3,8 +3,6 @@ import mujoco_viewer
 import mujoco
 import os
 from scps.ikpykinematics import Kinematics
-from kinematics import fkin
-from coffee_project.trajectory_generation.cart_sin_traj import sin_traj
 import time
 
 
